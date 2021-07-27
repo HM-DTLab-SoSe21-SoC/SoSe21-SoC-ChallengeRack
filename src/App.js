@@ -19,29 +19,11 @@ import Paper from '@material-ui/core/Paper';
 
 Amplify.configure(awsmobile);
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: '100%',
-  },
-  paper: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
-  },
+const useStyles = makeStyles({
   table: {
-    minWidth: 750,
+    minWidth: 650,
   },
-  visuallyHidden: {
-    border: 0,
-    clip: 'rect(0 0 0 0)',
-    height: 1,
-    margin: -1,
-    overflow: 'hidden',
-    padding: 0,
-    position: 'absolute',
-    top: 20,
-    width: 1,
-  },
-}));
+});
 
 function App() {
   const classes = useStyles();
@@ -96,26 +78,7 @@ function App() {
     </div>
   );
 }
-/*
-class App extends Component {
-  state = { challanges: [] }
-  async componentDidMount() {
-    const data = await API.graphql(graphqlOperation(listChallanges))
-    this.setState({
-      challanges: data.data.listChallanges.items
-    })
-  }
-  render() {
-    return (
-      <div className="App">
-        {this.state.challanges.map((challange, index) => (<p key={index}>
-          {challange.content}   {challange.id}
-          </p>))}
-      </div >
-    );
-  }
-}
-*/
+
 export default withAuthenticator(App, {
   signUpConfig: {
     hiddenDefaults: ['phone_number']
