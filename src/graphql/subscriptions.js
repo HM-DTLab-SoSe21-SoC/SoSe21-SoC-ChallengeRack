@@ -6,11 +6,18 @@ export const onCreateChallange = /* GraphQL */ `
     onCreateChallange {
       type
       id
-      content
-      owner
+      phase
+      status
+      orgaTitle
+      orgaCity
+      title
+      score
+      theme
+      technology
       timestamp
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -19,11 +26,18 @@ export const onUpdateChallange = /* GraphQL */ `
     onUpdateChallange {
       type
       id
-      content
-      owner
+      phase
+      status
+      orgaTitle
+      orgaCity
+      title
+      score
+      theme
+      technology
       timestamp
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -32,11 +46,18 @@ export const onDeleteChallange = /* GraphQL */ `
     onDeleteChallange {
       type
       id
-      content
-      owner
+      phase
+      status
+      orgaTitle
+      orgaCity
+      title
+      score
+      theme
+      technology
       timestamp
       createdAt
       updatedAt
+      owner
     }
   }
 `;

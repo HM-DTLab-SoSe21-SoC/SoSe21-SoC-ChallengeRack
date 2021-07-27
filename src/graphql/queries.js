@@ -6,11 +6,18 @@ export const getChallange = /* GraphQL */ `
     getChallange(id: $id) {
       type
       id
-      content
-      owner
+      phase
+      status
+      orgaTitle
+      orgaCity
+      title
+      score
+      theme
+      technology
       timestamp
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -24,11 +31,18 @@ export const listChallanges = /* GraphQL */ `
       items {
         type
         id
-        content
-        owner
+        phase
+        status
+        orgaTitle
+        orgaCity
+        title
+        score
+        theme
+        technology
         timestamp
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }
