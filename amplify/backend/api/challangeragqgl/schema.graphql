@@ -1,0 +1,20 @@
+type Challange
+  @model (subscriptions: { level: public })
+  @auth(rules: [
+    {allow: owner, ownerField:"owner", provider: userPools, operations:[read, create]},
+    {allow: private, provider: userPools, operations:[read]},
+	{allow: private, provider: iam ,operations:[create]},
+  ])
+{
+  type: String
+  id: ID
+  phase: String
+  status: String
+  orgaTitle: String
+  orgaCity: String
+  title: String
+  score: Int
+  theme: String
+  technology: String
+  timestamp: Int
+}
