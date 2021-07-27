@@ -21,9 +21,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {
-          this.state.challanges.map((challange, index) => (<p key={index}>{challange.content}</p>))
-        }
+        {this.state.challanges.map((challange, index) => (<p key={index}>
+          {challange.content}   {challange.id}
+          </p>))}
       </div >
     );
   }

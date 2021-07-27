@@ -5,9 +5,9 @@ type Challange
     {allow: private, provider: userPools, operations:[read]}
   ])
 {
-  type: String! # always set to 'post'. used in the SortByTimestamp GSI
+  type: String
   id: ID
-  content: String!
+  content: String
   owner: String
-  timestamp: Int!
+  timestamp: Int
 }
