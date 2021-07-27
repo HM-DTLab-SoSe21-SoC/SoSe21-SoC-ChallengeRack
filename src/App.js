@@ -75,6 +75,7 @@ function App() {
           </TableBody>
         </Table>
       </TableContainer>
+      <a href="pages/detailedPage.js">Details</a>
     </div>
   );
 }
