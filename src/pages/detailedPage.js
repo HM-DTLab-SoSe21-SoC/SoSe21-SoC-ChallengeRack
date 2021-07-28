@@ -4,69 +4,74 @@ import { API } from 'aws-amplify';
 import { listChallanges } from '../graphql/queries';
 
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
+import TextField from '@material-ui/core/TextField';
+import { createChallange as createChallangeMutation, deleteChallange as deleteChallangeMutation } from '../graphql/mutations';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
+    '& .MuiTextField-root': {
+      margin: theme.spacing(1),
+      width: '25ch',
+    },
   },
 }));
 
-function ListItemLink(props) {
-  return <ListItem button component="a" {...props} />;
-}
+const initialFormState = { id: '', orgaTitle: '' }
 
 export default function DataGridDemo() {
   const classes = useStyles();
-  const [notes, setNotes] = useState([]);
+  const [challanges, setChallanges] = useState([]);
+  const [formData, setFormData] = useState(initialFormState);
 
-  useEffect(() => {
-    fetchNotes();
+  fetchChallanges(() => {
+    fetchChallanges();
   }, []);
 
-  async function fetchNotes() {
+  async function fetchChallanges() {
     const apiData = await API.graphql({ query: listChallanges });
-    setNotes(apiData.data.listChallanges.items);
+    setChallanges(apiData.data.listChallanges.items);
+  }
+  async function createChallange() {
+    if (!formData.id || !formData.orgaCity || !formData.orgaTitle) return;
+    await API.graphql({ query: createChallangeMutation, variables: { input: formData } });
+    setChallanges([...challanges, formData]);
+    setFormData(initialFormState);
+  }
+
+  async function deleteChallange({ id }) {
+    const newChallengesArray = challanges.filter(challange => challange.id !== id);
+    setChallanges(newChallengesArray);
+    await API.graphql({ query: deleteChallangeMutation, variables: { input: { id } } });
   }
   return (
-    <div className={classes.root}>
-      <List component="nav" aria-label="main mailbox folders">
-        <ListItem button>
-          <ListItemIcon>
-            <InboxIcon />
-          </ListItemIcon>
-          <ListItemText primary="Inbox" />
-        </ListItem>
-        <ListItem button>
-          <ListItemIcon>
-            <DraftsIcon />
-          </ListItemIcon>
-          <ListItemText primary="Drafts" />
-        </ListItem>
-      </List>
-      <Divider />
-      <List component="nav" aria-label="secondary mailbox folders">
-        <ListItem button>
-          <ListItemText primary="Trash" />
-        </ListItem>
-        <ListItemLink href="#simple-list">
-          <ListItemText primary="Spam" />
-        </ListItemLink>
-      </List>
-      <p>Hallo</p>
-      <Link to="/challangeOverview">
-        <button variant="outlined">
-        Challange overview
-        </button>
-      </Link>
-    </div>
+    <form className={classes.root} noValidate autoComplete="off">
+      <TextField required id="standard-required" label="Required" defaultValue={formData.id} />
+      <TextField required id="standard-required" label="ID" 
+        onChange={e => setFormData({ ...formData, 'id': e.target.value })}
+        value={formData.id}
+      />
+      <TextField id="standard-basic" label="Organazation City"
+        onChange={e => setFormData({ ...formData, 'orgaCity': e.target.value })}
+        value={formData.orgaCity}
+      />
+      <TextField id="standard-basic" label="Organazation Title"
+        onChange={e => setFormData({ ...formData, 'orgaTitle': e.target.value })}
+        value={formData.orgaTitle}
+      />
+      <button onClick={createChallange}>Create Challange</button>
+      <div style={{ marginBottom: 30 }}>
+        {
+          challanges.map(challange => (
+            <div key={challange.id || challange.orgaTitle}>
+              <h2>{challange.orgaTitle}</h2>
+              <p>{challange.orgaCity}</p>
+              <button onClick={() => deleteChallange(challange)}>Delete challange</button>
+            </div>
+          ))
+        }
+      </div>
+    </form>
+
+
   );
 }
