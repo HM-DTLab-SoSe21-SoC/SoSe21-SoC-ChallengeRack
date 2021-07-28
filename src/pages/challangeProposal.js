@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+
 import { API } from 'aws-amplify';
 import { listChallanges } from '../graphql/queries';
 
@@ -26,11 +26,6 @@ export default function DataGridDemo() {
   return (
     <div className="App">
       <p>Hallo</p>
-      <Link to="/challangeOverview">
-        <button variant="outlined">
-        Challange overview
-        </button>
-      </Link>
     </div>
   );
 }
