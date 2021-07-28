@@ -47,7 +47,7 @@ export default function DataGridDemo() {
     <form className={classes.root} noValidate autoComplete="off">
       <div align="left"> 
       <p>Please enter a valid ID</p>
-      <TextField align="left" required id="standard-required" label="ID"  
+      <TextField align="left" required id="standard-required" label="ID" 
         onChange={e => setFormData({ ...formData, 'id': e.target.value })}
         value={formData.id}
       />
