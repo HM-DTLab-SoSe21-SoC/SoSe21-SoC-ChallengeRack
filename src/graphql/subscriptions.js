@@ -4,16 +4,51 @@
 export const onCreateChallange = /* GraphQL */ `
   subscription OnCreateChallange {
     onCreateChallange {
-      type
       id
       phase
       status
+      coName
+      coTitle
+      coEmail
+      coPhone
+      coOptIn
       orgaTitle
       orgaCity
-      title
-      score
+      orgaMission
+      orgaWebsite
+      orgaDate
+      chaStatem
+      chaDes
+      chaStak
+      chaBac
+      chaSup
+      leadSup
+      critOfSuc
+      nextStep
+      chatitle
       theme
       technology
+      repu
+      feasibil
+      impact
+      scalabil
+      aligment
+      prototype
+      score
+      type
+      comment
+      faculty
+      prof
+      matchEmail
+      numberOfT
+      numberOfS
+      startDate
+      endDate
+      cohort
+      milestone
+      publURL
+      gitHubURL
+      publDate
       timestamp
       createdAt
       updatedAt
@@ -24,16 +59,51 @@ export const onCreateChallange = /* GraphQL */ `
 export const onUpdateChallange = /* GraphQL */ `
   subscription OnUpdateChallange {
     onUpdateChallange {
-      type
       id
       phase
       status
+      coName
+      coTitle
+      coEmail
+      coPhone
+      coOptIn
       orgaTitle
       orgaCity
-      title
-      score
+      orgaMission
+      orgaWebsite
+      orgaDate
+      chaStatem
+      chaDes
+      chaStak
+      chaBac
+      chaSup
+      leadSup
+      critOfSuc
+      nextStep
+      chatitle
       theme
       technology
+      repu
+      feasibil
+      impact
+      scalabil
+      aligment
+      prototype
+      score
+      type
+      comment
+      faculty
+      prof
+      matchEmail
+      numberOfT
+      numberOfS
+      startDate
+      endDate
+      cohort
+      milestone
+      publURL
+      gitHubURL
+      publDate
       timestamp
       createdAt
       updatedAt
@@ -44,16 +114,51 @@ export const onUpdateChallange = /* GraphQL */ `
 export const onDeleteChallange = /* GraphQL */ `
   subscription OnDeleteChallange {
     onDeleteChallange {
-      type
       id
       phase
       status
+      coName
+      coTitle
+      coEmail
+      coPhone
+      coOptIn
       orgaTitle
       orgaCity
-      title
-      score
+      orgaMission
+      orgaWebsite
+      orgaDate
+      chaStatem
+      chaDes
+      chaStak
+      chaBac
+      chaSup
+      leadSup
+      critOfSuc
+      nextStep
+      chatitle
       theme
       technology
+      repu
+      feasibil
+      impact
+      scalabil
+      aligment
+      prototype
+      score
+      type
+      comment
+      faculty
+      prof
+      matchEmail
+      numberOfT
+      numberOfS
+      startDate
+      endDate
+      cohort
+      milestone
+      publURL
+      gitHubURL
+      publDate
       timestamp
       createdAt
       updatedAt

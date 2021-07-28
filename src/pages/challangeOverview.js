@@ -11,24 +11,30 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import { deleteChallange as deleteChallangeMutation } from '../graphql/mutations';
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
-
+ 
 export default function DataGridDemo() {
   const classes = useStyles();
-  const [notes, setNotes] = useState([]);
+  const [challanges, setChallanges] = useState([]);
 
-  useEffect(() => {
-    fetchNotes();
+  fetchChallanges(() => {
+    fetchChallanges();
   }, []);
 
-  async function fetchNotes() {
+  async function fetchChallanges() {
     const apiData = await API.graphql({ query: listChallanges });
-    setNotes(apiData.data.listChallanges.items);
+    setChallanges(apiData.data.listChallanges.items);
+  }
+  async function deleteChallange({ id }) {
+    const newChallengesArray = challanges.filter(challange => challange.id !== id);
+    setChallanges(newChallengesArray);
+    await API.graphql({ query: deleteChallangeMutation, variables: { input: { id } } });
   }
   return (
 <div className="App">
@@ -49,20 +55,21 @@ export default function DataGridDemo() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {notes.map((notes) => (
-              <TableRow key={notes.id}>
+            {challanges.map((challange) => (
+              <TableRow key={challange.id}>
                 <TableCell component="th" scope="note">
-                  {notes.id}
+                  {challange.id}
                 </TableCell>
-                <TableCell align="left">{notes.phase}</TableCell>
-                <TableCell align="left">{notes.status}</TableCell>
-                <TableCell align="left">{notes.orgaTitle}</TableCell>
-                <TableCell align="left">{notes.orgaCity}</TableCell>
-                <TableCell align="left">{notes.title}</TableCell>
-                <TableCell align="left">{notes.type}</TableCell>
-                <TableCell align="left">{notes.score}</TableCell>
-                <TableCell align="left">{notes.theme}</TableCell>
-                <TableCell align="left">{notes.technology}</TableCell>
+                <TableCell align="left">{challange.phase}</TableCell>
+                <TableCell align="left">{challange.status}</TableCell>
+                <TableCell align="left">{challange.orgaTitle}</TableCell>
+                <TableCell align="left">{challange.orgaCity}</TableCell>
+                <TableCell align="left">{challange.chatitle}</TableCell>
+                <TableCell align="left">{challange.type}</TableCell>
+                <TableCell align="left">{challange.score}</TableCell>
+                <TableCell align="left">{challange.theme}</TableCell>
+                <TableCell align="left">{challange.technology}</TableCell>
+                <button onClick={() => deleteChallange(challange)}>Delete challange</button>
               </TableRow>
             ))}
           </TableBody>
