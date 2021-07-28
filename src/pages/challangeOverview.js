@@ -13,7 +13,6 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { deleteChallange as deleteChallangeMutation } from '../graphql/mutations';
 
-
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
@@ -65,7 +64,7 @@ export default function DataGridDemo() {
                 <TableCell align="left">{challange.status}</TableCell>
                 <TableCell align="left">{challange.orgaTitle}</TableCell>
                 <TableCell align="left">{challange.orgaCity}</TableCell>
-                <TableCell align="left">{challange.title}</TableCell>
+                <TableCell align="left">{challange.chatitle}</TableCell>
                 <TableCell align="left">{challange.type}</TableCell>
                 <TableCell align="left">{challange.score}</TableCell>
                 <TableCell align="left">{challange.theme}</TableCell>

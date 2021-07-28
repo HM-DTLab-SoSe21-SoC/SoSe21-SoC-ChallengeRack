@@ -6,15 +6,50 @@ type Challange
 	{allow: private, provider: iam ,operations:[create]},
   ])
 {
-  type: String
   id: ID
   phase: String
   status: String
+  coName: String
+  coTitle: String
+  coEmail: String
+  coPhone: String
+  coOptIn: String
   orgaTitle: String
   orgaCity: String
-  title: String
-  score: Int
+  orgaMission: String
+  orgaWebsite: String
+  orgaDate: String
+  chaStatem: String
+  chaDes: String
+  chaStak: String
+  chaBac: String
+  chaSup: String
+  leadSup: String
+  critOfSuc: String
+  nextStep: String
+  chatitle: String
   theme: String
   technology: String
+  repu: String
+  feasibil: String
+  impact: String
+  scalabil: String
+  aligment: String
+  prototype: Int
+  score: Int
+  type: String
+  comment: String
+  faculty: String
+  prof: String
+  matchEmail: String
+  numberOfT: String
+  numberOfS: String
+  startDate: String
+  endDate: String
+  cohort: String
+  milestone: String
+  publURL: String
+  gitHubURL: String
+  publDate: String
   timestamp: Int
 }
