@@ -1,22 +1,28 @@
 import React, { useState, useEffect } from 'react';
-
+import { Link } from "react-router-dom";
 import { API } from 'aws-amplify';
 import { listChallanges } from '../graphql/queries';
 
 import { makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
-import Paper from '@material-ui/core/Paper';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import Divider from '@material-ui/core/Divider';
+import InboxIcon from '@material-ui/icons/Inbox';
+import DraftsIcon from '@material-ui/icons/Drafts';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 650,
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    maxWidth: 360,
+    backgroundColor: theme.palette.background.paper,
   },
-});
+}));
+
+function ListItemLink(props) {
+  return <ListItem button component="a" {...props} />;
+}
 
 export default function DataGridDemo() {
   const classes = useStyles();
@@ -31,44 +37,36 @@ export default function DataGridDemo() {
     setNotes(apiData.data.listChallanges.items);
   }
   return (
-<div className="App">
-      <TableContainer component={Paper}>
-        <Table className={classes.table} size="small" aria-label="a dense table">
-          <TableHead>
-            <TableRow>
-              <TableCell>ID</TableCell>
-              <TableCell align="left">Phase</TableCell>
-              <TableCell align="left">Status</TableCell>
-              <TableCell align="left">Orga Title</TableCell>
-              <TableCell align="left">Orga City</TableCell>
-              <TableCell align="left">Title</TableCell>
-              <TableCell align="left">Type</TableCell>
-              <TableCell align="left">Score</TableCell>
-              <TableCell align="left">Theme</TableCell>
-              <TableCell align="left">Technology</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {notes.map((notes) => (
-              <TableRow key={notes.id}>
-                <TableCell component="th" scope="note">
-                  {notes.id}
-                </TableCell>
-                <TableCell align="left">{notes.phase}</TableCell>
-                <TableCell align="left">{notes.status}</TableCell>
-                <TableCell align="left">{notes.orgaTitle}</TableCell>
-                <TableCell align="left">{notes.orgaCity}</TableCell>
-                <TableCell align="left">{notes.title}</TableCell>
-                <TableCell align="left">{notes.type}</TableCell>
-                <TableCell align="left">{notes.score}</TableCell>
-                <TableCell align="left">{notes.theme}</TableCell>
-                <TableCell align="left">{notes.technology}</TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <a href="pages/detailedPage.js">Details</a>
+    <div className={classes.root}>
+      <List component="nav" aria-label="main mailbox folders">
+        <ListItem button>
+          <ListItemIcon>
+            <InboxIcon />
+          </ListItemIcon>
+          <ListItemText primary="Inbox" />
+        </ListItem>
+        <ListItem button>
+          <ListItemIcon>
+            <DraftsIcon />
+          </ListItemIcon>
+          <ListItemText primary="Drafts" />
+        </ListItem>
+      </List>
+      <Divider />
+      <List component="nav" aria-label="secondary mailbox folders">
+        <ListItem button>
+          <ListItemText primary="Trash" />
+        </ListItem>
+        <ListItemLink href="#simple-list">
+          <ListItemText primary="Spam" />
+        </ListItemLink>
+      </List>
+      <p>Hallo</p>
+      <Link to="/challangeOverview">
+        <button variant="outlined">
+        Challange overview
+        </button>
+      </Link>
     </div>
   );
 }
