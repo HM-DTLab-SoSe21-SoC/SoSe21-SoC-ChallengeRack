@@ -4,16 +4,51 @@
 export const getChallange = /* GraphQL */ `
   query GetChallange($id: ID!) {
     getChallange(id: $id) {
-      type
       id
       phase
       status
+      coName
+      coTitle
+      coEmail
+      coPhone
+      coOptIn
       orgaTitle
       orgaCity
-      title
-      score
+      orgaMission
+      orgaWebsite
+      orgaDate
+      chaStatem
+      chaDes
+      chaStak
+      chaBac
+      chaSup
+      leadSup
+      critOfSuc
+      nextStep
+      chatitle
       theme
       technology
+      repu
+      feasibil
+      impact
+      scalabil
+      aligment
+      prototype
+      score
+      type
+      comment
+      faculty
+      prof
+      matchEmail
+      numberOfT
+      numberOfS
+      startDate
+      endDate
+      cohort
+      milestone
+      publURL
+      gitHubURL
+      publDate
       timestamp
       createdAt
       updatedAt
@@ -29,16 +64,51 @@ export const listChallanges = /* GraphQL */ `
   ) {
     listChallanges(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
-        type
         id
         phase
         status
+        coName
+        coTitle
+        coEmail
+        coPhone
+        coOptIn
         orgaTitle
         orgaCity
-        title
-        score
+        orgaMission
+        orgaWebsite
+        orgaDate
+        chaStatem
+        chaDes
+        chaStak
+        chaBac
+        chaSup
+        leadSup
+        critOfSuc
+        nextStep
+        chatitle
         theme
         technology
+        repu
+        feasibil
+        impact
+        scalabil
+        aligment
+        prototype
+        score
+        type
+        comment
+        faculty
+        prof
+        matchEmail
+        numberOfT
+        numberOfS
+        startDate
+        endDate
+        cohort
+        milestone
+        publURL
+        gitHubURL
+        publDate
         timestamp
         createdAt
         updatedAt

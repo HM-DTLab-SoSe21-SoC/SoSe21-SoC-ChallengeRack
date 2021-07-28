@@ -7,16 +7,51 @@ export const updateChallange = /* GraphQL */ `
     $condition: ModelChallangeConditionInput
   ) {
     updateChallange(input: $input, condition: $condition) {
-      type
       id
       phase
       status
+      coName
+      coTitle
+      coEmail
+      coPhone
+      coOptIn
       orgaTitle
       orgaCity
-      title
-      score
+      orgaMission
+      orgaWebsite
+      orgaDate
+      chaStatem
+      chaDes
+      chaStak
+      chaBac
+      chaSup
+      leadSup
+      critOfSuc
+      nextStep
+      chatitle
       theme
       technology
+      repu
+      feasibil
+      impact
+      scalabil
+      aligment
+      prototype
+      score
+      type
+      comment
+      faculty
+      prof
+      matchEmail
+      numberOfT
+      numberOfS
+      startDate
+      endDate
+      cohort
+      milestone
+      publURL
+      gitHubURL
+      publDate
       timestamp
       createdAt
       updatedAt
@@ -30,16 +65,51 @@ export const deleteChallange = /* GraphQL */ `
     $condition: ModelChallangeConditionInput
   ) {
     deleteChallange(input: $input, condition: $condition) {
-      type
       id
       phase
       status
+      coName
+      coTitle
+      coEmail
+      coPhone
+      coOptIn
       orgaTitle
       orgaCity
-      title
-      score
+      orgaMission
+      orgaWebsite
+      orgaDate
+      chaStatem
+      chaDes
+      chaStak
+      chaBac
+      chaSup
+      leadSup
+      critOfSuc
+      nextStep
+      chatitle
       theme
       technology
+      repu
+      feasibil
+      impact
+      scalabil
+      aligment
+      prototype
+      score
+      type
+      comment
+      faculty
+      prof
+      matchEmail
+      numberOfT
+      numberOfS
+      startDate
+      endDate
+      cohort
+      milestone
+      publURL
+      gitHubURL
+      publDate
       timestamp
       createdAt
       updatedAt
@@ -53,16 +123,51 @@ export const createChallange = /* GraphQL */ `
     $condition: ModelChallangeConditionInput
   ) {
     createChallange(input: $input, condition: $condition) {
-      type
       id
       phase
       status
+      coName
+      coTitle
+      coEmail
+      coPhone
+      coOptIn
       orgaTitle
       orgaCity
-      title
-      score
+      orgaMission
+      orgaWebsite
+      orgaDate
+      chaStatem
+      chaDes
+      chaStak
+      chaBac
+      chaSup
+      leadSup
+      critOfSuc
+      nextStep
+      chatitle
       theme
       technology
+      repu
+      feasibil
+      impact
+      scalabil
+      aligment
+      prototype
+      score
+      type
+      comment
+      faculty
+      prof
+      matchEmail
+      numberOfT
+      numberOfS
+      startDate
+      endDate
+      cohort
+      milestone
+      publURL
+      gitHubURL
+      publDate
       timestamp
       createdAt
       updatedAt
