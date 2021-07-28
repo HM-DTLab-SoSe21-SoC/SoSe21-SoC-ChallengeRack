@@ -46,7 +46,8 @@ export default function DataGridDemo() {
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <div align="left"> 
-      <TextField align="left" required id="standard-required" label="ID" 
+      <p>Please enter a valid ID</p>
+      <TextField align="left" required id="standard-required" label="ID"  
         onChange={e => setFormData({ ...formData, 'id': e.target.value })}
         value={formData.id}
       />
@@ -63,16 +64,6 @@ export default function DataGridDemo() {
       <Button  onClick={createChallange} variant="contained" color="primary">
       Create Challange
       </Button>
-      </div>
-      <div align="left" style={{ marginBottom: 30 }}>
-        {
-          challanges.map(challange => (
-            <div key={challange.id}>
-              <p>{challange.orgaCity}</p>
-              <button onClick={() => deleteChallange(challange)}>Delete challange</button>
-            </div>
-          ))
-        }
       </div>
     </form>
 
