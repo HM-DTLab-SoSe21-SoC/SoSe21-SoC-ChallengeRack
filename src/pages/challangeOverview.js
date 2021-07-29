@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css';
-import { API } from 'aws-amplify';
-import { listChallanges } from '../graphql/queries';
 
+import { useParams } from 'react-router-dom';
+import { API, graphqlOperation } from 'aws-amplify';
+import { listChallanges, getChallange } from '../graphql/queries';
+import { Link } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,7 +13,17 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { deleteChallange as deleteChallangeMutation } from '../graphql/mutations';
-import detailedPage from '../pages/detailedPage';
+import {
+  Button,
+  List,
+  ListItem,
+  Divider,
+  ListItemText,
+  ListItemAvatar,
+  Avatar,
+  Typography,
+  CircularProgress,
+} from '@material-ui/core';
 
 const useStyles = makeStyles({
   table: {
@@ -21,16 +32,14 @@ const useStyles = makeStyles({
 });
 
 export default function DataGridDemo() {
+  const { id } = useParams()
   const classes = useStyles();
   const [challanges, setChallanges] = useState([]);
-  const [data, setData] = useState('');
 
   fetchChallanges(() => {
     fetchChallanges();
   }, []);
-  const parentToChild = () => {
-    setData("Thimponent.");
-  }
+
   async function fetchChallanges() {
     const apiData = await API.graphql({ query: listChallanges });
     setChallanges(apiData.data.listChallanges.items);
@@ -40,14 +49,18 @@ export default function DataGridDemo() {
     setChallanges(newChallengesArray);
     await API.graphql({ query: deleteChallangeMutation, variables: { input: { id } } });
   }
+  async function spezChallange({ id }) {
+    const oneTodo = await API.graphql(graphqlOperation(getChallange, { id: '1' }));
+    setChallanges(oneTodo.data.listChallanges.items);
+  }
   return (
     <div className="App">
-      <detailedPage parentToChild={data} />
       <TableContainer component={Paper}>
         <Table className={classes.table} size="small" aria-label="a dense table">
           <TableHead>
             <TableRow>
-              <TableCell>ID</TableCell>
+              <TableCell align="left"> </TableCell>
+              <TableCell align="left">ID</TableCell>
               <TableCell align="left">Phase</TableCell>
               <TableCell align="left">Status</TableCell>
               <TableCell align="left">Orga Title</TableCell>
@@ -62,6 +75,11 @@ export default function DataGridDemo() {
           <TableBody>
             {challanges.map((challange) => (
               <TableRow key={challange.id}>
+                <TableCell align="left">
+                  <Link to="/detailedPage">
+                    <Avatar alt={challange.id} src='/' />
+                  </Link>
+                </TableCell>
                 <TableCell component="th" scope="note">
                   {challange.id}
                 </TableCell>
@@ -75,8 +93,6 @@ export default function DataGridDemo() {
                 <TableCell align="left">{challange.theme}</TableCell>
                 <TableCell align="left">{challange.technology}</TableCell>
                 <button onClick={() => deleteChallange(challange)}>Delete challange</button>
-                <button onClick={() => parentToChild()}>Details</button>
-                {parentToChild}
               </TableRow>
             ))}
           </TableBody>
