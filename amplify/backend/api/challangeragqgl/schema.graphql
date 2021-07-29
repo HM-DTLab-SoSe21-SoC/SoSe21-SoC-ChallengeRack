@@ -6,16 +6,16 @@ type Challange
 	{allow: private, provider: iam ,operations:[create]},
   ])
 {
-id: ID
+  id: ID
 	phase: String
 	status: String
 	coName: String
 	coTitle: String
 	coEmail: String
 	coPhone: String
-	coOptIn: Boolean
+	coOptIn: String
 	orgaTitle: String
-	orgaCity: String
+	orgaLocat: String
 	orgaMission: String
 	orgaWebsite: String
 	orgaDate: String
