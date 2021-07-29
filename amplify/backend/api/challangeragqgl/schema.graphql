@@ -5,8 +5,9 @@ type Challange
     {allow: private, provider: userPools, operations:[read]},
 	{allow: private, provider: iam ,operations:[create]},
   ])
+    @key(name: "BySpecificID", fields:["id", "timestamp"], queryField: "listPostsBySpecificID")
 {
-id: ID
+  id: ID
 	phase: String
 	status: String
 	coName: String
@@ -15,7 +16,7 @@ id: ID
 	coPhone: String
 	coOptIn: String
 	orgaTitle: String
-	orgaCity: String
+	orgaLocat: String
 	orgaMission: String
 	orgaWebsite: String
 	orgaDate: String
