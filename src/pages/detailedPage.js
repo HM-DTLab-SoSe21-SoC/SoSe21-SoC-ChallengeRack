@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
 
 const initialFormState = { id: '', orgaTitle: '' }
 
-export default function DataGridDemo() {
+export default function DataGridDemo(parentToChild) {
   const classes = useStyles();
   const [challanges, setChallanges] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
@@ -46,7 +46,7 @@ export default function DataGridDemo() {
   return (
     <form className={classes.root} noValidate autoComplete="off">
       <TextField required id="standard-required" label="Required" defaultValue={formData.id} />
-      <TextField required id="standard-required" label="ID" 
+      <TextField required id="standard-required" label="ID"
         onChange={e => setFormData({ ...formData, 'id': e.target.value })}
         value={formData.id}
       />
@@ -58,18 +58,7 @@ export default function DataGridDemo() {
         onChange={e => setFormData({ ...formData, 'orgaTitle': e.target.value })}
         value={formData.orgaTitle}
       />
-      <button onClick={createChallange}>Create Challange</button>
-      <div style={{ marginBottom: 30 }}>
-        {
-          challanges.map(challange => (
-            <div key={challange.id || challange.orgaTitle}>
-              <h2>{challange.orgaTitle}</h2>
-              <p>{challange.orgaCity}</p>
-              <button onClick={() => deleteChallange(challange)}>Delete challange</button>
-            </div>
-          ))
-        }
-      </div>
+      <p>JSON.stringify(parentToChild.data)</p>
     </form>
 
 

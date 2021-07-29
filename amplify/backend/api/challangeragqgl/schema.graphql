@@ -13,7 +13,7 @@ id: ID
 	coTitle: String
 	coEmail: String
 	coPhone: String
-	coOptIn: String
+	coOptIn: Boolean
 	orgaTitle: String
 	orgaCity: String
 	orgaMission: String

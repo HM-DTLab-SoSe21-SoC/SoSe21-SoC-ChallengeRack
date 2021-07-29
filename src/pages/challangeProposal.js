@@ -66,7 +66,5 @@ export default function DataGridDemo() {
       </Button>
       </div>
     </form>
-
-
   );
 }

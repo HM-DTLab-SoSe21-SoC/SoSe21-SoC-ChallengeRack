@@ -13,7 +13,7 @@ export const onCreateChallange = /* GraphQL */ `
       coPhone
       coOptIn
       orgaTitle
-      orgaCity
+      orgaLocat
       orgaMission
       orgaWebsite
       orgaDate
@@ -68,7 +68,7 @@ export const onUpdateChallange = /* GraphQL */ `
       coPhone
       coOptIn
       orgaTitle
-      orgaCity
+      orgaLocat
       orgaMission
       orgaWebsite
       orgaDate
@@ -123,7 +123,7 @@ export const onDeleteChallange = /* GraphQL */ `
       coPhone
       coOptIn
       orgaTitle
-      orgaCity
+      orgaLocat
       orgaMission
       orgaWebsite
       orgaDate

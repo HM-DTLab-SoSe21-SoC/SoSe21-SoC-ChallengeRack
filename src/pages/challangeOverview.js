@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import '../App.css';
 import { API } from 'aws-amplify';
 import { listChallanges } from '../graphql/queries';
 
@@ -12,21 +12,25 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import { deleteChallange as deleteChallangeMutation } from '../graphql/mutations';
+import detailedPage from '../pages/detailedPage';
 
 const useStyles = makeStyles({
   table: {
     minWidth: 650,
   },
 });
- 
+
 export default function DataGridDemo() {
   const classes = useStyles();
   const [challanges, setChallanges] = useState([]);
+  const [data, setData] = useState('');
 
   fetchChallanges(() => {
     fetchChallanges();
   }, []);
-
+  const parentToChild = () => {
+    setData("Thimponent.");
+  }
   async function fetchChallanges() {
     const apiData = await API.graphql({ query: listChallanges });
     setChallanges(apiData.data.listChallanges.items);
@@ -37,7 +41,8 @@ export default function DataGridDemo() {
     await API.graphql({ query: deleteChallangeMutation, variables: { input: { id } } });
   }
   return (
-<div className="App">
+    <div className="App">
+      <detailedPage parentToChild={data} />
       <TableContainer component={Paper}>
         <Table className={classes.table} size="small" aria-label="a dense table">
           <TableHead>
@@ -70,6 +75,8 @@ export default function DataGridDemo() {
                 <TableCell align="left">{challange.theme}</TableCell>
                 <TableCell align="left">{challange.technology}</TableCell>
                 <button onClick={() => deleteChallange(challange)}>Delete challange</button>
+                <button onClick={() => parentToChild()}>Details</button>
+                {parentToChild}
               </TableRow>
             ))}
           </TableBody>

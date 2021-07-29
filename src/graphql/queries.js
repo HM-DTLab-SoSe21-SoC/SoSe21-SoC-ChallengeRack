@@ -13,7 +13,7 @@ export const getChallange = /* GraphQL */ `
       coPhone
       coOptIn
       orgaTitle
-      orgaCity
+      orgaLocat
       orgaMission
       orgaWebsite
       orgaDate
@@ -73,7 +73,7 @@ export const listChallanges = /* GraphQL */ `
         coPhone
         coOptIn
         orgaTitle
-        orgaCity
+        orgaLocat
         orgaMission
         orgaWebsite
         orgaDate
