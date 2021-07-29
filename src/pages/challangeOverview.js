@@ -68,7 +68,7 @@ export default function DataGridDemo() {
                 <TableCell align="left">{challange.phase}</TableCell>
                 <TableCell align="left">{challange.status}</TableCell>
                 <TableCell align="left">{challange.orgaTitle}</TableCell>
-                <TableCell align="left">{challange.orgaCity}</TableCell>
+                <TableCell align="left">{challange.orgaLocat}</TableCell>
                 <TableCell align="left">{challange.chatitle}</TableCell>
                 <TableCell align="left">{challange.type}</TableCell>
                 <TableCell align="left">{challange.score}</TableCell>
