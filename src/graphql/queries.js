@@ -118,18 +118,16 @@ export const listChallanges = /* GraphQL */ `
     }
   }
 `;
-export const listPostsBySpecificID = /* GraphQL */ `
-  query ListPostsBySpecificID(
+export const listBySpecificID = /* GraphQL */ `
+  query ListBySpecificID(
     $id: ID
-    $timestamp: ModelIntKeyConditionInput
     $sortDirection: ModelSortDirection
     $filter: ModelChallangeFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listPostsBySpecificID(
+    listBySpecificID(
       id: $id
-      timestamp: $timestamp
       sortDirection: $sortDirection
       filter: $filter
       limit: $limit

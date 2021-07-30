@@ -35,5 +35,23 @@
       },
       "hosting": {}
     }
+  },
+  "newdev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-challangerag-newdev-74539-authRole",
+      "UnauthRoleArn": "arn:aws:iam::858562401334:role/amplify-challangerag-newdev-74539-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::858562401334:role/amplify-challangerag-newdev-74539-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-challangerag-newdev-74539-deployment",
+      "UnauthRoleName": "amplify-challangerag-newdev-74539-unauthRole",
+      "StackName": "amplify-challangerag-newdev-74539",
+      "StackId": "arn:aws:cloudformation:us-east-1:858562401334:stack/amplify-challangerag-newdev-74539/625f5570-f0f9-11eb-ae53-0ed9163b6ca9",
+      "AmplifyAppId": "d3mobcx24zbaf3"
+    },
+    "categories": {
+      "auth": {
+        "challangeragb85db312": {}
+      }
+    }
   }
 }

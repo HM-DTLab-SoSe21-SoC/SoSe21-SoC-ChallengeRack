@@ -49,10 +49,6 @@ export default function DataGridDemo() {
     setChallanges(newChallengesArray);
     await API.graphql({ query: deleteChallangeMutation, variables: { input: { id } } });
   }
-  async function spezChallange({ id }) {
-    const oneTodo = await API.graphql(graphqlOperation(getChallange, { id: '1' }));
-    setChallanges(oneTodo.data.listChallanges.items);
-  }
   return (
     <div className="App">
       <TableContainer component={Paper}>
