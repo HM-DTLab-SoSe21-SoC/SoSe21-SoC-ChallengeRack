@@ -5,7 +5,7 @@ import { listChallanges } from '../graphql/queries';
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { createChallange as createChallangeMutation, deleteChallange as deleteChallangeMutation } from '../graphql/mutations';
+import { createChallange as createChallangeMutation } from '../graphql/mutations';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
@@ -45,11 +45,6 @@ export default function DataGridDemo() {
     await API.graphql({ query: createChallangeMutation, variables: { input: formData } });
     setChallanges([...challanges, formData]);
     setFormData(initialFormState);
-  }
-  async function deleteChallange({ id }) {
-    const newChallengesArray = challanges.filter(challange => challange.id !== id);
-    setChallanges(newChallengesArray);
-    await API.graphql({ query: deleteChallangeMutation, variables: { input: { id } } });
   }
   return (
     <form className={classes.root} noValidate autoComplete="off">

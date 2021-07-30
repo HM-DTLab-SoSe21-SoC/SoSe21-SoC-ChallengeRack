@@ -5,7 +5,7 @@ type Challange
     {allow: private, provider: userPools, operations:[read]},
 	{allow: private, provider: iam ,operations:[create]},
   ])
-    @key(name: "BySpecificID", fields:["id", "timestamp"], queryField: "listPostsBySpecificID")
+    @key(name: "listBySpecificID", fields:["id"], queryField: "listBySpecificID")
 {
   id: ID
 	phase: String

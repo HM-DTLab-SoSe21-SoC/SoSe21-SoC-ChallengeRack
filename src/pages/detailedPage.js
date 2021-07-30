@@ -1,81 +1,28 @@
-import React, { useState, useEffect, useReducer } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { API } from 'aws-amplify';
 import { listChallanges } from '../graphql/queries';
-import { listPostsBySpecificID } from '../graphql/queries';
-import { useParams } from 'react-router';
-import { graphqlOperation } from '@aws-amplify/api';
-
+import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { createChallange as createChallangeMutation, deleteChallange as deleteChallangeMutation } from '../graphql/mutations';
-import {
-  Button,
-  List,
-  ListItem,
-  Divider,
-  ListItemText,
-  ListItemAvatar,
-  Avatar,
-  Typography,
-  CircularProgress,
-} from '@material-ui/core';
-import moment from 'moment';
-import { useHistory } from 'react-router';
+import { updateChallange as updateChallangeMutation, deleteChallange as deleteChallangeMutation } from '../graphql/mutations';
+import Button from '@material-ui/core/Button';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: '25ch',
+      width: '100ch',
     },
   },
 }));
-const INITIAL_QUERY = 'INITIAL_QUERY';
-const ADDITIONAL_QUERY = 'ADDITIONAL_QUERY';
+
 const initialFormState = { id: '', orgaTitle: '' }
 
-const reducer = (state, action) => {
-  switch (action.type) {
-    case INITIAL_QUERY:
-      return action.posts;
-    case ADDITIONAL_QUERY:
-      return [...state, ...action.posts]
-    default:
-      return state;
-  }
-};
-
 export default function DataGridDemo() {
-  const { userId } = useParams();
   const classes = useStyles();
   const [challanges, setChallanges] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
-
-  const [posts, dispatch] = useReducer(reducer, []);
-  const [isLoading, setIsLoading] = useState(true);
-  const [nextToken, setNextToken] = useState(null);
-
-  const getPosts = async (type, nextToken = null) => {
-    const res = await API.graphql(graphqlOperation(listPostsBySpecificID, {
-      id: 1,
-      sortDirection: 'DESC',
-      limit: 20,
-      nextToken: nextToken,
-    }));
-    console.log(res);
-    dispatch({ type: type, posts: res.data.listPostsBySpecificID.items })
-    setNextToken(res.data.listPostsBySpecificID.nextToken);
-    setIsLoading(false);
-  }
-  const getAdditionalPosts = () => {
-    if (nextToken === null) return; //Reached the last page
-    getPosts(ADDITIONAL_QUERY, nextToken);
-  }
-
-
-  useEffect(() => {
-    getPosts(INITIAL_QUERY);
-  }, []);
 
   fetchChallanges(() => {
     fetchChallanges();
@@ -85,13 +32,11 @@ export default function DataGridDemo() {
     const apiData = await API.graphql({ query: listChallanges });
     setChallanges(apiData.data.listChallanges.items);
   }
-  async function createChallange() {
-    if (!formData.id || !formData.orgaCity || !formData.orgaTitle) return;
-    await API.graphql({ query: createChallangeMutation, variables: { input: formData } });
+  async function updateChallange() {
+    await API.graphql({ query: updateChallangeMutation, variables: { input: formData } });
     setChallanges([...challanges, formData]);
     setFormData(initialFormState);
   }
-
   async function deleteChallange({ id }) {
     const newChallengesArray = challanges.filter(challange => challange.id !== id);
     setChallanges(newChallengesArray);
@@ -99,79 +44,83 @@ export default function DataGridDemo() {
   }
   return (
     <form className={classes.root} noValidate autoComplete="off">
-      <TextField align="left" required id="standard-required" label="ID"
-        onChange={e => setFormData({ ...formData, 'id': e.target.value })}
-        value={formData.id}
-      />
-      <TextField align="left" id="standard-required" label="Organazation's Name"
-        onChange={e => setFormData({ ...formData, 'orgaTitle': e.target.value })}
-        value={formData.orgaTitle}
-      />
-      <TextField align="left" id="standard-required" label="Organazation's City"
-        onChange={e => setFormData({ ...formData, 'orgaLocat': e.target.value })}
-        value={formData.orgaLocat}
-      />
-
-      <div className={classes.listRoot}>
-          <div className={classes.loader}>
-            {challanges.map(challange => (
-              <span>
-                <PostItem challange={challange} />
-                <Divider component="li" />
-              </span>
-            ))}
+      <div align="left">
+        {challanges.map((challange) => (
+          <div align="left">
+            <Button onClick={updateChallange} variant="contained" color="primary">
+              Update challenge data
+            </Button>&nbsp;&nbsp;&nbsp;
+            <Button onClick={() => deleteChallange(challange)} variant="contained" color="primary">
+              Delete challenge
+            </Button>&nbsp;&nbsp;&nbsp;
+            <NavLink to='/challangeOverview'>
+              <Button variant="contained" color="primary">
+                Back to overview
+              </Button>
+            </NavLink>
+            <p> </p>
+            <h1>General</h1>
+            <TextField required id="standard-size-normal" label="ID" placeholder={challange.id}
+              onChange={e => setFormData({ ...formData, 'id': e.target.value })}
+              value={formData.id}
+            />
+            <TextField required id="standard-size-normal" label="Phase" placeholder={challange.phase}
+              onChange={e => setFormData({ ...formData, 'phase': e.target.value })}
+              value={formData.phase}
+            />
+            <TextField required id="standard-size-normal" label="Status" placeholder={challange.status}
+              onChange={e => setFormData({ ...formData, 'status': e.target.value })}
+              value={formData.status}
+            />
+            <p> </p>
+            <h1>Contact</h1>
+            <TextField required id="standard-size-normal" label="Contact Name" placeholder={challange.coName}
+              onChange={e => setFormData({ ...formData, 'coName': e.target.value })}
+              value={formData.coName}
+            />
+            <TextField required id="standard-size-normal" label="Contact Title" placeholder={challange.coTitle}
+              onChange={e => setFormData({ ...formData, 'coTitle': e.target.value })}
+              value={formData.coTitle}
+            />
+            <TextField align="left" id="standard-required" label="Contact Email" placeholder={challange.coEmail}
+              onChange={e => setFormData({ ...formData, 'coEmail': e.target.value })}
+              value={formData.coEmail}
+            />
+            <TextField align="left" id="standard-required" label="Contact Phone" placeholder={challange.coPhone}
+              onChange={e => setFormData({ ...formData, 'coPhone': e.target.value })}
+              value={formData.coPhone}
+            />
+            <TextField required id="standard-size-normal" label="Contact Opt-In" placeholder={challange.status}
+              onChange={e => setFormData({ ...formData, 'status': e.target.value })}
+              value={formData.coOptIn}
+            />
+            <p> </p>
+            <h1>Organization</h1>
+            <TextField align="left" id="standard-required" label="Organazation's Title" placeholder={challange.orgaTitle}
+              onChange={e => setFormData({ ...formData, 'orgaTitle': e.target.value })}
+              value={formData.orgaTitle}
+            />
+            <TextField align="left" id="standard-required" label="Organazation's Location" placeholder={challange.orgaLocat}
+              onChange={e => setFormData({ ...formData, 'orgaLocat': e.target.value })}
+              value={formData.orgaLocat}
+            />
+            <TextField align="left" id="standard-required" label="Organazation's Mission" placeholder={challange.orgaMission}
+              onChange={e => setFormData({ ...formData, 'orgaMission': e.target.value })}
+              value={formData.orgaMission}
+            />
+            <TextField align="left" id="standard-required" label="Organazation's Website" placeholder={challange.orgaWebsite}
+              onChange={e => setFormData({ ...formData, 'orgaWebsite': e.target.value })}
+              value={formData.orgaWebsite}
+            />
+            <TextField align="left" id="standard-required" label="Organazation's Date" placeholder={challange.orgaDate}
+              onChange={e => setFormData({ ...formData, 'orgaDate': e.target.value })}
+              value={formData.orgaDate}
+            />
           </div>
-          
+        ))}
       </div>
     </form>
 
 
   );
-}
-function PostItem({ challange }) {
-  const classes = useStyles();
-  const history = useHistory();
-  const now = moment();
-  console.log(now)
-
-  const calcTimestampDiff = (timestamp) => {
-    const scales = ['years', 'months', 'weeks', 'days', 'hours', 'minutes', 'seconds'];
-
-    for (let i = 0; i < scales.length; i++) {
-      const scale = scales[i];
-      const diff = moment(now).diff(timestamp * 1000, scale);
-      if (diff > 0) return diff + scale.charAt(0)
-    }
-
-    return 0 + scales[scales.length - 1].charAt(0)
-  }
-
-  return (
-    <ListItem alignItems='flex-start' key={challange.id}>
-      <ListItemAvatar>
-        <div className={classes.clickable} onClick={() => history.push('/' + challange.id)}>
-          <Avatar alt={challange.id} src='/' />
-        </div>
-      </ListItemAvatar>
-      <ListItemText
-        primary={
-          <React.Fragment>
-            {challange.id}
-            <Typography
-              color='textSecondary'
-              display='inline'
-            >
-            </Typography>
-          </React.Fragment>
-        }
-        secondary={
-          <Typography
-            color='textPrimary'
-          >
-            {challange.orgaLocat}
-          </Typography>
-        }
-      />
-    </ListItem>
-  )
 }
