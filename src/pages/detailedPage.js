@@ -116,6 +116,40 @@ export default function DataGridDemo() {
               onChange={e => setFormData({ ...formData, 'orgaDate': e.target.value })}
               value={formData.orgaDate}
             />
+            <p> </p>
+            <h1>Organization</h1>
+            <TextField align="left" id="standard-required" label="Challange Statement" placeholder={challange.chaStatem}
+              onChange={e => setFormData({ ...formData, 'chaStatem': e.target.value })}
+              value={formData.chaStatem}
+            />
+            <TextField align="left" id="standard-required" label="Challange Description" placeholder={challange.chaDes}
+              onChange={e => setFormData({ ...formData, 'chaDes': e.target.value })}
+              value={formData.chaDes}
+            />
+            <TextField align="left" id="standard-required" label="Challange Stakeholder" placeholder={challange.chaStak}
+              onChange={e => setFormData({ ...formData, 'chaStak': e.target.value })}
+              value={formData.chaStak}
+            />
+            <TextField align="left" id="standard-required" label="Challange Background" placeholder={challange.chaBac}
+              onChange={e => setFormData({ ...formData, 'chaBac': e.target.value })}
+              value={formData.chaBac}
+            />
+            <TextField align="left" id="standard-required" label="Challange Support" placeholder={challange.chaSup}
+              onChange={e => setFormData({ ...formData, 'chaSup': e.target.value })}
+              value={formData.chaSup}
+            />
+            <TextField align="left" id="standard-required" label="Leadership Support" placeholder={challange.leadSup}
+              onChange={e => setFormData({ ...formData, 'leadSup': e.target.value })}
+              value={formData.leadSup}
+            />
+            <TextField align="left" id="standard-required" label="Criteria of Success" placeholder={challange.critOfSuc}
+              onChange={e => setFormData({ ...formData, 'critOfSuc': e.target.value })}
+              value={formData.critOfSuc}
+            />
+            <TextField align="left" id="standard-required" label="Next Steps" placeholder={challange.nextStep}
+              onChange={e => setFormData({ ...formData, 'nextStep': e.target.value })}
+              value={formData.nextStep}
+            />
           </div>
         ))}
       </div>

@@ -55,7 +55,7 @@ export default function DataGridDemo() {
     <form className={classes.root} noValidate autoComplete="off">
       <div align="left">
         <h1>Contact Us</h1>
-        <p>Feel free to reach us out at dtl@hmu.edu, or fill out the form below.</p>
+        <p>Feel free to reach us out at <a href="mailto:dtlab@hmu.edu">dtl@hmu.edu</a>, or fill out the form below.</p>
         <TextField align="left" required id="standard-required" label="ID"
           onChange={e => setFormData({ ...formData, 'id': e.target.value })}
           value={formData.id}
@@ -66,9 +66,8 @@ export default function DataGridDemo() {
         />
       </div >
       <div align="left">
-        <p>By creating a challenge, you are agreeing to our <a href="">Terms & Conditions</a>.</p>
         <Button onClick={createChallange} variant="contained" color="primary">
-          Create Challange
+          Submit
         </Button>
       </div>
     </form>
