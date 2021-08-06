@@ -1,12 +1,12 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const updateChallange = /* GraphQL */ `
-  mutation UpdateChallange(
-    $input: UpdateChallangeInput!
-    $condition: ModelChallangeConditionInput
+export const updateChallenge = /* GraphQL */ `
+  mutation UpdateChallenge(
+    $input: UpdateChallengeInput!
+    $condition: ModelChallengeConditionInput
   ) {
-    updateChallange(input: $input, condition: $condition) {
+    updateChallenge(input: $input, condition: $condition) {
       id
       phase
       status
@@ -59,12 +59,12 @@ export const updateChallange = /* GraphQL */ `
     }
   }
 `;
-export const deleteChallange = /* GraphQL */ `
-  mutation DeleteChallange(
-    $input: DeleteChallangeInput!
-    $condition: ModelChallangeConditionInput
+export const deleteChallenge = /* GraphQL */ `
+  mutation DeleteChallenge(
+    $input: DeleteChallengeInput!
+    $condition: ModelChallengeConditionInput
   ) {
-    deleteChallange(input: $input, condition: $condition) {
+    deleteChallenge(input: $input, condition: $condition) {
       id
       phase
       status
@@ -117,12 +117,12 @@ export const deleteChallange = /* GraphQL */ `
     }
   }
 `;
-export const createChallange = /* GraphQL */ `
-  mutation CreateChallange(
-    $input: CreateChallangeInput!
-    $condition: ModelChallangeConditionInput
+export const createChallenge = /* GraphQL */ `
+  mutation CreateChallenge(
+    $input: CreateChallengeInput!
+    $condition: ModelChallengeConditionInput
   ) {
-    createChallange(input: $input, condition: $condition) {
+    createChallenge(input: $input, condition: $condition) {
       id
       phase
       status

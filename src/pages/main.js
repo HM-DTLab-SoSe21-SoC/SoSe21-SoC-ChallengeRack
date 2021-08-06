@@ -3,9 +3,9 @@ import { Switch, Route } from 'react-router-dom';
 
 import home from '../pages/home';
 import contact from '../pages/contact';
-import challangeProposal from '../pages/challangeProposal';
+import challangeProposal from './challengeProposal';
 import detailedPage from '../pages/detailedPage';
-import challangeOverview from '../pages/challangeOverview';
+import challangeOverview from './challengeOverview';
 
 const Main = () => {
   return (

@@ -1,4 +1,4 @@
-type Challange
+type Challenge
   @model (subscriptions: { level: public })
   @auth(rules: [
     {allow: owner, ownerField:"owner", provider: userPools, operations:[read, create]},
@@ -7,7 +7,7 @@ type Challange
   ])
     @key(name: "listBySpecificID", fields:["id"], queryField: "listBySpecificID")
 {
-  id: ID
+  id: ID!
 	phase: String
 	status: String
 	coName: String

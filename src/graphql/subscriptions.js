@@ -1,9 +1,9 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateChallange = /* GraphQL */ `
-  subscription OnCreateChallange {
-    onCreateChallange {
+export const onCreateChallenge = /* GraphQL */ `
+  subscription OnCreateChallenge {
+    onCreateChallenge {
       id
       phase
       status
@@ -56,9 +56,9 @@ export const onCreateChallange = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateChallange = /* GraphQL */ `
-  subscription OnUpdateChallange {
-    onUpdateChallange {
+export const onUpdateChallenge = /* GraphQL */ `
+  subscription OnUpdateChallenge {
+    onUpdateChallenge {
       id
       phase
       status
@@ -111,9 +111,9 @@ export const onUpdateChallange = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteChallange = /* GraphQL */ `
-  subscription OnDeleteChallange {
-    onDeleteChallange {
+export const onDeleteChallenge = /* GraphQL */ `
+  subscription OnDeleteChallenge {
+    onDeleteChallenge {
       id
       phase
       status
