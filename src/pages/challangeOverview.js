@@ -14,6 +14,7 @@ import { deleteChallange, updateChallange } from '../graphql/mutations';
 import DetailedPage from './detailedPage'
 import Box from '@material-ui/core/Box';
 import { Button, Avatar } from '@material-ui/core';
+import { withAuthenticator } from 'aws-amplify-react';
 
 const useStyles = makeStyles({
   table: {
@@ -21,7 +22,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function DataGridDemo() {
+const ChallengeOverview = ({ }) => {
   const classes = useStyles();
   const [challenges, setChallenges] = useState([]);
   const [apiError, setApiError] = useState();
@@ -134,3 +135,9 @@ export default function DataGridDemo() {
     </div>
   );
 }
+
+export default withAuthenticator(ChallengeOverview, {
+  signUpConfig: {
+    hiddenDefaults: ['phone_number']
+  }
+});
