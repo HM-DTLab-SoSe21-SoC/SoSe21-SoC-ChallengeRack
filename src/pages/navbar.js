@@ -16,17 +16,18 @@ const signOut = () => {
 }
 
 const Navigation = () => (
-  <nav>
-    <NavLink to='/'>Home</NavLink>&nbsp;&nbsp;&nbsp;
-    <NavLink to='/challangeProposal'>Challenge intake</NavLink>&nbsp;&nbsp;&nbsp;
-    <NavLink to='/challangeOverview'>Challenge overview</NavLink>&nbsp;&nbsp;&nbsp;
-    <NavLink to='/detailedPage'>Detailed page</NavLink>
-    <Button align="right"
-      onClick={signOut}
-    >
-      Logout
-    </Button>
-  </nav>
+  <dev>
+    <nav align="left">
+      <NavLink to='/'>Challenge intake</NavLink>&nbsp;&nbsp;&nbsp;
+      <NavLink to='/challangeOverview'>Challenge overview</NavLink>&nbsp;&nbsp;&nbsp;
+
+    </nav>
+    <dev align="right">
+      <Button align="right" onClick={signOut}>
+        Logout
+      </Button>
+    </dev>
+  </dev>
 );
 
 export default Navigation;

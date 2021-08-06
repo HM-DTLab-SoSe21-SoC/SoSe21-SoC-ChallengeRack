@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { API } from 'aws-amplify';
-import { listChallanges } from '../graphql/queries';
+import { listChallenges } from '../graphql/queries';
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { createChallange as createChallangeMutation } from '../graphql/mutations';
+import { createChallenge as createChallengeMutation } from '../graphql/mutations';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,18 +21,18 @@ const initialFormState = {  }
 
 export default function ChallengeProposal() {
   const classes = useStyles();
-  const [challanges, setChallanges] = useState([]);
+  const [challenges, setChallenges] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
 
-  fetchChallanges(() => {
-    fetchChallanges();
+  useEffect(() => {
+    fetchChallenges();
   }, []);
 
-  async function fetchChallanges() {
-    const apiData = await API.graphql({ query: listChallanges });
-    setChallanges(apiData.data.listChallanges.items);
+  async function fetchChallenges() {
+    const apiData = await API.graphql({ query: listChallenges });
+    setChallenges(apiData.data.listChallenges.items);
   }
-  async function createChallange() {
+  async function createChallenge() {
     if (!formData.orgaLocat || !formData.orgaTitle
       // || !formData.coName || !formData.orgaWebsite || !formData.coEmail || 
       // !formData.coOptIn || !formData.chaStatem || !formData.coTitle || 
@@ -42,8 +42,8 @@ export default function ChallengeProposal() {
       alert("Please fill in all the mandatory fields.");
       return;
     }
-    await API.graphql({ query: createChallangeMutation, variables: { input: formData } });
-    setChallanges([...challanges, formData]);
+    await API.graphql({ query: createChallengeMutation, variables: { input: formData } });
+    setChallenges([...challenges, formData]);
     setFormData(initialFormState);
   }
   return (
@@ -118,8 +118,8 @@ export default function ChallengeProposal() {
       </div >
       <div align="left">
         <p>By creating a challenge, you are agreeing to our <a href="">Terms & Conditions</a>.</p>
-        <Button onClick={createChallange} variant="contained" color="primary">
-          Create Challange
+        <Button onClick={createChallenge} variant="contained" color="primary">
+          Create Challenge
         </Button>
       </div>
     </form>

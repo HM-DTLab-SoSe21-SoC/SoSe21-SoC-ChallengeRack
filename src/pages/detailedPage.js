@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
 import { API } from 'aws-amplify';
-import { listChallanges } from '../graphql/queries';
-import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { updateChallange as updateChallangeMutation, deleteChallange as deleteChallangeMutation } from '../graphql/mutations';
+import { updateChallenge as updateChallengeMutation, deleteChallenge as deleteChallengeMutation } from '../graphql/mutations';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
@@ -66,20 +63,20 @@ const DetailedPage = ({ challenge }) => {
     gitHubURL: challenge.gitHubURL,
   }
   const classes = useStyles();
-  const [challenges, setChallanges] = useState([]);
+  const [challenges, setChallenges] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
   useEffect(() => {
-    updateChallange();
+    updateChallenge();
   }, []);
-  async function updateChallange() {
-    await API.graphql({ query: updateChallangeMutation, variables: { input: formData } });
-    setChallanges([...challenges, formData]);
+  async function updateChallenge() {
+    await API.graphql({ query: updateChallengeMutation, variables: { input: formData } });
+    setChallenges([...challenges, formData]);
     setFormData(initialFormState);
   }
-  async function deleteChallange({ id }) {
-    const newChallengesArray = challenges.filter(challange => challange.id !== id);
-    setChallanges(newChallengesArray);
-    await API.graphql({ query: deleteChallangeMutation, variables: { input: { id } } });
+  async function deleteChallenge({ id }) {
+    const newChallengesArray = challenges.filter(challenge => challenge.id !== id);
+    setChallenges(newChallengesArray);
+    await API.graphql({ query: deleteChallengeMutation, variables: { input: { id } } });
   }
   return (
     <form className={classes.root} noValidate autoComplete="off">
@@ -144,10 +141,10 @@ const DetailedPage = ({ challenge }) => {
         value={formData.orgaDate}
       />
       <div>
-        <Button onClick={updateChallange} variant="contained" color="primary">
+        <Button onClick={updateChallenge} variant="contained" color="primary">
           Update challenge data
         </Button>&nbsp;&nbsp;&nbsp;
-        <Button onClick={() => deleteChallange(challenge)} variant="contained" color="primary">
+        <Button onClick={() => deleteChallenge(challenge)} variant="contained" color="primary">
           Delete challenge
         </Button>&nbsp;&nbsp;&nbsp;
       </div>

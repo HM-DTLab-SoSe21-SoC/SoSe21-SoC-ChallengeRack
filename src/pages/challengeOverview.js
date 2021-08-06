@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
-import { listChallanges, getChallange } from '../graphql/queries';
-import { NavLink, Link } from 'react-router-dom';
+import { listChallenges } from '../graphql/queries';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -10,7 +9,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { deleteChallange, updateChallange } from '../graphql/mutations';
+import { deleteChallenge, updateChallenge } from '../graphql/mutations';
 import DetailedPage from './detailedPage'
 import Box from '@material-ui/core/Box';
 import { Button, Avatar } from '@material-ui/core';
@@ -35,8 +34,8 @@ const ChallengeOverview = ({ }) => {
   async function fetchChallenges() {
     setIsLoading(true);
     try {
-      const apiData = await API.graphql(graphqlOperation(listChallanges));
-      const challenges = apiData.data.listChallanges.items;
+      const apiData = await API.graphql(graphqlOperation(listChallenges));
+      const challenges = apiData.data.listChallenges.items;
       setChallenges(challenges);
       setApiError(null);
     } catch (error) {
@@ -46,9 +45,9 @@ const ChallengeOverview = ({ }) => {
       setIsLoading(false);
     }
   }
-  async function deleteChallangeFunction(id) {
+  async function deleteChallengeFunction(id) {
     try {
-      await API.graphql(graphqlOperation(deleteChallange, { input: { id } }));
+      await API.graphql(graphqlOperation(deleteChallenge, { input: { id } }));
       setChallenges(challenges.filter((challenge) => challenge.id !== id));
       setApiError(null);
     } catch (error) {
@@ -56,9 +55,9 @@ const ChallengeOverview = ({ }) => {
       setApiError(error);
     }
   }
-  async function updateChallangeFunction(challenge) {
+  async function updateChallengeFunction(challenge) {
     await API.graphql(
-      graphqlOperation(updateChallange, {
+      graphqlOperation(updateChallenge, {
         input: {
           orgaTitle: challenge.orgaTitle,
           orgaLocat: challenge.orgaLocat,
@@ -82,8 +81,8 @@ const ChallengeOverview = ({ }) => {
               </Button>
               <DetailedPage
                 challenge={filteredChallenge}
-                deleteChallangeFunction={deleteChallangeFunction}
-                updateChallangeFunction={updateChallangeFunction}
+                deleteChallengeFunction={deleteChallengeFunction}
+                updateChallengeFunction={updateChallengeFunction}
               />
             </div>
           ))}

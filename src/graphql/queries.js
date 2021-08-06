@@ -1,9 +1,9 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
- 
-export const getChallange = /* GraphQL */ `
-  query GetChallange($id: ID!) {
-    getChallange(id: $id) {
+
+export const getChallenge = /* GraphQL */ `
+  query GetChallenge($id: ID!) {
+    getChallenge(id: $id) {
       id
       phase
       status
@@ -56,13 +56,13 @@ export const getChallange = /* GraphQL */ `
     }
   }
 `;
-export const listChallanges = /* GraphQL */ `
-  query ListChallanges(
-    $filter: ModelChallangeFilterInput
+export const listChallenges = /* GraphQL */ `
+  query ListChallenges(
+    $filter: ModelChallengeFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listChallanges(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listChallenges(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
         phase
@@ -122,7 +122,7 @@ export const listBySpecificID = /* GraphQL */ `
   query ListBySpecificID(
     $id: ID
     $sortDirection: ModelSortDirection
-    $filter: ModelChallangeFilterInput
+    $filter: ModelChallengeFilterInput
     $limit: Int
     $nextToken: String
   ) {

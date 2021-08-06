@@ -1,4 +1,4 @@
-type Challange
+type Challenge
   @model (subscriptions: { level: public })
   @auth(rules: [
     {allow: owner, ownerField:"owner", provider: userPools, operations:[read, create]},

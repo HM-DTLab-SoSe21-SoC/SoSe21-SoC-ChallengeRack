@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { API } from 'aws-amplify';
-import { listChallanges } from '../graphql/queries';
+import { listChallenges } from '../graphql/queries';
 
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { createChallange as createChallangeMutation, deleteChallange as deleteChallangeMutation } from '../graphql/mutations';
+import { createChallenge as createChallengeMutation} from '../graphql/mutations';
 import Button from '@material-ui/core/Button';
 
 const useStyles = makeStyles((theme) => ({
@@ -22,18 +22,18 @@ const initialFormState = { id: '', orgaTitle: '' }
 
 export default function DataGridDemo() {
   const classes = useStyles();
-  const [challanges, setChallanges] = useState([]);
+  const [challenges, setChallenges] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
 
-  fetchChallanges(() => {
-    fetchChallanges();
+  useEffect(() => {
+    fetchChallenges();
   }, []);
 
-  async function fetchChallanges() {
-    const apiData = await API.graphql({ query: listChallanges });
-    setChallanges(apiData.data.listChallanges.items);
+  async function fetchChallenges() {
+    const apiData = await API.graphql({ query: listChallenges });
+    setChallenges(apiData.data.listChallenges.items);
   }
-  async function createChallange() {
+  async function createChallenge() {
     if (!formData.orgaLocat || !formData.orgaTitle
       // || !formData.coName || !formData.orgaWebsite || !formData.coEmail || 
       // !formData.coOptIn || !formData.chaStatem || !formData.coTitle || 
@@ -43,14 +43,9 @@ export default function DataGridDemo() {
       alert("Please fill in all the mandatory fields.");
       return;
     }
-    await API.graphql({ query: createChallangeMutation, variables: { input: formData } });
-    setChallanges([...challanges, formData]);
+    await API.graphql({ query: createChallengeMutation, variables: { input: formData } });
+    setChallenges([...challenges, formData]);
     setFormData(initialFormState);
-  }
-  async function deleteChallange({ id }) {
-    const newChallengesArray = challanges.filter(challange => challange.id !== id);
-    setChallanges(newChallengesArray);
-    await API.graphql({ query: deleteChallangeMutation, variables: { input: { id } } });
   }
   return (
     <form className={classes.root} noValidate autoComplete="off">
@@ -67,7 +62,7 @@ export default function DataGridDemo() {
         />
       </div >
       <div align="left">
-        <Button onClick={createChallange} variant="contained" color="primary">
+        <Button onClick={createChallenge} variant="contained" color="primary">
           Submit
         </Button>
       </div>
