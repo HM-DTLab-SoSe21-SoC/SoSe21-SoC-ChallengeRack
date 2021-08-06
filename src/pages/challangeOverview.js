@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-
-import { useParams } from 'react-router-dom';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listChallanges, getChallange } from '../graphql/queries';
-import { Link } from "react-router-dom";
+import { NavLink, Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -12,18 +10,10 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
-import { deleteChallange as deleteChallangeMutation } from '../graphql/mutations';
-import {
-  Button,
-  List,
-  ListItem,
-  Divider,
-  ListItemText,
-  ListItemAvatar,
-  Avatar,
-  Typography,
-  CircularProgress,
-} from '@material-ui/core';
+import { deleteChallange, updateChallange } from '../graphql/mutations';
+import DetailedPage from './detailedPage'
+import Box from '@material-ui/core/Box';
+import { Button, Avatar } from '@material-ui/core';
 
 const useStyles = makeStyles({
   table: {
@@ -32,68 +22,115 @@ const useStyles = makeStyles({
 });
 
 export default function DataGridDemo() {
-  const { id } = useParams()
   const classes = useStyles();
-  const [challanges, setChallanges] = useState([]);
-
-  fetchChallanges(() => {
-    fetchChallanges();
+  const [challenges, setChallenges] = useState([]);
+  const [apiError, setApiError] = useState();
+  const [isLoading, setIsLoading] = useState(false);
+  const [show, setShow] = useState(false);
+  const [chall, setChall] = useState();
+  useEffect(() => {
+    fetchChallenges();
   }, []);
-
-  async function fetchChallanges() {
-    const apiData = await API.graphql({ query: listChallanges });
-    setChallanges(apiData.data.listChallanges.items);
+  async function fetchChallenges() {
+    setIsLoading(true);
+    try {
+      const apiData = await API.graphql(graphqlOperation(listChallanges));
+      const challenges = apiData.data.listChallanges.items;
+      setChallenges(challenges);
+      setApiError(null);
+    } catch (error) {
+      console.error('Failed fetching challenges:', error);
+      setApiError(error);
+    } finally {
+      setIsLoading(false);
+    }
   }
-  async function deleteChallange({ id }) {
-    const newChallengesArray = challanges.filter(challange => challange.id !== id);
-    setChallanges(newChallengesArray);
-    await API.graphql({ query: deleteChallangeMutation, variables: { input: { id } } });
+  async function deleteChallangeFunction(id) {
+    try {
+      await API.graphql(graphqlOperation(deleteChallange, { input: { id } }));
+      setChallenges(challenges.filter((challenge) => challenge.id !== id));
+      setApiError(null);
+    } catch (error) {
+      console.error('Failed deleting challenge:', error);
+      setApiError(error);
+    }
+  }
+  async function updateChallangeFunction(challenge) {
+    await API.graphql(
+      graphqlOperation(updateChallange, {
+        input: {
+          orgaTitle: challenge.orgaTitle,
+          orgaLocat: challenge.orgaLocat,
+          id: challenge.id,
+        },
+      })
+    );
+    setApiError(null);
+  }
+  if (isLoading) {
+    return 'Loading...';
   }
   return (
     <div className="App">
-      <TableContainer component={Paper}>
-        <Table className={classes.table} size="small" aria-label="a dense table">
-          <TableHead>
-            <TableRow>
-              <TableCell align="left"> </TableCell>
-              <TableCell align="left">ID</TableCell>
-              <TableCell align="left">Phase</TableCell>
-              <TableCell align="left">Status</TableCell>
-              <TableCell align="left">Orga Title</TableCell>
-              <TableCell align="left">Orga City</TableCell>
-              <TableCell align="left">Title</TableCell>
-              <TableCell align="left">Type</TableCell>
-              <TableCell align="left">Score</TableCell>
-              <TableCell align="left">Theme</TableCell>
-              <TableCell align="left">Technology</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {challanges.map((challange) => (
-              <TableRow key={challange.id}>
-                <TableCell align="left">
-                  <Link to="/detailedPage">
-                    <Avatar alt={challange.id} src='/' />
-                  </Link>
-                </TableCell>
-                <TableCell component="th" scope="note">
-                  {challange.id}
-                </TableCell>
-                <TableCell align="left">{challange.phase}</TableCell>
-                <TableCell align="left">{challange.status}</TableCell>
-                <TableCell align="left">{challange.orgaTitle}</TableCell>
-                <TableCell align="left">{challange.orgaLocat}</TableCell>
-                <TableCell align="left">{challange.chatitle}</TableCell>
-                <TableCell align="left">{challange.type}</TableCell>
-                <TableCell align="left">{challange.score}</TableCell>
-                <TableCell align="left">{challange.theme}</TableCell>
-                <TableCell align="left">{challange.technology}</TableCell>
-                <button onClick={() => deleteChallange(challange)}>Delete challange</button>
+      {show && <Box>
+        <div align="left">
+          {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
+            <div align="left">
+              <Button onClick={() => setShow(prev => !prev)} variant="contained" color="primary">
+                Back to the overview
+              </Button>
+              <DetailedPage
+                challenge={filteredChallenge}
+                deleteChallangeFunction={deleteChallangeFunction}
+                updateChallangeFunction={updateChallangeFunction}
+              />
+            </div>
+          ))}
+        </div>
+      </Box>}
+      {!show && <Box>
+        <TableContainer component={Paper}>
+          <Table className={classes.table} size="small" aria-label="a dense table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="left"> </TableCell>
+                <TableCell align="left">ID</TableCell>
+                <TableCell align="left">Phase</TableCell>
+                <TableCell align="left">Status</TableCell>
+                <TableCell align="left">Orga Title</TableCell>
+                <TableCell align="left">Orga City</TableCell>
+                <TableCell align="left">Title</TableCell>
+                <TableCell align="left">Type</TableCell>
+                <TableCell align="left">Score</TableCell>
+                <TableCell align="left">Theme</TableCell>
+                <TableCell align="left">Technology</TableCell>
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+            </TableHead>
+            <TableBody>
+              {challenges.map((challenge, index) => (
+                <TableRow key={challenge.id}>
+                  <TableCell align="left"><Avatar alt={challenge.id} src='/' /></TableCell>
+                  <TableCell component="th" scope="note">{challenge.id}</TableCell>
+                  <TableCell align="left">{challenge.phase}</TableCell>
+                  <TableCell align="left">{challenge.status}</TableCell>
+                  <TableCell align="left">{challenge.orgaTitle}</TableCell>
+                  <TableCell align="left">{challenge.orgaLocat}</TableCell>
+                  <TableCell align="left">{challenge.chatitle}</TableCell>
+                  <TableCell align="left">{challenge.type}</TableCell>
+                  <TableCell align="left">{challenge.score}</TableCell>
+                  <TableCell align="left">{challenge.theme}</TableCell>
+                  <TableCell align="left">{challenge.technology}</TableCell>
+                  <TableCell align="left">
+                    <Button onClick={() => { setChall(challenge.id); setShow(prev => !prev); }} variant="contained" color="primary">
+                      Details
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </Box>}
     </div>
   );
 }

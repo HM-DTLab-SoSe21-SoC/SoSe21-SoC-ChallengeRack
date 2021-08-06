@@ -17,9 +17,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const initialFormState = { id: '', orgaTitle: '' }
+const initialFormState = {  }
 
-export default function DataGridDemo() {
+export default function ChallengeProposal() {
   const classes = useStyles();
   const [challanges, setChallanges] = useState([]);
   const [formData, setFormData] = useState(initialFormState);
@@ -51,10 +51,6 @@ export default function DataGridDemo() {
       <div align="left">
         <p>PLEASE NOTE! As a public institution we publish the results of a challenge under an
           open source license to promote further innovation.</p>
-        <TextField align="left" required id="standard-required" label="ID"
-          onChange={e => setFormData({ ...formData, 'id': e.target.value })}
-          value={formData.id}
-        />
         <TextField align="left" id="standard-required" label="Organazation's Name"
           onChange={e => setFormData({ ...formData, 'orgaTitle': e.target.value })}
           value={formData.orgaTitle}

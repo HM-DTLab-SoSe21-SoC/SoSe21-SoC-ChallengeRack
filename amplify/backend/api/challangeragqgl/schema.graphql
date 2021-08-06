@@ -7,7 +7,7 @@ type Challange
   ])
     @key(name: "listBySpecificID", fields:["id"], queryField: "listBySpecificID")
 {
-  id: ID
+  id: ID!
 	phase: String
 	status: String
 	coName: String

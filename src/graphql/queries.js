@@ -1,6 +1,6 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
-
+ 
 export const getChallange = /* GraphQL */ `
   query GetChallange($id: ID!) {
     getChallange(id: $id) {
