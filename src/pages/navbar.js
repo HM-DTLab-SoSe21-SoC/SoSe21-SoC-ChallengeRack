@@ -24,7 +24,7 @@ const Navigation = () => (
     <Button align="right"
       onClick={signOut}
     >
-      {checkUser}
+      Logout
     </Button>
   </nav>
 );
