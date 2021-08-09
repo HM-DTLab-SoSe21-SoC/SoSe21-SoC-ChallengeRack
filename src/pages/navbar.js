@@ -20,13 +20,7 @@ const Navigation = () => (
     <nav align="left">
       <NavLink to='/'>Challenge intake</NavLink>&nbsp;&nbsp;&nbsp;
       <NavLink to='/challangeOverview'>Challenge overview</NavLink>&nbsp;&nbsp;&nbsp;
-
     </nav>
-    <dev align="right">
-      <Button align="right" onClick={signOut}>
-        Logout
-      </Button>
-    </dev>
   </dev>
 );
 
