@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from 'react';
+import Amplify from '@aws-amplify/core';
+import awsmobile from '../aws-exports';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listChallenges } from '../graphql/queries';
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,7 +15,10 @@ import { deleteChallenge, updateChallenge } from '../graphql/mutations';
 import DetailedPage from './detailedPage'
 import Box from '@material-ui/core/Box';
 import { Button, Avatar } from '@material-ui/core';
-import { withAuthenticator } from 'aws-amplify-react';
+import { withAuthenticator, Authenticator } from 'aws-amplify-react';
+import CustomSignIn from "./signIn";
+
+Amplify.configure(awsmobile);
 
 const useStyles = makeStyles({
   table: {
@@ -72,6 +77,8 @@ const ChallengeOverview = ({ }) => {
   }
   return (
     <div className="App">
+      <Authenticator amplifyConfig={awsmobile}>
+      </Authenticator>
       {show && <Box>
         <div align="left">
           {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
