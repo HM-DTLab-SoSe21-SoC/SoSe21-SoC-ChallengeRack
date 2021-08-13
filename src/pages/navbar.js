@@ -18,8 +18,9 @@ const signOut = () => {
 const Navigation = () => (
   <dev>
     <nav align="left">
-      <NavLink to='/'>Challenge intake</NavLink>&nbsp;&nbsp;&nbsp;
+      <NavLink to='/home'>Challenge intake</NavLink>&nbsp;&nbsp;&nbsp;
       <NavLink to='/challangeOverview'>Challenge overview</NavLink>&nbsp;&nbsp;&nbsp;
+      <NavLink to='/challangeOverview2'>Challenge overview2</NavLink>
     </nav>
   </dev>
 );
