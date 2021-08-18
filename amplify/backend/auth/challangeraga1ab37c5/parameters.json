@@ -1,8 +1,8 @@
 {
-    "identityPoolName": "challangeragb85db312_identitypool_b85db312",
+    "identityPoolName": "challangeraga1ab37c5_identitypool_a1ab37c5",
     "allowUnauthenticatedIdentities": false,
-    "resourceNameTruncated": "challab85db312",
-    "userPoolName": "challangeragb85db312_userpool_b85db312",
+    "resourceNameTruncated": "challaa1ab37c5",
+    "userPoolName": "challangeraga1ab37c5_userpool_a1ab37c5",
     "autoVerifiedAttributes": [
         "email"
     ],
@@ -20,6 +20,9 @@
     "requiredAttributes": [
         "email"
     ],
+    "aliasAttributes": [
+        "preferred_username"
+    ],
     "userpoolClientGenerateSecret": false,
     "userpoolClientRefreshTokenValidity": 30,
     "userpoolClientWriteAttributes": [
@@ -28,10 +31,10 @@
     "userpoolClientReadAttributes": [
         "email"
     ],
-    "userpoolClientLambdaRole": "challab85db312_userpoolclient_lambda_role",
+    "userpoolClientLambdaRole": "challaa1ab37c5_userpoolclient_lambda_role",
     "userpoolClientSetAttributes": false,
-    "sharedId": "b85db312",
-    "resourceName": "challangeragb85db312",
+    "sharedId": "a1ab37c5",
+    "resourceName": "challangeraga1ab37c5",
     "authSelections": "identityPoolAndUserPool",
     "authRoleArn": {
         "Fn::GetAtt": [
