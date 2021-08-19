@@ -8,7 +8,6 @@ import detailedPage from './detailedPage';
 import challangeOverview from './challengeOverview';
 
 import Admin from "../layouts/Admin.js";
-import RTL from "../layouts/RTL.js";
 
 import "../assets/css/material-dashboard-react.css?v=1.10.0";
 
@@ -21,7 +20,6 @@ const Main = () => {
       <Route exact path='/detailedPage' component={detailedPage}></Route>
       <Route exact path='/challangeOverview' component={challangeOverview}></Route>
       <Route path="/admin" component={Admin} />
-      <Route path="/rtl" component={RTL} />
       <Redirect from="/" to="/admin/challangeOverview" />
     </Switch>
   );

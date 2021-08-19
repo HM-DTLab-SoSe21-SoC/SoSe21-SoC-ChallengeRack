@@ -37,13 +37,6 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/home",
-    name: "Propose a challenge",
-    icon: Unarchive,
-    component: home,
-    layout: "/admin",
-  },
-  {
     path: "/challangeOverview",
     name: "Challange overview",
     icon: AssignmentIcon,
