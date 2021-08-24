@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {Auth} from 'aws-amplify';
-
 const CustomSignIn = (props) => {
       const {authState, onStateChange} = props;
       const [formData, setFormData] = useState({

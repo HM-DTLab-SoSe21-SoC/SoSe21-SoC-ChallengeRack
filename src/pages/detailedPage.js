@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const DetailedPage = ({ challenge }) => {
+const DetailedPage = ({ handleHide, challenge, fetchChallenges, deleteChallenge }) => {
   const initialFormState = {
     id: challenge.id,
     phase: challenge.phase,
@@ -69,20 +69,10 @@ const DetailedPage = ({ challenge }) => {
     gitHubURL: challenge.gitHubURL,
   }
   const classes = useStyles();
-  const [challenges, setChallenges] = useState([]);
+ 
   const [formData, setFormData] = useState(initialFormState);
-  useEffect(() => {
-    updateChallenge();
-  }, []);
-  async function updateChallenge() {
+  const updateChallenge = async (event) => {
     await API.graphql({ query: updateChallengeMutation, variables: { input: formData } });
-    setChallenges([...challenges, formData]);
-    setFormData(initialFormState);
-  }
-  async function deleteChallenge({ id }) {
-    const newChallengesArray = challenges.filter(challenge => challenge.id !== id);
-    setChallenges(newChallengesArray);
-    await API.graphql({ query: deleteChallengeMutation, variables: { input: { id } } });
   }
   return (
     <form className={classes.root} noValidate autoComplete="off">
@@ -147,12 +137,13 @@ const DetailedPage = ({ challenge }) => {
         value={formData.orgaDate}
       />
       <div>
-        <Button onClick={updateChallenge} variant="contained" color="primary">
+        <Button onClick={() => { updateChallenge(); fetchChallenges(); }} variant="contained" color="primary">
           Update challenge data
         </Button>&nbsp;&nbsp;&nbsp;
-        <Button onClick={() => deleteChallenge(challenge)} variant="contained" color="primary">
+        <Button onClick={() => { deleteChallenge(challenge); handleHide(); }} variant="contained" color="primary">
           Delete challenge
         </Button>&nbsp;&nbsp;&nbsp;
+
       </div>
     </form>
   );

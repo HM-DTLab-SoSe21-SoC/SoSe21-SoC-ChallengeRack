@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import classNames from "classnames";
 import PropTypes from "prop-types";
 import { NavLink, useLocation } from "react-router-dom";
@@ -12,14 +12,12 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import Icon from "@material-ui/core/Icon";
 // core components
-import AdminNavbarLinks from "components/Navbars/AdminNavbarLinks.js";
 import IconButton from '@material-ui/core/IconButton';
 import styles from "assets/jss/material-dashboard-react/components/sidebarStyle.js";
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import clsx from 'clsx';
-import Button from '@material-ui/core/Button';
-import Divider from '@material-ui/core/Divider';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
+
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import Auth from '@aws-amplify/auth';
 
 const useStyles = makeStyles(styles);
 
@@ -31,20 +29,54 @@ export default function Sidebar(props) {
     return location.pathname === routeName;
   }
   const { color, image, routes, open } = props;
+  const [error, setError] = useState(null);
+  const [username, setUsername] = useState('Guest');
 
+  useEffect(() => {
+    try {
+      setError(null);
+      Auth.currentAuthenticatedUser({
+        bypassCache: false  // Optional, By default is false. If set to true, this call will send a request to Cognito to get the latest user data
+      }).then(user => {
+        setUsername(user.username);
+        console.log(`Load additional settings for user: ${user.username}`);
+        // TBD
+      }).catch(err => setError(err));
+    }
+    catch (e) {
+      setError(e);
+    }
+  }, []);
+  const signOut = () => {
+    props.handleDrawerToggle();
+    Auth.signOut()
+      .then(data => console.log(data))
+      .catch(err => console.log(err));
+  }
   return (
     <div>
       <Hidden smDown implementation="css">
         <SwipeableDrawer
           anchor="left"
           open={open}
+          onClose={props.handleDrawerToggle}
           classes={{
             paper: classNames(classes.drawerPaper, {
             }),
           }}
         >
-          <div className={classes.logo}>
-
+          <div className={classes.logo} align="right">
+            <label className={classes.whiteFont}>
+              {username}
+            </label>
+            <IconButton
+              className={classes.whiteFont}
+              color="inherit"
+              aria-label="open drawer"
+              onClick={signOut}
+            >
+              <ExitToAppIcon />
+            </IconButton>
           </div>
           <div className={classes.sidebarWrapper}>
             <IconButton className={classes.whiteFont} onClick={props.handleDrawerToggle}>

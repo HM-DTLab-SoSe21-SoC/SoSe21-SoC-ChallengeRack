@@ -15,9 +15,7 @@ import Auth from '@aws-amplify/auth';
 // @material-ui/icons
 import Person from "@material-ui/icons/Person";
 import Notifications from "@material-ui/icons/Notifications";
-import Dashboard from "@material-ui/icons/Dashboard";
 import Search from "@material-ui/icons/Search";
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 // core components
 import CustomInput from "components/CustomInput/CustomInput.js";

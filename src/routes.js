@@ -22,10 +22,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 // core components/views for Admin layout
 import UserProfile from "views/UserProfile/UserProfile.js";
 
-import home from './pages/home';
-import contact from './pages/contact';
 import challangeProposal from './pages/challengeProposal';
-import detailedPage from './pages/detailedPage';
 import challangeOverview from './pages/challengeOverview';
 
 const dashboardRoutes = [

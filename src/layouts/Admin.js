@@ -46,7 +46,10 @@ export default function Admin({ ...rest }) {
   // states and functions
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const handleDrawerToggle = () => {
+  const handleDrawerToggle = (event) => {
+    if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+      return;
+    }
     setMobileOpen(!mobileOpen);
   };
   const resizeFunction = () => {
@@ -74,22 +77,27 @@ export default function Admin({ ...rest }) {
   }, [mainPanel]);
   return (
     <div className={classes.wrapper}>
+      <div className={classes.logo}>
       <img align="left" height="60" src={"https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/dtlab_1/bilder_138/logos_30/HM_MUni_Logo_DT_Lab_RGB_Logo.png"} alt="logo" />
       <img align="right" height="60" src={"https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/hm_images/hm_logo_neu/HM_logo_SVG_no_margins.svg"} alt="logo" />
-      <Sidebar
-        routes={routes}
-        image={bgImage}
-        handleDrawerToggle={handleDrawerToggle}
-        open={mobileOpen}
-        color={"blue"}
-        {...rest}
-      />
-      <div className={classes.mainPanel} ref={mainPanel}>
+      </div>
+      <div className={classes.navbar}>
+        <Sidebar
+          routes={routes}
+          image={bgImage}
+          handleDrawerToggle={handleDrawerToggle}
+          open={mobileOpen}
+          color={"blue"}
+          {...rest}
+        />
         <Navbar
           routes={routes}
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
         />
+      </div>
+      <div className={classes.mainPanel} ref={mainPanel}>
+
         <div className={classes.content}>
           <div className={classes.container}>{switchRoutes}</div>
         </div>
