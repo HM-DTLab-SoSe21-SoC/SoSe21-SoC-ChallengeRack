@@ -81,6 +81,7 @@ export default function Sidebar(props) {
           <div className={classes.sidebarWrapper}>
             <IconButton className={classes.whiteFont} onClick={props.handleDrawerToggle}>
               <ChevronLeftIcon />
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             </IconButton>
             <List className={classes.list}>
               {routes.map((prop, key) => {
