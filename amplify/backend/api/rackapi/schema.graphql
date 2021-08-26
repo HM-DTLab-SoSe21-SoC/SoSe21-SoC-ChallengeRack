@@ -36,8 +36,8 @@ type Challenge
 	impact: String
 	scalabil: String
 	aligment: String
-	prototype: Int
-	score: Int
+	prototype: String
+	score: String
 	type: String
 	comment: String
 	faculty: String

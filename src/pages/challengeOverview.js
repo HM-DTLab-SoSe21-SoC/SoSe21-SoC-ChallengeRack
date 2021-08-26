@@ -263,8 +263,7 @@ const ChallengeOverview = ({ }) => {
   };
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
-  const handleSearch = (event) => 
-  {
+  const handleSearch = (event) => {
     setSearch(event.target.value);
     if (event.target.value == "") {
       setchallSearch(null);
@@ -335,7 +334,7 @@ const ChallengeOverview = ({ }) => {
             <div className={classes.searchWrapper}>
               <TextField
                 value={search}
-                onChange={(event) => {  handleSearch(event); }}
+                onChange={(event) => { handleSearch(event); }}
                 placeholder="Search..."
               />
               <Button onClick={handleSearch} color="white" aria-label="edit" justIcon round>
@@ -358,7 +357,7 @@ const ChallengeOverview = ({ }) => {
                   rowCount={challenges.length}
                 />
                 <TableBody>
-                  {stableSort(challenges.filter(challenge => (challenge.search == challSearch || challenge.phase.toLowerCase().includes(challSearch) || challenge.status.toLowerCase().includes(challSearch) || challenge.orgaTitle.toLowerCase().includes(challSearch) || challenge.orgaLocat.toLowerCase().includes(challSearch) || challenge.chatitle.toLowerCase().includes(challSearch) ||challenge.type.toLowerCase().includes(challSearch) ||challenge.theme.toLowerCase().includes(challSearch) || challenge.technology.toLowerCase().includes(challSearch))), getComparator(order, orderBy))
+                  {stableSort(challenges.filter(challenge => (challenge.search == challSearch || challenge.phase.toLowerCase().includes(challSearch) || challenge.status.toLowerCase().includes(challSearch) || challenge.orgaTitle.toLowerCase().includes(challSearch) || challenge.orgaLocat.toLowerCase().includes(challSearch) || challenge.chatitle.toLowerCase().includes(challSearch) || challenge.type.toLowerCase().includes(challSearch) || challenge.score.toLowerCase().includes(challSearch) || challenge.theme.toLowerCase().includes(challSearch) || challenge.technology.toLowerCase().includes(challSearch))), getComparator(order, orderBy))
                     .map((challenge, index) => {
                       const isItemSelected = isSelected(challenge.id);
                       const labelId = `enhanced-table-checkbox-${index}`;
