@@ -23,7 +23,51 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const initialFormState = {}
+const initialFormState = {
+  phase: "",
+  status: "",
+  coName: "",
+  coTitle: "",
+  coEmail: "",
+  coPhone: "",
+  coOptIn: "",
+  orgaTitle: "",
+  orgaLocat: "",
+  orgaMission: "",
+  orgaWebsite: "",
+  orgaDate: "",
+  chaStatem: "",
+  chaDes: "",
+  chaStak: "",
+  chaBac: "",
+  chaSup: "",
+  leadSup: "",
+  critOfSuc: "",
+  nextStep: "",
+  chatitle: "",
+  theme: "",
+  technology: "",
+  repu: "",
+  feasibil: "",
+  impact: "",
+  scalabil: "",
+  aligment: "",
+  prototype: 0,
+  score: 0,
+  type: "",
+  comment: "",
+  faculty: "",
+  prof: "",
+  matchEmail: "",
+  numberOfT: "",
+  numberOfS: "",
+  startDate: "",
+  endDate: "",
+  cohort: "",
+  milestone: "",
+  publURL: "",
+  gitHubURL: "",
+}
 
 export default function ChallengeProposal() {
   const classes = useStyles();
@@ -184,7 +228,7 @@ export default function ChallengeProposal() {
             <p>By creating a challenge, you are agreeing to our <a href="">Terms & Conditions</a>.</p>
             <NavLink to='/admin/challangeOverview'>
               <Button onClick={() => { createChallenge(); fetchChallenges(); }} variant="contained" color="primary">
-                Create Challenge
+                Create Challenge 
               </Button>
             </NavLink>
           </div>

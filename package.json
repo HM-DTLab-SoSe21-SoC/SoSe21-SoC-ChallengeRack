@@ -30,6 +30,7 @@
     "graphql-tag": "^2.12.5",
     "moment": "^2.29.1",
     "react": "^17.0.2",
+    "react-admin": "^3.17.2",
     "react-bootstrap": "^2.0.0-beta.4",
     "react-chartist": "^0.14.4",
     "react-chartjs-2": "^3.0.4",

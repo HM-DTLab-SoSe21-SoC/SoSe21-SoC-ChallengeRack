@@ -31,6 +31,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import CustomInput from "components/CustomInput/CustomInput.js";
 import Search from "@material-ui/icons/Search";
+import TextField from '@material-ui/core/TextField';
 Amplify.configure(awsconfig);
 
 function descendingComparator(a, b, orderBy) {
@@ -158,6 +159,44 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flex: '1 1 100%',
   },
+  search: {
+    "& > div": {
+      marginTop: "0",
+    },
+    [theme.breakpoints.down("sm")]: {
+      margin: "10px 15px !important",
+      float: "none !important",
+      paddingTop: "1px",
+      paddingBottom: "1px",
+      padding: "0!important",
+      width: "60%",
+      marginTop: "40px",
+      "& input": {
+        color: "#FFF",
+      },
+    },
+  },
+  searchButton: {
+    [theme.breakpoints.down("sm")]: {
+      top: "-50px !important",
+      marginRight: "22px",
+      float: "right",
+    },
+  },
+  searchIcon: {
+    width: "17px",
+    zIndex: "4",
+  },
+  searchWrapper: {
+    [theme.breakpoints.down("sm")]: {
+      width: "-webkit-fill-available",
+      margin: "10px 15px 0",
+    },
+    paddingLeft: "15px",
+    display: "inline-block",
+    float: "left",
+
+  },
 }));
 
 const ChallengeOverview = ({ }) => {
@@ -167,6 +206,8 @@ const ChallengeOverview = ({ }) => {
   const [selected, setSelected] = useState([]);
   const [selectedChall, setSelectedChall] = useState([]);
   const [dense, setDense] = useState(false);
+  const [search, setSearch] = useState([]);
+  const [challSearch, setchallSearch] = useState(null);
 
   const [challenges, setChallenges] = useState([]);
   const [apiError, setApiError] = useState();
@@ -222,7 +263,15 @@ const ChallengeOverview = ({ }) => {
   };
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
-
+  const handleSearch = (event) => 
+  {
+    setSearch(event.target.value);
+    if (event.target.value == "") {
+      setchallSearch(null);
+    } else {
+      setchallSearch(event.target.value.toLowerCase());
+    }
+  };
   return (
     <div className={classes.root}>
       <AmplifyAuthenticator >
@@ -283,7 +332,16 @@ const ChallengeOverview = ({ }) => {
             )}
           </Toolbar>
           {!show && <Box>
-          
+            <div className={classes.searchWrapper}>
+              <TextField
+                value={search}
+                onChange={(event) => {  handleSearch(event); }}
+                placeholder="Search..."
+              />
+              <Button onClick={handleSearch} color="white" aria-label="edit" justIcon round>
+                <Search />
+              </Button>
+            </div>
             <TableContainer>
               <Table
                 className={classes.table}
@@ -300,7 +358,7 @@ const ChallengeOverview = ({ }) => {
                   rowCount={challenges.length}
                 />
                 <TableBody>
-                  {stableSort(challenges, getComparator(order, orderBy))
+                  {stableSort(challenges.filter(challenge => (challenge.search == challSearch || challenge.phase.toLowerCase().includes(challSearch) || challenge.status.toLowerCase().includes(challSearch) || challenge.orgaTitle.toLowerCase().includes(challSearch) || challenge.orgaLocat.toLowerCase().includes(challSearch) || challenge.chatitle.toLowerCase().includes(challSearch) ||challenge.type.toLowerCase().includes(challSearch) ||challenge.theme.toLowerCase().includes(challSearch) || challenge.technology.toLowerCase().includes(challSearch))), getComparator(order, orderBy))
                     .map((challenge, index) => {
                       const isItemSelected = isSelected(challenge.id);
                       const labelId = `enhanced-table-checkbox-${index}`;
