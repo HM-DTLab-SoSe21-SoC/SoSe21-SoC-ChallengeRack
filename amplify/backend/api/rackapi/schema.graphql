@@ -1,0 +1,56 @@
+type Challenge
+  @model (subscriptions: { level: public })
+  @auth(rules: [
+    {allow: owner, ownerField:"owner", provider: userPools, operations:[read, create]},
+    {allow: private, provider: userPools, operations:[read]},
+	{allow: private, provider: iam ,operations:[create]},
+  ])
+    @key(name: "listBySpecificID", fields:["id"], queryField: "listBySpecificID")
+{
+  id: ID!
+	phase: String
+	status: String
+	coName: String
+	coTitle: String
+	coEmail: String
+	coPhone: String
+	coOptIn: String
+	orgaTitle: String
+	orgaLocat: String
+	orgaMission: String
+	orgaWebsite: String
+	orgaDate: String
+	chaStatem: String
+	chaDes: String
+	chaStak: String
+	chaBac: String
+	chaSup: String
+	leadSup: String
+	critOfSuc: String
+	nextStep: String
+	chatitle: String
+	theme: String
+	technology: String
+	repu: String
+	feasibil: String
+	impact: String
+	scalabil: String
+	aligment: String
+	prototype: String
+	score: String
+	type: String
+	comment: String
+	faculty: String
+	prof: String
+	matchEmail: String
+	numberOfT: String
+	numberOfS: String
+	startDate: String
+	endDate: String
+	cohort: String
+	milestone: String
+	publURL: String
+	gitHubURL: String
+	publDate: String
+	timestamp: Int
+}

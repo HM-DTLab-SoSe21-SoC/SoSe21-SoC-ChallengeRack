@@ -1,56 +1,19 @@
 {
   "dev": {
     "awscloudformation": {
-      "AuthRoleName": "amplify-challangerag-dev-145400-authRole",
-      "UnauthRoleArn": "arn:aws:iam::858562401334:role/amplify-challangerag-dev-145400-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::858562401334:role/amplify-challangerag-dev-145400-authRole",
+      "AuthRoleName": "amplify-rack-dev-145931-authRole",
+      "UnauthRoleArn": "arn:aws:iam::858562401334:role/amplify-rack-dev-145931-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::858562401334:role/amplify-rack-dev-145931-authRole",
       "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-challangerag-dev-145400-deployment",
-      "UnauthRoleName": "amplify-challangerag-dev-145400-unauthRole",
-      "StackName": "amplify-challangerag-dev-145400",
-      "StackId": "arn:aws:cloudformation:us-east-1:858562401334:stack/amplify-challangerag-dev-145400/39d5f610-ec7e-11eb-8b01-0eaa1a5b8293",
-      "AmplifyAppId": "d3mobcx24zbaf3"
+      "DeploymentBucketName": "amplify-rack-dev-145931-deployment",
+      "UnauthRoleName": "amplify-rack-dev-145931-unauthRole",
+      "StackName": "amplify-rack-dev-145931",
+      "StackId": "arn:aws:cloudformation:us-east-1:858562401334:stack/amplify-rack-dev-145931/4e631c10-00ed-11ec-bb25-125fdb273fd7",
+      "AmplifyAppId": "dnkxi1emhqof2"
     },
     "categories": {
       "auth": {
-        "challangeragb85db312": {}
-      }
-    }
-  },
-  "staging": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-challangerag-staging-80514-authRole",
-      "UnauthRoleArn": "arn:aws:iam::858562401334:role/amplify-challangerag-staging-80514-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::858562401334:role/amplify-challangerag-staging-80514-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-challangerag-staging-80514-deployment",
-      "UnauthRoleName": "amplify-challangerag-staging-80514-unauthRole",
-      "StackName": "amplify-challangerag-staging-80514",
-      "StackId": "arn:aws:cloudformation:us-east-1:858562401334:stack/amplify-challangerag-staging-80514/75ae4980-edd7-11eb-8e19-0ae28d89ba2b",
-      "AmplifyAppId": "d3mobcx24zbaf3"
-    },
-    "categories": {
-      "auth": {
-        "challangeragb85db312": {}
-      },
-      "hosting": {}
-    }
-  },
-  "newdev": {
-    "awscloudformation": {
-      "AuthRoleName": "amplify-challangerag-newdev-74539-authRole",
-      "UnauthRoleArn": "arn:aws:iam::858562401334:role/amplify-challangerag-newdev-74539-unauthRole",
-      "AuthRoleArn": "arn:aws:iam::858562401334:role/amplify-challangerag-newdev-74539-authRole",
-      "Region": "us-east-1",
-      "DeploymentBucketName": "amplify-challangerag-newdev-74539-deployment",
-      "UnauthRoleName": "amplify-challangerag-newdev-74539-unauthRole",
-      "StackName": "amplify-challangerag-newdev-74539",
-      "StackId": "arn:aws:cloudformation:us-east-1:858562401334:stack/amplify-challangerag-newdev-74539/625f5570-f0f9-11eb-ae53-0ed9163b6ca9",
-      "AmplifyAppId": "d3mobcx24zbaf3"
-    },
-    "categories": {
-      "auth": {
-        "challangeragb85db312": {}
+        "rackc542a3de": {}
       }
     }
   }

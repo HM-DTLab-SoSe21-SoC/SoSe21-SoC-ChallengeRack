@@ -1,14 +1,30 @@
 {
   "auth": {
-    "challangeragb85db312": {
+    "rackc542a3de": {
       "service": "Cognito",
       "providerPlugin": "awscloudformation",
       "dependsOn": [],
-      "customAuth": false
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "loginMechanism": [
+          "PREFERRED_USERNAME"
+        ],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ]
+      }
     }
   },
   "api": {
-    "challangeragqgl": {
+    "rackapi": {
       "service": "AppSync",
       "providerPlugin": "awscloudformation",
       "output": {
@@ -16,7 +32,7 @@
           "defaultAuthentication": {
             "authenticationType": "AMAZON_COGNITO_USER_POOLS",
             "userPoolConfig": {
-              "userPoolId": "authchallangeragb85db312"
+              "userPoolId": "authrackc542a3de"
             }
           },
           "additionalAuthenticationProviders": [
@@ -27,6 +43,5 @@
         }
       }
     }
-  },
-  "hosting": {}
+  }
 }

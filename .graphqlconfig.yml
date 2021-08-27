@@ -1,6 +1,6 @@
 projects:
-  challangeragqgl:
-    schemaPath: amplify/backend/api/challangeragqgl/build/schema.graphql
+  rackapi:
+    schemaPath: amplify/backend/api/rackapi/build/schema.graphql
     includes:
       - src/graphql/**/*.js
     excludes:
