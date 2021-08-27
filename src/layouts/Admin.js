@@ -78,8 +78,8 @@ export default function Admin({ ...rest }) {
   return (
     <div className={classes.wrapper}>
       <div className={classes.logo}>
-      <img align="left" height="60" src={"https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/dtlab_1/bilder_138/logos_30/HM_MUni_Logo_DT_Lab_RGB_Logo.png"} alt="logo" />
-      <img align="right" height="60" src={"https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/hm_images/hm_logo_neu/HM_logo_SVG_no_margins.svg"} alt="logo" />
+        <img align="left" height="60" src={"https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/dtlab_1/bilder_138/logos_30/HM_MUni_Logo_DT_Lab_RGB_Logo.png"} alt="logo" />
+        <img align="right" height="60" src={"https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/hm_images/hm_logo_neu/HM_logo_SVG_no_margins.svg"} alt="logo" />
       </div>
       <div className={classes.navbar}>
         <Sidebar
@@ -101,9 +101,7 @@ export default function Admin({ ...rest }) {
         <div className={classes.content}>
           <div className={classes.container}>{switchRoutes}</div>
         </div>
-
         <Footer />
-
       </div>
     </div>
   );

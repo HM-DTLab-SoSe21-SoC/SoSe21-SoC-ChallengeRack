@@ -1,5 +1,4 @@
 import {
-  drawerWidth,
   transition,
   container,
 } from "assets/jss/material-dashboard-react.js";

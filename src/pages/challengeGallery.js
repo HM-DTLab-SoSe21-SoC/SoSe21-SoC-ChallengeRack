@@ -198,7 +198,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const ChallengeOverview = ({ }) => {
+const ChallengeGallery = ({ }) => {
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
@@ -406,4 +406,4 @@ const ChallengeOverview = ({ }) => {
     </div>
   );
 }
-export default ChallengeOverview;
+export default ChallengeGallery;

@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
       width: '80ch',
     },
   },
+  form: {
+    padding: "15px",
+  },
 }));
 
 const initialFormState = {
@@ -110,7 +113,7 @@ export default function ChallengeProposal() {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <form noValidate autoComplete="off">
+        <form noValidate autoComplete="off" className={classes.form}>
           <div align="left">
             PLEASE NOTE! As a public institution we publish the results of a challenge under an
             open source license to promote further innovation.
@@ -225,10 +228,13 @@ export default function ChallengeProposal() {
             </div>
           </div >
           <div align="left">
-            <p>By creating a challenge, you are agreeing to our <a href="">Terms & Conditions</a>.</p>
+            <p>The DTLab is part of the innovation network M:UniverCity at Munich University of Applied Sciences, which organizes CoCreation projects with partners from science, business, civil society and politics.
+              <a href="https://hm.edu/munivercity/">https://hm.edu/munivercity/</a>
+              By participating in a Challenge, your organization becomes becomes a member of M:UniverCity at the same time. No obligations arise from the membership.
+            </p>
             <NavLink to='/admin/challangeOverview'>
               <Button onClick={() => { createChallenge(); fetchChallenges(); }} variant="contained" color="primary">
-                Create Challenge 
+                Create Challenge
               </Button>
             </NavLink>
           </div>

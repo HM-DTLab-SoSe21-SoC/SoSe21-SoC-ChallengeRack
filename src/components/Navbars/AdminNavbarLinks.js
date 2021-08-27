@@ -10,7 +10,6 @@ import ClickAwayListener from "@material-ui/core/ClickAwayListener";
 import Hidden from "@material-ui/core/Hidden";
 import Poppers from "@material-ui/core/Popper";
 import Divider from "@material-ui/core/Divider";
-import { withAuthenticator, Authenticator, AmplifySignOut } from '@aws-amplify/ui-react';
 import Auth from '@aws-amplify/auth';
 // @material-ui/icons
 import Person from "@material-ui/icons/Person";
