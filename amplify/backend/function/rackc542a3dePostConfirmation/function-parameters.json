@@ -5,14 +5,11 @@
   ],
   "parentResource": "rackc542a3de",
   "functionName": "rackc542a3dePostConfirmation",
-  "resourceName": "rackc542a3dePostConfirmation",
   "parentStack": "auth",
-  "triggerEnvs": [],
+  "triggerEnvs": "[]",
   "triggerDir": "C:\\Users\\Student\\AppData\\Roaming\\npm\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-category-auth\\provider-utils\\awscloudformation\\triggers\\PostConfirmation",
+  "roleName": "rackc542a3dePostConfirmation",
   "triggerTemplate": "PostConfirmation.json.ejs",
   "triggerEventPath": "PostConfirmation.event.json",
-  "roleName": "rackc542a3dePostConfirmation",
-  "skipEdit": true,
-  "GROUP": "everyone",
-  "enableCors": false
+  "skipEdit": true
 }
