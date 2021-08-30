@@ -31,7 +31,12 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Search from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
-Amplify.configure(awsconfig);
+Amplify.configure({
+  ...awsconfig,
+  DataStore: {
+    authModeStrategyType: AuthModeStrategyType.MULTI_AUTH
+  }
+})
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {

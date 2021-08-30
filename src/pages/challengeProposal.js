@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const initialFormState = {
-  owner: "guest",
   phase: "",
   status: "",
   coName: "",
