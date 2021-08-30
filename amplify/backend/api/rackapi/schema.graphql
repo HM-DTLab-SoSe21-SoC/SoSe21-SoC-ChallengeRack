@@ -1,9 +1,13 @@
 type Challenge
   @model (subscriptions: { level: public })
+    @aws_iam
+  @aws_cognito_user_pools
   @auth(rules: [
-    {allow: owner, ownerField:"owner", provider: userPools, operations:[read, create]},
+    {allow: owner, ownerField:"owner", provider: userPools, operations:[read, create, delete]},
     {allow: private, provider: userPools, operations:[read]},
 	{allow: private, provider: iam ,operations:[create]},
+    { allow: public, provider: iam, operations: [read] },
+    { allow: groups, groups: ["everyone"], operations: [read] },
   ])
     @key(name: "listBySpecificID", fields:["id"], queryField: "listBySpecificID")
 {

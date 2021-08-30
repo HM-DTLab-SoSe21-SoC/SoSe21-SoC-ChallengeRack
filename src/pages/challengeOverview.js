@@ -273,7 +273,7 @@ const ChallengeOverview = ({ }) => {
   return (
     <div className={classes.root}>
       <AmplifyAuthenticator >
-        <AmplifySignIn slot="sign-in" hideSignUp></AmplifySignIn>
+        <AmplifySignIn slot="sign-in" /*hideSignUp*/></AmplifySignIn>
         <Paper className={classes.paper}>
           {show && <Box>
             <div align="left" className={classes.paper}>

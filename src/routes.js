@@ -22,7 +22,7 @@ import BurstModeIcon from '@material-ui/icons/BurstMode';
 // core components/views for Admin layout
 import challengeProposal from './pages/challengeProposal';
 import challengeOverview from './pages/challengeOverview';
-
+import challengeGallery from './pages/challengeGallery';
 
 const dashboardRoutes = [
   {
@@ -39,6 +39,12 @@ const dashboardRoutes = [
     component: challengeOverview,
     layout: "/admin",
   },
-
+  {
+    path: "/challengeGallery",
+    name: "Challenge gallery",
+    icon: BurstModeIcon,
+    component: challengeGallery,
+    layout: "/admin",
+  },
 ];
 export default dashboardRoutes;
