@@ -14,7 +14,10 @@ import routes from "routes.js";
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
 import bgImage from "assets/img/sidebar-2.jpg";
-
+import Amplify from 'aws-amplify';
+import awsconfig from '../aws-exports';
+import { AmplifyAuthenticator, AmplifySignIn } from '@aws-amplify/ui-react';
+Amplify.configure(awsconfig);
 
 let ps;
 
@@ -32,7 +35,7 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/admin" to="/admin/dashboard" />
+    <Redirect from="/" to="/admin/challengeView" />
   </Switch>
 );
 
@@ -99,7 +102,11 @@ export default function Admin({ ...rest }) {
       <div className={classes.mainPanel} ref={mainPanel}>
 
         <div className={classes.content}>
+        <AmplifyAuthenticator >
+
+        <AmplifySignIn slot="sign-in" /*hideSignUp*/></AmplifySignIn>
           <div className={classes.container}>{switchRoutes}</div>
+          </AmplifyAuthenticator>
         </div>
         <Footer />
       </div>

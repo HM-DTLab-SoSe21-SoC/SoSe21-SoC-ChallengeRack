@@ -21,8 +21,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import BurstModeIcon from '@material-ui/icons/BurstMode';
 // core components/views for Admin layout
 import challengeProposal from './pages/challengeProposal';
-import challengeOverview from './pages/challengeOverview';
-import challengeGallery from './pages/challengeGallery';
+import challengeView from './pages/challengeView';
 
 const dashboardRoutes = [
   {
@@ -33,17 +32,10 @@ const dashboardRoutes = [
     layout: "/admin",
   },
   {
-    path: "/challengeOverview",
+    path: "/challengeView",
     name: "Challenge overview",
     icon: AssignmentIcon,
-    component: challengeOverview,
-    layout: "/admin",
-  },
-  {
-    path: "/challengeGallery",
-    name: "Challenge gallery",
-    icon: BurstModeIcon,
-    component: challengeGallery,
+    component: challengeView,
     layout: "/admin",
   },
 ];

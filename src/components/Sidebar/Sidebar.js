@@ -30,7 +30,7 @@ export default function Sidebar(props) {
   }
   const { color, image, routes, open } = props;
   const [error, setError] = useState(null);
-  const [username, setUsername] = useState('Guest');
+  const [username, setUsername] = useState('-');
 
   useEffect(() => {
     try {

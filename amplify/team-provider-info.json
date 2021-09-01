@@ -17,7 +17,9 @@
       },
       "function": {
         "rackc542a3dePostConfirmation": {
-          "GROUP": "everyone"
+          "GROUP": "everyone",
+          "deploymentBucketName": "amplify-rack-dev-145931-deployment",
+          "s3Key": "amplify-builds/rackc542a3dePostConfirmation-474b7162636d4b666963-build.zip"
         }
       }
     }

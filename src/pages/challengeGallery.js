@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { deleteChallenge } from '../graphql/mutations';
-import DetailedPage from './detailedPage'
-import Box from '@material-ui/core/Box';
-import { Button} from '@material-ui/core';
-
+import Popup from './popup';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listChallenges } from '../graphql/queries';
 import PropTypes from 'prop-types';
@@ -28,6 +25,20 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Search from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Popover from '@material-ui/core/Popover';
+import {
+  Box,
+  Container,
+  Grid,
+  Pagination,
+  Button
+} from '@material-ui/core';
+import DetailedPage from './detailedPage';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -68,7 +79,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const { classes, order, orderBy,  onRequestSort } = props;
+  const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -109,7 +120,6 @@ EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
@@ -192,6 +202,15 @@ const useStyles = makeStyles((theme) => ({
     float: "left",
 
   },
+  card: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 140,
+  },
+  popup: {
+    maxWidth: 1000,
+  },
 }));
 
 const ChallengeGallery = ({ }) => {
@@ -239,22 +258,21 @@ const ChallengeGallery = ({ }) => {
     setOrderBy(property);
   };
 
-  const handleClick = (event, challenge) => {
-    if (selected == challenge.id) {
-      setSelected('');
-      setSelectedChall('')
-    } else {
-      setSelected(challenge.id);
-    }
-    setSelectedChall(challenge);
+  const [anchorEl, setAnchorEl] = React.useState(null);
 
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
   };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
-  };
-  const handleHide = (event) => {
-    setShow(prev => !prev);
   };
 
   const isSelected = (id) => selected.indexOf(id) !== -1;
@@ -268,134 +286,141 @@ const ChallengeGallery = ({ }) => {
   };
   return (
     <div className={classes.root}>
-        <Paper className={classes.paper}>
-          {show && <Box>
-            <div align="left" className={classes.paper}>
-              {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
-                <div align="left">
-                  <DetailedPage
-                    handleHide={handleHide}
-                    challenge={filteredChallenge}
-                    fetchChallenges={fetchChallenges}
-                    deleteChallenge={deleteChallengeFunction}
-                  />
+      <Paper className={classes.paper}>
+        <Toolbar
+          className={clsx(classes.root2, {
+            [classes.highlight]: selected.length > 0,
+          })}
+        >
+          {selected.length > 0 ? (
+            <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
+              {challenges.filter(challenge => challenge.id == selected).map(filteredChallenge => (
+                <div>
+                  {filteredChallenge.orgaTitle}
+                  &nbsp;
+                  selected
                 </div>
               ))}
-            </div>
-          </Box>}
-          {!show && <Box>
-          <Toolbar
-            className={clsx(classes.root2, {
-              [classes.highlight]: selected.length > 0,
-            })}
+
+            </Typography>
+          ) : (
+            <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
+
+            </Typography>
+          )}
+
+          {selected.length > 0 ? (
+            <Tooltip title="Delete">
+              <IconButton onClick={() => { deleteChallengeFunction(selectedChall) }} aria-label="delete">
+                <DeleteIcon />
+              </IconButton>
+            </Tooltip>
+          ) : (
+            <Tooltip title="Filter list">
+              <IconButton aria-label="filter list">
+                <FilterListIcon />
+              </IconButton>
+            </Tooltip>
+          )}
+        </Toolbar>
+
+        <div className={classes.searchWrapper}>
+          <TextField
+            value={search}
+            onChange={(event) => { handleSearch(event); }}
+            placeholder="Search..."
+          />
+          <Button onClick={handleSearch} color="white" aria-label="edit" justIcon round>
+            <Search />
+          </Button>
+        </div>
+        <div>
+          <Box
+            sx={{
+              backgroundColor: 'background.default',
+              minHeight: '100%',
+              py: 3
+            }}
           >
-            {selected.length > 0 ? (
-              <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-                {challenges.filter(challenge => challenge.id == selected).map(filteredChallenge => (
-                  <div>
-                    {filteredChallenge.orgaTitle}
-                    &nbsp;
-                    selected
-                  </div>
-                ))}
-
-              </Typography>
-            ) : (
-              <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-
-              </Typography>
-            )}
-
-            {selected.length > 0 ? (
-              <Tooltip title="Delete">
-                <IconButton onClick={() => { deleteChallengeFunction(selectedChall) }} aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
-              </Tooltip>
-            ) : (
-              <Tooltip title="Filter list">
-                <IconButton aria-label="filter list">
-                  <FilterListIcon />
-                </IconButton>
-              </Tooltip>
-            )}
-          </Toolbar>
-
-            <div className={classes.searchWrapper}>
-              <TextField
-                value={search}
-                onChange={(event) => { handleSearch(event); }}
-                placeholder="Search..."
-              />
-              <Button onClick={handleSearch} color="white" aria-label="edit" justIcon round>
-                <Search />
-              </Button>
-            </div>
-            <TableContainer>
-              <Table
-                className={classes.table}
-                aria-labelledby="tableTitle"
-                size={dense ? 'small' : 'medium'}
-                aria-label="enhanced table"
+            <Container maxWidth={false}>
+              <Box sx={{ pt: 3 }}>
+                <Grid
+                  container
+                  spacing={3}
+                >
+                  {stableSort(challenges.filter(challenge => (challenge.search == challSearch || challenge.phase.toLowerCase().includes(challSearch) || challenge.status.toLowerCase().includes(challSearch) || challenge.orgaTitle.toLowerCase().includes(challSearch) || challenge.orgaLocat.toLowerCase().includes(challSearch) || challenge.chatitle.toLowerCase().includes(challSearch) || challenge.type.toLowerCase().includes(challSearch) || challenge.score.toLowerCase().includes(challSearch) || challenge.theme.toLowerCase().includes(challSearch) || challenge.technology.toLowerCase().includes(challSearch))), getComparator(order, orderBy)).map((challenge) => (
+                    <Grid
+                      item
+                      key={challenge.id}
+                      lg={4}
+                      md={6}
+                      xs={12}
+                    >
+                      <Card className={classes.card}>
+                        <CardActionArea onClick={(event) => { setChall(challenge.id); handleClick(event); }}>
+                          <CardMedia
+                            className={classes.media}
+                            image="https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/dtlab_1/bilder_138/_dtl_bilder_neu/corona-5401250_1280_Standard_Standard.jpg"
+                            title="Contemplative Reptile"
+                          />
+                          <CardContent>
+                            <Typography align="left" gutterBottom variant="h5" component="h2">{challenge.orgaTitle}</Typography>
+                            <Typography align="left" gutterBottom variant="h5" component="h2">{challenge.orgaLocat}</Typography>
+                            <Typography align="left" gutterBottom variant="h5" component="h2">{challenge.timestamp}</Typography>
+                            <Typography align="left" gutterBottom variant="h5" component="h2">{challenge.chatitle}</Typography>
+                            <Typography align="left" gutterBottom variant="h5" component="h2">{challenge.theme}</Typography>
+                            <Typography align="left" gutterBottom variant="h5" component="h2">{challenge.technology}</Typography>
+                          </CardContent>
+                        </CardActionArea>
+                      </Card>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Box>
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  pt: 3
+                }}
               >
-                <EnhancedTableHead
-                  classes={classes}
-                  numSelected={selected.length}
-                  order={order}
-                  orderBy={orderBy}
-                  onRequestSort={handleRequestSort}
-                  rowCount={challenges.length}
+              </Box>
+            </Container>
+          </Box>
+        </div>
+        <Popover
+          className={classes.popup}
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'center',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'center',
+            horizontal: 'center',
+          }}
+        >
+          <div>
+            {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
+              <div align="left">
+                <Popup
+                  challenge={filteredChallenge}
+                  fetchChallenges={fetchChallenges}
+                  deleteChallenge={deleteChallengeFunction}
                 />
-                <TableBody>
-                  {stableSort(challenges.filter(challenge => (challenge.search == challSearch || challenge.phase.toLowerCase().includes(challSearch) || challenge.status.toLowerCase().includes(challSearch) || challenge.orgaTitle.toLowerCase().includes(challSearch) || challenge.orgaLocat.toLowerCase().includes(challSearch) || challenge.chatitle.toLowerCase().includes(challSearch) || challenge.type.toLowerCase().includes(challSearch) || challenge.score.toLowerCase().includes(challSearch) || challenge.theme.toLowerCase().includes(challSearch) || challenge.technology.toLowerCase().includes(challSearch))), getComparator(order, orderBy))
-                    .map((challenge, index) => {
-                      const isItemSelected = isSelected(challenge.id);
-                      const labelId = `enhanced-table-checkbox-${index}`;
+              </div>
+            ))}
+          </div>
+        </Popover>
 
-                      return (
-                        <TableRow
-                          hover
-                          onClick={(event) => handleClick(event, challenge)}
-                          role="checkbox"
-                          aria-checked={isItemSelected}
-                          tabIndex={-1}
-                          key={challenge.id}
-                          selected={isItemSelected}
-                        >
-                          <TableCell padding="checkbox">
-                            <Checkbox
-                              checked={isItemSelected}
-                              inputProps={{ 'aria-labelledby': labelId }}
-                            />
-                          </TableCell>
-                          <TableCell component="th" id={labelId} scope="challenge" padding="none">
-                            {challenge.phase}
-                          </TableCell>
-                          <TableCell align="left">{challenge.status}</TableCell>
-                          <TableCell align="left">{challenge.orgaTitle}</TableCell>
-                          <TableCell align="left">{challenge.orgaLocat}</TableCell>
-                          <TableCell align="left">{challenge.chatitle}</TableCell>
-                          <TableCell align="left">{challenge.type}</TableCell>
-                          <TableCell align="left">{challenge.score}</TableCell>
-                          <TableCell align="left">{challenge.theme}</TableCell>
-                          <TableCell align="left">{challenge.technology}</TableCell>
-                          <TableCell align="left">
-                            <Button onClick={() => { setChall(challenge.id); handleHide(); }} variant="contained" color="primary">
-                              Details
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Box>}
-        </Paper>
-        <FormControlLabel
-          control={<Switch checked={dense} onChange={handleChangeDense} />}
-          label="Dense padding"
-        />
+      </Paper>
+      <FormControlLabel
+        control={<Switch checked={dense} onChange={handleChangeDense} />}
+        label="Dense padding"
+      />
     </div>
   );
 }

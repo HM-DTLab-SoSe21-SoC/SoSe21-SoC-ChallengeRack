@@ -3,9 +3,6 @@ import { deleteChallenge } from '../graphql/mutations';
 import DetailedPage from './detailedPage'
 import Box from '@material-ui/core/Box';
 import { Button} from '@material-ui/core';
-import { AmplifyAuthenticator, AmplifySignIn } from '@aws-amplify/ui-react';
-import Amplify from 'aws-amplify';
-import awsconfig from '../aws-exports';
 
 import { API, graphqlOperation } from 'aws-amplify';
 import { listChallenges } from '../graphql/queries';
@@ -31,7 +28,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Search from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
-Amplify.configure(awsconfig);
+
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -113,7 +110,6 @@ EnhancedTableHead.propTypes = {
   classes: PropTypes.object.isRequired,
   numSelected: PropTypes.number.isRequired,
   onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
   order: PropTypes.oneOf(['asc', 'desc']).isRequired,
   orderBy: PropTypes.string.isRequired,
   rowCount: PropTypes.number.isRequired,
@@ -270,10 +266,13 @@ const ChallengeOverview = ({ }) => {
       setchallSearch(event.target.value.toLowerCase());
     }
   };
+
+
+
+
   return (
     <div className={classes.root}>
-      <AmplifyAuthenticator >
-        <AmplifySignIn slot="sign-in" /*hideSignUp*/></AmplifySignIn>
+
         <Paper className={classes.paper}>
           {show && <Box>
             <div align="left" className={classes.paper}>
@@ -402,7 +401,7 @@ const ChallengeOverview = ({ }) => {
           control={<Switch checked={dense} onChange={handleChangeDense} />}
           label="Dense padding"
         />
-      </AmplifyAuthenticator>
+
     </div>
   );
 }
