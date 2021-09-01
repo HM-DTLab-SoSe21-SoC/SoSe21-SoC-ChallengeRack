@@ -24,7 +24,6 @@ const ChallengeView = () => {
 
   return (
     <div>
-      {group}
       {group == "admin" && <Box>
         <ChallengeOverview />
       </Box>}
