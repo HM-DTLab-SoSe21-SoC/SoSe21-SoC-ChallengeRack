@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css'
 
 import { Switch, Route, Redirect } from 'react-router-dom';
@@ -9,6 +9,9 @@ import "./assets/css/material-dashboard-react.css?v=1.10.0";
 
 
 function App() {
+  useEffect(() => {
+    document.title = "DTLab Challanges"
+  }, [])
   return (
     <div className="App">
       <Switch> {/* The Switch decides which component to show based on the current URL.*/}
