@@ -1,9 +1,10 @@
 type Challenge
   @model (subscriptions: { level: public })
   @auth(rules: [
-    {allow: owner, ownerField:"owner", provider: userPools, operations:[read, create]},
-    {allow: private, provider: userPools, operations:[read]},
-	{allow: private, provider: iam ,operations:[create]},
+    {allow: owner, ownerField:"owner", provider: userPools, operations:[read]},
+
+	{ allow: groups, groups: ["admin"], operations: [read, create, delete, update] },
+		{ allow: groups, groups: ["common"],operations: [read, create] },
   ])
     @key(name: "listBySpecificID", fields:["id"], queryField: "listBySpecificID")
 {
@@ -16,7 +17,7 @@ type Challenge
 	coPhone: String
 	coOptIn: String
 	orgaTitle: String
-	orgaLocat: String
+	orgaLocat: String 
 	orgaMission: String
 	orgaWebsite: String
 	orgaDate: String
@@ -37,7 +38,7 @@ type Challenge
 	scalabil: String
 	aligment: String
 	prototype: String
-	score: String
+	score: String 
 	type: String
 	comment: String
 	faculty: String

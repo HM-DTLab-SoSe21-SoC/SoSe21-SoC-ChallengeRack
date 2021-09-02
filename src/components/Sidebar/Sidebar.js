@@ -30,7 +30,7 @@ export default function Sidebar(props) {
   }
   const { color, image, routes, open } = props;
   const [error, setError] = useState(null);
-  const [username, setUsername] = useState('Guest');
+  const [username, setUsername] = useState('-');
 
   useEffect(() => {
     try {
@@ -79,11 +79,21 @@ export default function Sidebar(props) {
             </IconButton>
           </div>
           <div className={classes.sidebarWrapper}>
-            <IconButton className={classes.whiteFont} onClick={props.handleDrawerToggle}>
-              <ChevronLeftIcon />
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            </IconButton>
+
             <List className={classes.list}>
+              <ListItem
+                button
+                className={classes.whiteFont}
+                onClick={props.handleDrawerToggle}>
+                <Icon >
+                  <ChevronLeftIcon />
+                </Icon>
+                <ListItemText
+                  primary=" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                  className={classes.itemText}
+                  disableTypography={true}
+                />
+              </ListItem>
               {routes.map((prop, key) => {
                 var activePro = " ";
                 var listItemClasses;

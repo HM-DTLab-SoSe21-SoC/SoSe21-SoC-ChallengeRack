@@ -1,5 +1,4 @@
 import {
-  drawerWidth,
   transition,
   container,
 } from "assets/jss/material-dashboard-react.js";
@@ -38,10 +37,15 @@ const appStyle = (theme) => ({
   },
   content: {
 	      marginTop: "0px",
-    padding: "0px 15px",
+	paddingLeft: "15px",
+	paddingRight: "15px",
     minHeight: "calc(100vh - 123px)",
   },
-  container,
+  container: {
+	  	paddingLeft: "15px",
+	paddingRight: "15px",
+	  
+  },
 
 });
 

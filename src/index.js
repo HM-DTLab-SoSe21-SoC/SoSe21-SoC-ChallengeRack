@@ -11,9 +11,9 @@ Amplify.configure(config)
 
 ReactDOM.render(
   <React.StrictMode>
-      <BrowserRouter>
-    <App /> {/* The various pages will be displayed by the `Main` component. */}
-  </BrowserRouter>
+    <BrowserRouter>
+      <App /> {/* The various pages will be displayed by the `Main` component. */}
+    </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
 );

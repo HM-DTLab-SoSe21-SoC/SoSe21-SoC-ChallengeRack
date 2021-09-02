@@ -16,35 +16,26 @@
 
 */
 // @material-ui/icons
-import Person from "@material-ui/icons/Person";
 import Unarchive from "@material-ui/icons/Unarchive";
 import AssignmentIcon from '@material-ui/icons/Assignment';
+import BurstModeIcon from '@material-ui/icons/BurstMode';
 // core components/views for Admin layout
-import UserProfile from "views/UserProfile/UserProfile.js";
-
-import challangeProposal from './pages/challengeProposal';
-import challangeOverview from './pages/challengeOverview';
+import challengeProposal from './pages/challengeProposal';
+import challengeView from './pages/challengeView';
 
 const dashboardRoutes = [
   {
-    path: "/challangeProposal",
+    path: "/challengeProposal",
     name: "Propose a challenge",
     icon: Unarchive,
-    component: challangeProposal,
+    component: challengeProposal,
     layout: "/admin",
   },
   {
-    path: "/challangeOverview",
-    name: "Challange overview",
+    path: "/challengeView",
+    name: "Challenge overview",
     icon: AssignmentIcon,
-    component: challangeOverview,
-    layout: "/admin",
-  },
-  {
-    path: "/user",
-    name: "User Profile",
-    icon: Person,
-    component: UserProfile,
+    component: challengeView,
     layout: "/admin",
   },
 ];

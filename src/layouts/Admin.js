@@ -14,7 +14,10 @@ import routes from "routes.js";
 import styles from "assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
 import bgImage from "assets/img/sidebar-2.jpg";
-
+import Amplify from 'aws-amplify';
+import awsconfig from '../aws-exports';
+import { AmplifyAuthenticator, AmplifySignIn } from '@aws-amplify/ui-react';
+Amplify.configure(awsconfig);
 
 let ps;
 
@@ -32,7 +35,7 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/admin" to="/admin/dashboard" />
+    <Redirect from="/" to="/admin/challengeView" />
   </Switch>
 );
 
@@ -78,8 +81,8 @@ export default function Admin({ ...rest }) {
   return (
     <div className={classes.wrapper}>
       <div className={classes.logo}>
-      <img align="left" height="60" src={"https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/dtlab_1/bilder_138/logos_30/HM_MUni_Logo_DT_Lab_RGB_Logo.png"} alt="logo" />
-      <img align="right" height="60" src={"https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/hm_images/hm_logo_neu/HM_logo_SVG_no_margins.svg"} alt="logo" />
+        <img align="left" height="60" src={"https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/dtlab_1/bilder_138/logos_30/HM_MUni_Logo_DT_Lab_RGB_Logo.png"} alt="logo" />
+        <img align="right" height="60" src={"https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/hm_images/hm_logo_neu/HM_logo_SVG_no_margins.svg"} alt="logo" />
       </div>
       <div className={classes.navbar}>
         <Sidebar
@@ -99,11 +102,13 @@ export default function Admin({ ...rest }) {
       <div className={classes.mainPanel} ref={mainPanel}>
 
         <div className={classes.content}>
+        <AmplifyAuthenticator >
+
+        <AmplifySignIn slot="sign-in" /*hideSignUp*/></AmplifySignIn>
           <div className={classes.container}>{switchRoutes}</div>
+          </AmplifyAuthenticator>
         </div>
-
         <Footer />
-
       </div>
     </div>
   );
