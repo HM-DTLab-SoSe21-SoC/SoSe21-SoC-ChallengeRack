@@ -35,10 +35,9 @@ import {
   Box,
   Container,
   Grid,
-  Pagination,
-  Button
+  Button,
+  Icon,
 } from '@material-ui/core';
-import DetailedPage from './detailedPage';
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -330,9 +329,9 @@ const ChallengeGallery = ({ }) => {
             onChange={(event) => { handleSearch(event); }}
             placeholder="Search..."
           />
-          <Button onClick={handleSearch} color="white" aria-label="edit" justIcon round>
+          <Icon color="white" aria-label="edit" justIcon round>
             <Search />
-          </Button>
+          </Icon>
         </div>
         <div>
           <Box
@@ -364,12 +363,12 @@ const ChallengeGallery = ({ }) => {
                             title="Contemplative Reptile"
                           />
                           <CardContent>
-                            <Typography align="left" gutterBottom variant="h5" component="h2">{challenge.orgaTitle}</Typography>
-                            <Typography align="left" gutterBottom variant="h5" component="h2">{challenge.orgaLocat}</Typography>
-                            <Typography align="left" gutterBottom variant="h5" component="h2">{challenge.timestamp}</Typography>
-                            <Typography align="left" gutterBottom variant="h5" component="h2">{challenge.chatitle}</Typography>
-                            <Typography align="left" gutterBottom variant="h5" component="h2">{challenge.theme}</Typography>
-                            <Typography align="left" gutterBottom variant="h5" component="h2">{challenge.technology}</Typography>
+                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaTitle}</Typography>
+                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaLocat}</Typography>
+                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.createdAt}</Typography>
+                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.chatitle}</Typography>
+                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.theme}</Typography>
+                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.technology}</Typography>
                           </CardContent>
                         </CardActionArea>
                       </Card>
@@ -407,9 +406,9 @@ const ChallengeGallery = ({ }) => {
             {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
               <div align="left">
                 <Popup
+                  handleClose={handleClose}
                   challenge={filteredChallenge}
                   fetchChallenges={fetchChallenges}
-                  deleteChallenge={deleteChallengeFunction}
                 />
               </div>
             ))}

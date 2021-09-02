@@ -2,29 +2,57 @@ import React, { useState } from 'react';
 import { API } from 'aws-amplify';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
-import { updateChallenge as updateChallengeMutation} from '../graphql/mutations';
-import Button from '@material-ui/core/Button';
+import { updateChallenge as updateChallengeMutation } from '../graphql/mutations';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import IconButton from '@material-ui/core/IconButton';
+import {
+  Box,
+  Container,
+  Grid,
+  Button,
+  Icon,
+} from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: '100ch',
+      autoWidth: true,
     },
   },
   root2: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: '40ch',
+      autoWidth: true,
     },
   },
   details: {
     padding: "15px",
   },
+  background: {
+    position: "absolute",
+    zIndex: "1",
+    height: "100%",
+    width: "100%",
+    display: "block",
+    top: "0",
+    left: "0",
+    backgroundSize: "cover",
+    backgroundPosition: "center center",
+    "&:after": {
+      position: "absolute",
+      zIndex: "3",
+      width: "100%",
+      height: "100%",
+      content: '""',
+      display: "block",
+      opacity: ".8",
+    },
+  },
 }));
 
 
-const Popup = ({ challenge, fetchChallenges, deleteChallenge }) => {
+const Popup = ({ handleClose, challenge, fetchChallenges, }) => {
   const initialFormState = {
     id: challenge.id,
     phase: challenge.phase,
@@ -38,7 +66,7 @@ const Popup = ({ challenge, fetchChallenges, deleteChallenge }) => {
     orgaLocat: challenge.orgaLocat,
     orgaMission: challenge.orgaMission,
     orgaWebsite: challenge.orgaWebsite,
-    orgaDate: challenge.orgaDate,
+    createdAt: challenge.createdAt,
     chaStatem: challenge.chaStatem,
     chaDes: challenge.chaDes,
     chaStak: challenge.chaStak,
@@ -80,85 +108,132 @@ const Popup = ({ challenge, fetchChallenges, deleteChallenge }) => {
   return (
     <form className={classes.details} noValidate autoComplete="off">
       <div>
-        <div>
-          <Button onClick={() => { fetchChallenges(); }} variant="contained" color="primary">
-            Back to the overview
-          </Button>&nbsp;&nbsp;&nbsp;
-          <Button onClick={() => { updateChallenge(); fetchChallenges(); }} variant="contained" color="primary">
-            Update challenge data
-          </Button>&nbsp;&nbsp;&nbsp;
-          <Button onClick={() => { deleteChallenge(challenge);  }} variant="contained" color="primary">
-            Delete challenge
-          </Button>&nbsp;&nbsp;&nbsp;
-
-        </div>
-        <div className={classes.root2}>
-          <h1>General</h1>
-          <TextField required id="standard-size-normal" label="ID"
-            onChange={e => setFormData({ ...formData, 'id': e.target.value })}
-            value={formData.id}
-            InputProps={{
-              readOnly: true,
-            }}
-          />
-          <TextField required id="standard-size-normal" label="Phase"
-            onChange={e => setFormData({ ...formData, 'phase': e.target.value })}
-            value={formData.phase}
-          />
-          <TextField required id="standard-size-normal" label="Status"
-            onChange={e => setFormData({ ...formData, 'status': e.target.value })}
-            value={formData.status}
-          />
-          <p> </p>
-        </div>
-        <div className={classes.root}>
-          <h1>Contact</h1>
-          <TextField required id="standard-size-normal" label="Contact Name"
-            onChange={e => setFormData({ ...formData, 'coName': e.target.value })}
-            value={formData.coName}
-          />
-          <TextField required id="standard-size-normal" label="Contact Title"
-            onChange={e => setFormData({ ...formData, 'coTitle': e.target.value })}
-            value={formData.coTitle}
-          />
-          <TextField align="left" id="standard-required" label="Contact Email"
-            onChange={e => setFormData({ ...formData, 'coEmail': e.target.value })}
-            value={formData.coEmail}
-          />
-          <TextField align="left" id="standard-required" label="Contact Phone"
-            onChange={e => setFormData({ ...formData, 'coPhone': e.target.value })}
-            value={formData.coPhone}
-          />
-          <TextField required id="standard-size-normal" label="Contact Opt-In"
-            onChange={e => setFormData({ ...formData, 'status': e.target.value })}
-            value={formData.coOptIn}
-          />
-          <p> </p>
-        </div>
-        <div className={classes.root}>
-          <h1>Organization</h1>
-          <TextField align="left" id="standard-required" label="Organazation's Title"
-            onChange={e => setFormData({ ...formData, 'orgaTitle': e.target.value })}
-            value={formData.orgaTitle}
-          />
-          <TextField align="left" id="standard-required" label="Organazation's Location"
-            onChange={e => setFormData({ ...formData, 'orgaLocat': e.target.value })}
-            value={formData.orgaLocat}
-          />
-          <TextField align="left" id="standard-required" label="Organazation's Mission"
-            onChange={e => setFormData({ ...formData, 'orgaMission': e.target.value })}
-            value={formData.orgaMission}
-          />
-          <TextField align="left" id="standard-required" label="Organazation's Website"
-            onChange={e => setFormData({ ...formData, 'orgaWebsite': e.target.value })}
-            value={formData.orgaWebsite}
-          />
-          <TextField align="left" id="standard-required" label="Organazation's Date"
-            onChange={e => setFormData({ ...formData, 'orgaDate': e.target.value })}
-            value={formData.orgaDate}
-          />
-        </div>
+        <Grid item md={5}>
+          <IconButton
+            button
+            onClick={handleClose}>
+            <Icon >
+              <ChevronLeftIcon />
+            </Icon>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </IconButton>
+          <div/>
+          <img align="left" height="60" src={"https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/dtlab_1/bilder_138/_dtl_bilder_neu/corona-5401250_1280_Standard_Standard.jpg"} />
+          <p>&nbsp;</p>
+          <div className={classes.root2}>
+            <h3>Organization</h3>
+            <TextField align="left" id="standard-required" label="Organazation's Title"
+              onChange={e => setFormData({ ...formData, 'orgaTitle': e.target.value })}
+              value={formData.orgaTitle}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+            <TextField align="left" id="standard-required" label="Organazation's Location"
+              onChange={e => setFormData({ ...formData, 'orgaLocat': e.target.value })}
+              value={formData.orgaLocat}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+            <TextField align="left" id="standard-required" label="Submission Date"
+              onChange={e => setFormData({ ...formData, 'createdAt': e.target.value })}
+              value={formData.createdAt}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          </div>
+          <div className={classes.root}>
+            <h3>Challenge</h3>
+            <TextField align="left" id="standard-required" label="Challenge's Statement"
+              onChange={e => setFormData({ ...formData, 'chaStatem': e.target.value })}
+              value={formData.chaStatem}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+            <TextField align="left" id="standard-required" label="Challenge's Description"
+              onChange={e => setFormData({ ...formData, 'chaDes': e.target.value })}
+              value={formData.chaDes}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+            <TextField align="left" id="standard-required" label="Challenge's Stakeholders"
+              onChange={e => setFormData({ ...formData, 'chaStak': e.target.value })}
+              value={formData.chaStak}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+            <TextField align="left" id="standard-required" label="Challenge's Background"
+              onChange={e => setFormData({ ...formData, 'chaBac': e.target.value })}
+              value={formData.chaBac}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+            <TextField align="left" id="standard-required" label="Challenge's Support"
+              onChange={e => setFormData({ ...formData, 'chaSup': e.target.value })}
+              value={formData.chaSup}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+            <TextField align="left" id="standard-required" label="Leadership Support"
+              onChange={e => setFormData({ ...formData, 'leadSup': e.target.value })}
+              value={formData.leadSup}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+            <TextField align="left" id="standard-required" label="Criteria of Success"
+              onChange={e => setFormData({ ...formData, 'critOfSuc': e.target.value })}
+              value={formData.critOfSuc}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+            <TextField align="left" id="standard-required" label="Next Steps"
+              onChange={e => setFormData({ ...formData, 'nextStep': e.target.value })}
+              value={formData.nextStep}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          </div>
+          <div className={classes.root}>
+            <h3>Review</h3>
+            <TextField align="left" id="standard-required" label="Challenge's Title"
+              onChange={e => setFormData({ ...formData, 'chatitle': e.target.value })}
+              value={formData.chatitle}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+            <TextField align="left" id="standard-required" label="Theme"
+              onChange={e => setFormData({ ...formData, 'theme': e.target.value })}
+              value={formData.theme}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+            <TextField align="left" id="standard-required" label="Technology"
+              onChange={e => setFormData({ ...formData, 'chaDes': e.target.value })}
+              value={formData.technology}
+              InputProps={{
+                readOnly: true,
+              }}
+            />
+          </div>
+        </Grid>
       </div>
+      <div
+      />
+
+
+
     </form>
   );
 };

@@ -230,7 +230,7 @@ export default function ChallengeProposal() {
         </div>
         <div align="left">
           <p>By creating a challenge, you are agreeing to our <a href="">Terms & Conditions</a>.</p>
-          <NavLink to='/admin/challengeOverview'>
+          <NavLink to='/admin/challengeView'>
             <Button onClick={() => { createChallenge(); fetchChallenges(); }} variant="contained" color="primary">
               Create Challenge
             </Button>

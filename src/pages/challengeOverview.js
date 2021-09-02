@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { deleteChallenge } from '../graphql/mutations';
 import DetailedPage from './detailedPage'
 import Box from '@material-ui/core/Box';
-import { Button} from '@material-ui/core';
+import { Button, Icon } from '@material-ui/core';
 
 import { API, graphqlOperation } from 'aws-amplify';
 import { listChallenges } from '../graphql/queries';
@@ -28,7 +28,6 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import Search from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
-
 
 function descendingComparator(a, b, orderBy) {
   if (b[orderBy] < a[orderBy]) {
@@ -69,7 +68,7 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-  const { classes, order, orderBy,  onRequestSort } = props;
+  const { classes, order, orderBy, onRequestSort } = props;
   const createSortHandler = (property) => (event) => {
     onRequestSort(event, property);
   };
@@ -273,22 +272,22 @@ const ChallengeOverview = ({ }) => {
   return (
     <div className={classes.root}>
 
-        <Paper className={classes.paper}>
-          {show && <Box>
-            <div align="left" className={classes.paper}>
-              {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
-                <div align="left">
-                  <DetailedPage
-                    handleHide={handleHide}
-                    challenge={filteredChallenge}
-                    fetchChallenges={fetchChallenges}
-                    deleteChallenge={deleteChallengeFunction}
-                  />
-                </div>
-              ))}
-            </div>
-          </Box>}
-          {!show && <Box>
+      <Paper className={classes.paper}>
+        {show && <Box>
+          <div align="left" className={classes.paper}>
+            {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
+              <div align="left">
+                <DetailedPage
+                  handleHide={handleHide}
+                  challenge={filteredChallenge}
+                  fetchChallenges={fetchChallenges}
+                  deleteChallenge={deleteChallengeFunction}
+                />
+              </div>
+            ))}
+          </div>
+        </Box>}
+        {!show && <Box>
           <Toolbar
             className={clsx(classes.root2, {
               [classes.highlight]: selected.length > 0,
@@ -326,81 +325,81 @@ const ChallengeOverview = ({ }) => {
             )}
           </Toolbar>
 
-            <div className={classes.searchWrapper}>
-              <TextField
-                value={search}
-                onChange={(event) => { handleSearch(event); }}
-                placeholder="Search..."
+          <div className={classes.searchWrapper}>
+            <TextField
+              value={search}
+              onChange={(event) => { handleSearch(event); }}
+              placeholder="Search..."
+            />
+            <Icon color="white" aria-label="edit" justIcon round>
+              <Search />
+            </Icon>
+          </div>
+          <TableContainer>
+            <Table
+              className={classes.table}
+              aria-labelledby="tableTitle"
+              size={dense ? 'small' : 'medium'}
+              aria-label="enhanced table"
+            >
+              <EnhancedTableHead
+                classes={classes}
+                numSelected={selected.length}
+                order={order}
+                orderBy={orderBy}
+                onRequestSort={handleRequestSort}
+                rowCount={challenges.length}
               />
-              <Button onClick={handleSearch} color="white" aria-label="edit" justIcon round>
-                <Search />
-              </Button>
-            </div>
-            <TableContainer>
-              <Table
-                className={classes.table}
-                aria-labelledby="tableTitle"
-                size={dense ? 'small' : 'medium'}
-                aria-label="enhanced table"
-              >
-                <EnhancedTableHead
-                  classes={classes}
-                  numSelected={selected.length}
-                  order={order}
-                  orderBy={orderBy}
-                  onRequestSort={handleRequestSort}
-                  rowCount={challenges.length}
-                />
-                <TableBody>
-                  {stableSort(challenges.filter(challenge => (challenge.search == challSearch || challenge.phase.toLowerCase().includes(challSearch) || challenge.status.toLowerCase().includes(challSearch) || challenge.orgaTitle.toLowerCase().includes(challSearch) || challenge.orgaLocat.toLowerCase().includes(challSearch) || challenge.chatitle.toLowerCase().includes(challSearch) || challenge.type.toLowerCase().includes(challSearch) || challenge.score.toLowerCase().includes(challSearch) || challenge.theme.toLowerCase().includes(challSearch) || challenge.technology.toLowerCase().includes(challSearch))), getComparator(order, orderBy))
-                    .map((challenge, index) => {
-                      const isItemSelected = isSelected(challenge.id);
-                      const labelId = `enhanced-table-checkbox-${index}`;
+              <TableBody>
+                {stableSort(challenges.filter(challenge => (challenge.search == challSearch || challenge.phase.toLowerCase().includes(challSearch) || challenge.status.toLowerCase().includes(challSearch) || challenge.orgaTitle.toLowerCase().includes(challSearch) || challenge.orgaLocat.toLowerCase().includes(challSearch) || challenge.chatitle.toLowerCase().includes(challSearch) || challenge.type.toLowerCase().includes(challSearch) || challenge.score.toLowerCase().includes(challSearch) || challenge.theme.toLowerCase().includes(challSearch) || challenge.technology.toLowerCase().includes(challSearch))), getComparator(order, orderBy))
+                  .map((challenge, index) => {
+                    const isItemSelected = isSelected(challenge.id);
+                    const labelId = `enhanced-table-checkbox-${index}`;
 
-                      return (
-                        <TableRow
-                          hover
-                          onClick={(event) => handleClick(event, challenge)}
-                          role="checkbox"
-                          aria-checked={isItemSelected}
-                          tabIndex={-1}
-                          key={challenge.id}
-                          selected={isItemSelected}
-                        >
-                          <TableCell padding="checkbox">
-                            <Checkbox
-                              checked={isItemSelected}
-                              inputProps={{ 'aria-labelledby': labelId }}
-                            />
-                          </TableCell>
-                          <TableCell component="th" id={labelId} scope="challenge" padding="none">
-                            {challenge.phase}
-                          </TableCell>
-                          <TableCell align="left">{challenge.status}</TableCell>
-                          <TableCell align="left">{challenge.orgaTitle}</TableCell>
-                          <TableCell align="left">{challenge.orgaLocat}</TableCell>
-                          <TableCell align="left">{challenge.chatitle}</TableCell>
-                          <TableCell align="left">{challenge.type}</TableCell>
-                          <TableCell align="left">{challenge.score}</TableCell>
-                          <TableCell align="left">{challenge.theme}</TableCell>
-                          <TableCell align="left">{challenge.technology}</TableCell>
-                          <TableCell align="left">
-                            <Button onClick={() => { setChall(challenge.id); handleHide(); }} variant="contained" color="primary">
-                              Details
-                            </Button>
-                          </TableCell>
-                        </TableRow>
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </TableContainer>
-          </Box>}
-        </Paper>
-        <FormControlLabel
-          control={<Switch checked={dense} onChange={handleChangeDense} />}
-          label="Dense padding"
-        />
+                    return (
+                      <TableRow
+                        hover
+                        onClick={(event) => handleClick(event, challenge)}
+                        role="checkbox"
+                        aria-checked={isItemSelected}
+                        tabIndex={-1}
+                        key={challenge.id}
+                        selected={isItemSelected}
+                      >
+                        <TableCell padding="checkbox">
+                          <Checkbox
+                            checked={isItemSelected}
+                            inputProps={{ 'aria-labelledby': labelId }}
+                          />
+                        </TableCell>
+                        <TableCell component="th" id={labelId} scope="challenge" padding="none">
+                          {challenge.phase}
+                        </TableCell>
+                        <TableCell align="left">{challenge.status}</TableCell>
+                        <TableCell align="left">{challenge.orgaTitle}</TableCell>
+                        <TableCell align="left">{challenge.orgaLocat}</TableCell>
+                        <TableCell align="left">{challenge.chatitle}</TableCell>
+                        <TableCell align="left">{challenge.type}</TableCell>
+                        <TableCell align="left">{challenge.score}</TableCell>
+                        <TableCell align="left">{challenge.theme}</TableCell>
+                        <TableCell align="left">{challenge.technology}</TableCell>
+                        <TableCell align="left">
+                          <Button onClick={() => { setChall(challenge.id); handleHide(); }} variant="contained" color="primary">
+                            Details
+                          </Button>
+                        </TableCell>
+                      </TableRow>
+                    );
+                  })}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        </Box>}
+      </Paper>
+      <FormControlLabel
+        control={<Switch checked={dense} onChange={handleChangeDense} />}
+        label="Dense padding"
+      />
 
     </div>
   );
