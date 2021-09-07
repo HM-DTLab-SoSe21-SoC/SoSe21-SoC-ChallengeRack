@@ -78,6 +78,12 @@ export default function Admin({ ...rest }) {
       window.removeEventListener("resize", resizeFunction);
     };
   }, [mainPanel]);
+  const handleAuthStateChange = (state) => {
+    console.log(state);
+    if (state === "signedin" || state === "signedout") {
+      window.location.reload(false);
+    }
+  };
   return (
     <div className={classes.wrapper}>
       <div className={classes.logo}>
@@ -100,12 +106,30 @@ export default function Admin({ ...rest }) {
         />
       </div>
       <div className={classes.mainPanel} ref={mainPanel}>
-
         <div className={classes.content}>
-        <AmplifyAuthenticator >
-
-        <AmplifySignIn slot="sign-in" /*hideSignUp*/></AmplifySignIn>
-          <div className={classes.container}>{switchRoutes}</div>
+          <AmplifyAuthenticator >
+            <AmplifySignIn
+            
+              slot="sign-in"
+              handleAuthStateChange={handleAuthStateChange}
+              hideSignUp
+              formFields={[
+                {
+                  type: "username",
+                  label: "Username",
+                  value: "guest",
+                  inputProps: { required: true},
+                },
+                {
+                  type: "password",
+                  label: "Password",
+                  value: "1234567890",
+                  inputProps: { required: true},
+                },
+              ]}
+            >
+            </AmplifySignIn>
+            <div className={classes.container}>{switchRoutes}</div>
           </AmplifyAuthenticator>
         </div>
         <Footer />

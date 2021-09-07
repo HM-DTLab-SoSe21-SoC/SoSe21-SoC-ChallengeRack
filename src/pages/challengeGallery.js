@@ -1,33 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { deleteChallenge } from '../graphql/mutations';
 import Popup from './popup';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listChallenges } from '../graphql/queries';
 import PropTypes from 'prop-types';
-import clsx from 'clsx';
 import { lighten, makeStyles } from '@material-ui/core/styles';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
-import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import Search from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Popover from '@material-ui/core/Popover';
@@ -35,7 +23,6 @@ import {
   Box,
   Container,
   Grid,
-  Button,
   Icon,
 } from '@material-ui/core';
 
@@ -196,7 +183,8 @@ const useStyles = makeStyles((theme) => ({
       width: "-webkit-fill-available",
       margin: "10px 15px 0",
     },
-    paddingLeft: "15px",
+    paddingTop: "25px",
+    paddingLeft: "25px",
     display: "inline-block",
     float: "left",
 
@@ -216,8 +204,6 @@ const ChallengeGallery = ({ }) => {
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
-  const [selected, setSelected] = useState([]);
-  const [selectedChall, setSelectedChall] = useState([]);
   const [dense, setDense] = useState(false);
   const [search, setSearch] = useState([]);
   const [challSearch, setchallSearch] = useState(null);
@@ -226,7 +212,6 @@ const ChallengeGallery = ({ }) => {
   const [apiError, setApiError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [chall, setChall] = useState();
-  const [show, setShow] = useState(false);
 
   useEffect((event) => {
     fetchChallenges(event);
@@ -245,11 +230,6 @@ const ChallengeGallery = ({ }) => {
     } finally {
       setIsLoading(false);
     }
-  }
-  async function deleteChallengeFunction({ id }) {
-    const newChallengesArray = challenges.filter(challenge => challenge.id !== id);
-    setChallenges(newChallengesArray);
-    await API.graphql({ query: deleteChallenge, variables: { input: { id } } });
   }
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -274,7 +254,6 @@ const ChallengeGallery = ({ }) => {
     setDense(event.target.checked);
   };
 
-  const isSelected = (id) => selected.indexOf(id) !== -1;
   const handleSearch = (event) => {
     setSearch(event.target.value);
     if (event.target.value == "") {
@@ -286,43 +265,6 @@ const ChallengeGallery = ({ }) => {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <Toolbar
-          className={clsx(classes.root2, {
-            [classes.highlight]: selected.length > 0,
-          })}
-        >
-          {selected.length > 0 ? (
-            <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-              {challenges.filter(challenge => challenge.id == selected).map(filteredChallenge => (
-                <div>
-                  {filteredChallenge.orgaTitle}
-                  &nbsp;
-                  selected
-                </div>
-              ))}
-
-            </Typography>
-          ) : (
-            <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-
-            </Typography>
-          )}
-
-          {selected.length > 0 ? (
-            <Tooltip title="Delete">
-              <IconButton onClick={() => { deleteChallengeFunction(selectedChall) }} aria-label="delete">
-                <DeleteIcon />
-              </IconButton>
-            </Tooltip>
-          ) : (
-            <Tooltip title="Filter list">
-              <IconButton aria-label="filter list">
-                <FilterListIcon />
-              </IconButton>
-            </Tooltip>
-          )}
-        </Toolbar>
-
         <div className={classes.searchWrapper}>
           <TextField
             value={search}

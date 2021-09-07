@@ -25,6 +25,7 @@ export const getChallenge = /* GraphQL */ `
       leadSup
       critOfSuc
       nextStep
+      publCheck
       chatitle
       theme
       technology
@@ -85,6 +86,7 @@ export const listChallenges = /* GraphQL */ `
         leadSup
         critOfSuc
         nextStep
+        publCheck
         chatitle
         theme
         technology
@@ -155,6 +157,7 @@ export const listBySpecificID = /* GraphQL */ `
         leadSup
         critOfSuc
         nextStep
+        publCheck
         chatitle
         theme
         technology
