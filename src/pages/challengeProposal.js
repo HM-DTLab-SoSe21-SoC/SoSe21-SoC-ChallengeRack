@@ -2,13 +2,14 @@ import React, { useState, useEffect } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
 import { listChallenges } from '../graphql/queries';
 import { NavLink } from 'react-router-dom';
-
+import Checkbox from '@material-ui/core/Checkbox';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { createChallenge as createChallengeMutation } from '../graphql/mutations';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
-
+import Box from '@material-ui/core/Box';
+import Divider from '@material-ui/core/Divider';
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
@@ -23,7 +24,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   form: {
-    padding: "15px",
+    padding: "30px",
   },
 }));
 
@@ -40,13 +41,13 @@ const initialFormState = {
   orgaMission: "",
   orgaWebsite: "",
   orgaDate: "",
+  coOptIn: "no",
   chaStatem: "",
   chaDes: "",
   chaStak: "",
   chaBac: "",
   chaSup: "",
   leadSup: "",
-  critOfSuc: "",
   nextStep: "",
   chatitle: "",
   theme: "",
@@ -71,7 +72,6 @@ const initialFormState = {
   milestone: "",
   publURL: "",
   gitHubURL: "",
-  timestamp: Math.floor(Date.now() / 1000),
 }
 
 export default function ChallengeProposal() {
@@ -80,6 +80,9 @@ export default function ChallengeProposal() {
   const [formData, setFormData] = useState(initialFormState);
   const [apiError, setApiError] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [checked, setChecked] = useState(false);
+  const [checked2, setChecked2] = useState(false);
+  const [hide, setHide] = useState(false);
   useEffect(() => {
     fetchChallenges();
   }, []);
@@ -99,22 +102,52 @@ export default function ChallengeProposal() {
     }
   }
   async function createChallenge() {
-    if (!formData.orgaLocat || !formData.orgaTitle
-      // || !formData.coName || !formData.orgaWebsite || !formData.coEmail || 
-      // !formData.coOptIn || !formData.chaStatem || !formData.coTitle || 
-      // !formData.orgaMission || !formData.chaStak || !formData.chaBak || 
-      // !formData.chaSup || !formData.critOfSuc || !formData.leadSup || !formData.nextStep
+    if (!formData.orgaLocat || !formData.orgaTitle || !formData.publCheck
+      /*
+      !formData.coName || !formData.orgaWebsite || !formData.coEmail ||
+      !formData.critOfSuc || !formData.chaStatem || !formData.coTitle ||
+      !formData.orgaMission || !formData.chaStak || !formData.chaBak  ||
+      !formData.chaSup || !formData.leadSup || !formData.nextStep
+      */
     ) {
       alert("Please fill in all the mandatory fields.");
       return;
+    }
+    else {
+      setHide(true);
     }
     await API.graphql({ query: createChallengeMutation, variables: { input: formData } });
     setChallenges([...challenges, formData]);
     setFormData(initialFormState);
   }
+  const handleCheck = (event) => {
+    setChecked(event.target.checked);
+    if (event.target.checked) {
+      setFormData({ ...formData, 'coOptIn': "yes" })
+    }
+    else {
+      setFormData({ ...formData, 'coOptIn': "no" })
+    }
+
+  };
+  const handleCheck2 = (event) => {
+    setChecked2(event.target.checked);
+    if (event.target.checked) {
+      setFormData({ ...formData, 'publCheck': "yes" })
+    }
+    else {
+      setFormData({ ...formData, 'publCheck': "no" })
+    }
+
+  };
   return (
     <Paper className={classes.paper}>
       <form align="left" className={classes.form} noValidate autoComplete="off">
+        <p className={classes.root}>
+          This form is intended to help you and us to more clearly define the digital transformation challenge your organization faces.
+          This will enable us to better assess what is important to you or your stakeholders (members, customers, patients, etc.), and whether and where we can help with digital solutions.
+          We also want to get an idea, as far as possible at this stage, of what your involvement in the development of possible challenge solutions in the Digital Transformation Lab might look like.
+        </p>
         <p className={classes.root}>
           PLEASE NOTE! As a public institution we publish the results of a challenge under an
           open source license to promote further innovation.
@@ -159,83 +192,130 @@ export default function ChallengeProposal() {
         </div>
         <div className={classes.root2}>
           <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label="Would you like to opt-in for further communication, eg. the DTLab newsletter?"
-              onChange={e => setFormData({ ...formData, 'coOptIn': e.target.value })}
-              value={formData.coOptIn}
-            />
-          </div>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label="Tell us a bit about your organization. What is its key mission (challenge statement)?"
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label="Tell us a bit about your organization. What is its key mission (challenge statement)?"
               onChange={e => setFormData({ ...formData, 'chaStatem': e.target.value })}
               value={formData.chaStatem}
               variant="outlined"
+              multiline
+              rows={4}
             />
           </div>
           <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label="Who are you and what is your role within the organization?"
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label="Who are you and what is your role within the organization?"
               onChange={e => setFormData({ ...formData, 'coTitle': e.target.value })}
               value={formData.coTitle}
               variant="outlined"
+              multiline
+              rows={2}
             />
           </div>
           <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label="Now, tell us about your challenge. What problem or opportunity would you like to address?"
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label="Now, tell us about your challenge. What problem or opportunity would you like to address?"
               onChange={e => setFormData({ ...formData, 'orgaMission': e.target.value })}
               value={formData.orgaMission}
               variant="outlined"
+              multiline
+              rows={6}
             />
           </div>
           <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label="Who are your customers/stakeholders-both intermediary (e.g. employees, faculty, volunteers) and end users (e.g. students, patients):"
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label="Who are your customers/stakeholders-both intermediary (e.g. employees, faculty, volunteers) and end users (e.g. students, patients):"
               onChange={e => setFormData({ ...formData, 'chaStak': e.target.value })}
               value={formData.chaStak}
               variant="outlined"
+              multiline
+              rows={4}
             />
           </div>
           <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label="Do you already try to solve this problem today? How?"
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label="Do you already try to solve this problem today? How?"
               onChange={e => setFormData({ ...formData, 'chaBak': e.target.value })}
               value={formData.chaBak}
               variant="outlined"
+              multiline
+              rows={4}
             />
           </div>
           <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label="We cannot solve the problem without your help. Would you be willing and able to support (staff, data, etc.)? How?"
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label="We cannot solve the problem without your help. Would you be willing and able to support (staff, data, etc.)? How?"
               onChange={e => setFormData({ ...formData, 'chaSup': e.target.value })}
               value={formData.chaSup}
               variant="outlined"
+              multiline
+              rows={2}
             />
           </div>
           <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label="Let's imagine - we have been working on your challenge for a semester/term. How would you measure the success afterwards?"
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label="Let's imagine - we have been working on your challenge for a semester/term. How would you measure the success afterwards?"
               onChange={e => setFormData({ ...formData, 'critOfSuc': e.target.value })}
               value={formData.critOfSuc}
               variant="outlined"
+              multiline
+              rows={2}
             />
           </div>
           <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label="It is important to us to drive actual impact. Do you have executive and leadership support for this challenge? Who is this?"
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label="It is important to us to drive actual impact. Do you have executive and leadership support for this challenge? Who is this?"
               onChange={e => setFormData({ ...formData, 'leadSup': e.target.value })}
               value={formData.leadSup}
               variant="outlined"
+              multiline
+              rows={2}
             />
           </div>
           <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label="In your opinion, what are the next steps to implement a promising idea in reality/in your organization?"
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label="In your opinion, what are the next steps to implement a promising idea in reality/in your organization?"
               onChange={e => setFormData({ ...formData, 'nextStep': e.target.value })}
               value={formData.nextStep}
               variant="outlined"
+              multiline
+              rows={2}
             />
+          </div>
+          <div>
+            <Checkbox
+              color="primary"
+              checked={checked2}
+              onChange={handleCheck2}
+            />
+            As a public institution, we publish the results of a challenge under an open source license to stimulate further innovation. Is that okay with you?
+          </div>
+          <div>
+            <Checkbox
+              color="primary"
+              checked={checked}
+              onChange={handleCheck}
+            />
+            Would you like to opt-in for further communication, eg. the DTLab newsletter?(optional)
           </div>
         </div>
         <div align="left">
-          <p>By creating a challenge, you are agreeing to our <a href="">Terms & Conditions</a>.</p>
-          <NavLink to='/admin/challengeView'>
+          <p>
+            The DTLab is part of the innovation network
+            <a href="https://hm.edu/munivercity/"> M:UniverCity </a>
+            at Munich University of Applied Sciences, which organizes CoCreation projects with partners from science, business, civil society and politics.
+            By participating in a Challenge, your organization becomes a member of M:UniverCity at the same time. No obligations arise from the membership.
+          </p>
+        </div>
+        {!hide && <Box>
+          <div>
             <Button onClick={() => { createChallenge(); fetchChallenges(); }} variant="contained" color="primary">
               Create Challenge
             </Button>
+          </div>
+        </Box>}
+        {hide && <Box>
+          <Divider />
+          <p>
+            Congratulations you created a challenge!
+          </p>
+          <NavLink to='/admin/challengeView'>
+            <Button onClick={() => { fetchChallenges(); }} color="primary">
+              Switch to overview
+            </Button>
           </NavLink>
-        </div>
+        </Box>}
+
       </form>
     </Paper>
   );

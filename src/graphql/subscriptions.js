@@ -25,6 +25,7 @@ export const onCreateChallenge = /* GraphQL */ `
       leadSup
       critOfSuc
       nextStep
+      publCheck
       chatitle
       theme
       technology
@@ -80,6 +81,7 @@ export const onUpdateChallenge = /* GraphQL */ `
       leadSup
       critOfSuc
       nextStep
+      publCheck
       chatitle
       theme
       technology
@@ -135,6 +137,7 @@ export const onDeleteChallenge = /* GraphQL */ `
       leadSup
       critOfSuc
       nextStep
+      publCheck
       chatitle
       theme
       technology

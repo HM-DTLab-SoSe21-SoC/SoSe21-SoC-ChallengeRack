@@ -52,6 +52,7 @@ export default function Sidebar(props) {
     Auth.signOut()
       .then(data => console.log(data))
       .catch(err => console.log(err));
+    //window.location.reload(false);
   }
   return (
     <div>

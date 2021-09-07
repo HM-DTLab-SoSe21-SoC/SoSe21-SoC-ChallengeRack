@@ -2,9 +2,8 @@ type Challenge
   @model (subscriptions: { level: public })
   @auth(rules: [
     {allow: owner, ownerField:"owner", provider: userPools, operations:[read]},
-
 	{ allow: groups, groups: ["admin"], operations: [read, create, delete, update] },
-		{ allow: groups, groups: ["common"],operations: [read, create] },
+	{ allow: groups, groups: ["common"],operations: [read, create] },
   ])
     @key(name: "listBySpecificID", fields:["id"], queryField: "listBySpecificID")
 {
@@ -29,6 +28,7 @@ type Challenge
 	leadSup: String
 	critOfSuc: String
 	nextStep: String
+    publCheck: String
 	chatitle: String
 	theme: String
 	technology: String

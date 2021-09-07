@@ -56,15 +56,15 @@ function stableSort(array, comparator) {
 }
 
 const headCells = [
-  { id: 'phase', numeric: false, disablePadding: true, label: 'phase' },
-  { id: 'status', numeric: false, disablePadding: false, label: 'status' },
-  { id: 'orgaTitle', numeric: false, disablePadding: false, label: 'orgaTitle' },
-  { id: 'orgaLocat', numeric: false, disablePadding: false, label: 'orgaLocat' },
-  { id: 'chatitle', numeric: false, disablePadding: false, label: 'chatitle' },
-  { id: 'type', numeric: false, disablePadding: false, label: 'type' },
-  { id: 'score', numeric: true, disablePadding: false, label: 'score' },
-  { id: 'theme', numeric: false, disablePadding: false, label: 'theme' },
-  { id: 'technology', numeric: false, disablePadding: false, label: 'technology' },
+  { id: 'phase', numeric: false, disablePadding: true, label: 'Phase' },
+  { id: 'status', numeric: false, disablePadding: false, label: 'Status' },
+  { id: 'orgaTitle', numeric: false, disablePadding: false, label: 'Orga. Title.' },
+  { id: 'orgaLocat', numeric: false, disablePadding: false, label: 'Orga. Locat.' },
+  { id: 'chatitle', numeric: false, disablePadding: false, label: 'Chall. Title' },
+  { id: 'type', numeric: false, disablePadding: false, label: 'Type' },
+  { id: 'score', numeric: true, disablePadding: false, label: 'Score' },
+  { id: 'theme', numeric: false, disablePadding: false, label: 'Theme' },
+  { id: 'technology', numeric: false, disablePadding: false, label: 'Technology' },
 ];
 
 function EnhancedTableHead(props) {
@@ -293,6 +293,14 @@ const ChallengeOverview = ({ }) => {
               [classes.highlight]: selected.length > 0,
             })}
           >
+              <TextField
+                value={search}
+                onChange={(event) => { handleSearch(event); }}
+                placeholder="Search..."
+              />
+              <Icon color="white" aria-label="edit" justIcon round>
+                <Search />
+              </Icon>
             {selected.length > 0 ? (
               <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
                 {challenges.filter(challenge => challenge.id == selected).map(filteredChallenge => (
@@ -304,11 +312,7 @@ const ChallengeOverview = ({ }) => {
                 ))}
 
               </Typography>
-            ) : (
-              <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-
-              </Typography>
-            )}
+            ) : (null)}
 
             {selected.length > 0 ? (
               <Tooltip title="Delete">
@@ -316,25 +320,11 @@ const ChallengeOverview = ({ }) => {
                   <DeleteIcon />
                 </IconButton>
               </Tooltip>
-            ) : (
-              <Tooltip title="Filter list">
-                <IconButton aria-label="filter list">
-                  <FilterListIcon />
-                </IconButton>
-              </Tooltip>
-            )}
+            ) : (null)}
+            
           </Toolbar>
 
-          <div className={classes.searchWrapper}>
-            <TextField
-              value={search}
-              onChange={(event) => { handleSearch(event); }}
-              placeholder="Search..."
-            />
-            <Icon color="white" aria-label="edit" justIcon round>
-              <Search />
-            </Icon>
-          </div>
+
           <TableContainer>
             <Table
               className={classes.table}
