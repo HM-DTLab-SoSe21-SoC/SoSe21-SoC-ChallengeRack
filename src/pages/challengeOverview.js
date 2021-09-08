@@ -265,13 +265,8 @@ const ChallengeOverview = ({ }) => {
       setchallSearch(event.target.value.toLowerCase());
     }
   };
-
-
-
-
   return (
     <div className={classes.root}>
-
       <Paper className={classes.paper}>
         {show && <Box>
           <div align="left" className={classes.paper}>
@@ -310,10 +305,8 @@ const ChallengeOverview = ({ }) => {
                     selected
                   </div>
                 ))}
-
               </Typography>
             ) : (null)}
-
             {selected.length > 0 ? (
               <Tooltip title="Delete">
                 <IconButton onClick={() => { deleteChallengeFunction(selectedChall) }} aria-label="delete">
@@ -321,10 +314,7 @@ const ChallengeOverview = ({ }) => {
                 </IconButton>
               </Tooltip>
             ) : (null)}
-            
           </Toolbar>
-
-
           <TableContainer>
             <Table
               className={classes.table}

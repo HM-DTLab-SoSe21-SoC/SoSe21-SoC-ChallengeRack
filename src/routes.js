@@ -18,7 +18,6 @@
 // @material-ui/icons
 import Unarchive from "@material-ui/icons/Unarchive";
 import AssignmentIcon from '@material-ui/icons/Assignment';
-import BurstModeIcon from '@material-ui/icons/BurstMode';
 // core components/views for Admin layout
 import challengeProposal from './pages/challengeProposal';
 import challengeView from './pages/challengeView';

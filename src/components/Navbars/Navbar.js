@@ -10,7 +10,7 @@ import Hidden from "@material-ui/core/Hidden";
 // @material-ui/icons
 import Menu from "@material-ui/icons/Menu";
 // core components
-import Button from "components/CustomButtons/Button.js";
+import Button from '@material-ui/core/Button';
 
 //hooks
 import { useRouteName } from "hooks";
@@ -47,6 +47,8 @@ export default function Header(props) {
           <Hidden smDown implementation="css">
             {/*<AdminNavbarLinks />*/}
           </Hidden>
+          <Button onClick={() => { props.setlanguage(true) }}>DE</Button>
+        <Button onClick={() => { props.setlanguage(false) }}>EN</Button>
           <Hidden mdUp implementation="css">
             <IconButton
               color="inherit"
