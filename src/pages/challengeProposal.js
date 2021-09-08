@@ -298,18 +298,18 @@ export default function ChallengeProposal(props) {
         {!hide && <Box>
           <div>
             <Button onClick={() => { createChallenge(); fetchChallenges(); }} variant="contained" color="primary">
-              Create Challenge
+              {!props.language ? "Challange erstellen" : "Create Challenge"}
             </Button>
           </div>
         </Box>}
         {hide && <Box>
           <Divider />
           <p>
-            Congratulations you created a challenge!
+            {!props.language ? "Glückwunsch. Sie haben eine Challenge erstellt" : "Congratulations you created a challenge!"}
           </p>
           <NavLink to='/admin/challengeView'>
             <Button onClick={() => { fetchChallenges(); }} color="primary">
-              Switch to overview
+              {!props.language ? "Zur Übersicht wechseln" : "Switch to overview"}
             </Button>
           </NavLink>
         </Box>}
