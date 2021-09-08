@@ -199,15 +199,13 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1000,
   },
 }));
-
-const ChallengeGallery = ({ }) => {
+export default function ChallengeGallery({ props }) {
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
   const [dense, setDense] = useState(false);
   const [search, setSearch] = useState([]);
   const [challSearch, setchallSearch] = useState(null);
-
   const [challenges, setChallenges] = useState([]);
   const [apiError, setApiError] = useState();
   const [isLoading, setIsLoading] = useState(false);
@@ -269,7 +267,7 @@ const ChallengeGallery = ({ }) => {
           <TextField
             value={search}
             onChange={(event) => { handleSearch(event); }}
-            placeholder="Search..."
+            placeholder={!props.language ? "Suche..." : "Search..."}
           />
           <Icon color="white" aria-label="edit" justIcon round>
             <Search />
@@ -330,6 +328,7 @@ const ChallengeGallery = ({ }) => {
           </Box>
         </div>
         <Popover
+          props={props}
           className={classes.popup}
           id={id}
           open={open}
@@ -348,6 +347,7 @@ const ChallengeGallery = ({ }) => {
             {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
               <div align="left">
                 <Popup
+                  props={props}
                   handleClose={handleClose}
                   challenge={filteredChallenge}
                   fetchChallenges={fetchChallenges}
@@ -356,7 +356,6 @@ const ChallengeGallery = ({ }) => {
             ))}
           </div>
         </Popover>
-
       </Paper>
       <FormControlLabel
         control={<Switch checked={dense} onChange={handleChangeDense} />}
@@ -365,4 +364,3 @@ const ChallengeGallery = ({ }) => {
     </div>
   );
 }
-export default ChallengeGallery;

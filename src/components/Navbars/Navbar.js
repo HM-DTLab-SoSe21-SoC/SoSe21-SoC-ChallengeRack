@@ -47,8 +47,8 @@ export default function Header(props) {
           <Hidden smDown implementation="css">
             {/*<AdminNavbarLinks />*/}
           </Hidden>
-          <Button onClick={() => { props.setlanguage(true) }}>DE</Button>
-        <Button onClick={() => { props.setlanguage(false) }}>EN</Button>
+          <Button onClick={() => { props.setlanguage(false) }}>DE</Button>
+        <Button onClick={() => { props.setlanguage(true) }}>EN</Button>
           <Hidden mdUp implementation="css">
             <IconButton
               color="inherit"

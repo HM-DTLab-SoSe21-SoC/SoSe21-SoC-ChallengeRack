@@ -52,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const Popup = ({ handleClose, challenge, fetchChallenges, }) => {
+const Popup = ({ props, handleClose, challenge, fetchChallenges, }) => {
   const initialFormState = {
     id: challenge.id,
     phase: challenge.phase,
@@ -117,26 +117,28 @@ const Popup = ({ handleClose, challenge, fetchChallenges, }) => {
             </Icon>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </IconButton>
-          <div/>
+          <div />
           <img align="left" height="60" src={"https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/dtlab_1/bilder_138/_dtl_bilder_neu/corona-5401250_1280_Standard_Standard.jpg"} />
           <p>&nbsp;</p>
           <div className={classes.root2}>
-            <h3>Organization</h3>
-            <TextField align="left" id="standard-required" label="Organazation's Title"
+            <h3>
+              {!props.language ? "Organisation" : "Organization"}
+            </h3>
+            <TextField align="left" id="standard-required" label={!props.language ? "Name der Organisation" : "Organazation's Title"}
               onChange={e => setFormData({ ...formData, 'orgaTitle': e.target.value })}
               value={formData.orgaTitle}
               InputProps={{
                 readOnly: true,
               }}
             />
-            <TextField align="left" id="standard-required" label="Organazation's Location"
+            <TextField align="left" id="standard-required" label={!props.language ? "Standort der Organisation" : "Organazation's Location"}
               onChange={e => setFormData({ ...formData, 'orgaLocat': e.target.value })}
               value={formData.orgaLocat}
               InputProps={{
                 readOnly: true,
               }}
             />
-            <TextField align="left" id="standard-required" label="Submission Date"
+            <TextField align="left" id="standard-required" label={!props.language ? "Erstellungsdatum" : "Submission Date"}
               onChange={e => setFormData({ ...formData, 'createdAt': e.target.value })}
               value={formData.createdAt}
               InputProps={{
@@ -146,56 +148,56 @@ const Popup = ({ handleClose, challenge, fetchChallenges, }) => {
           </div>
           <div className={classes.root}>
             <h3>Challenge</h3>
-            <TextField align="left" id="standard-required" label="Challenge's Statement"
+            <TextField align="left" id="standard-required" label={!props.language ? "Stellungnahme" : "Challenge's Statement"}
               onChange={e => setFormData({ ...formData, 'chaStatem': e.target.value })}
               value={formData.chaStatem}
               InputProps={{
                 readOnly: true,
               }}
             />
-            <TextField align="left" id="standard-required" label="Challenge's Description"
+            <TextField align="left" id="standard-required" label={!props.language ? "Beschreibung der Challenge" : "Challenge's Description"}
               onChange={e => setFormData({ ...formData, 'chaDes': e.target.value })}
               value={formData.chaDes}
               InputProps={{
                 readOnly: true,
               }}
             />
-            <TextField align="left" id="standard-required" label="Challenge's Stakeholders"
+            <TextField align="left" id="standard-required" label={!props.language ? "Stakeholder der Challenge" : "Challenge's Stakeholders"}
               onChange={e => setFormData({ ...formData, 'chaStak': e.target.value })}
               value={formData.chaStak}
               InputProps={{
                 readOnly: true,
               }}
             />
-            <TextField align="left" id="standard-required" label="Challenge's Background"
+            <TextField align="left" id="standard-required" label={!props.language ? "Hintergrund der Challenge" : "Challenge's Background"}
               onChange={e => setFormData({ ...formData, 'chaBac': e.target.value })}
               value={formData.chaBac}
               InputProps={{
                 readOnly: true,
               }}
             />
-            <TextField align="left" id="standard-required" label="Challenge's Support"
+            <TextField align="left" id="standard-required" label={!props.language ? "Unterstützung" : "Challenge's Support"}
               onChange={e => setFormData({ ...formData, 'chaSup': e.target.value })}
               value={formData.chaSup}
               InputProps={{
                 readOnly: true,
               }}
             />
-            <TextField align="left" id="standard-required" label="Leadership Support"
+            <TextField align="left" id="standard-required" label={!props.language ? "Unterstützung der Führung" : "Leadership Support"}
               onChange={e => setFormData({ ...formData, 'leadSup': e.target.value })}
               value={formData.leadSup}
               InputProps={{
                 readOnly: true,
               }}
             />
-            <TextField align="left" id="standard-required" label="Criteria of Success"
+            <TextField align="left" id="standard-required" label={!props.language ? "Erfolgskriterien" : "Criteria of Success"}
               onChange={e => setFormData({ ...formData, 'critOfSuc': e.target.value })}
               value={formData.critOfSuc}
               InputProps={{
                 readOnly: true,
               }}
             />
-            <TextField align="left" id="standard-required" label="Next Steps"
+            <TextField align="left" id="standard-required" label={!props.language ? "Nächste Schritte" : "Next Steps"}
               onChange={e => setFormData({ ...formData, 'nextStep': e.target.value })}
               value={formData.nextStep}
               InputProps={{
@@ -204,27 +206,29 @@ const Popup = ({ handleClose, challenge, fetchChallenges, }) => {
             />
           </div>
           <div className={classes.root}>
-            <h3>Review</h3>
-            <TextField align="left" id="standard-required" label="Challenge's Title"
-              onChange={e => setFormData({ ...formData, 'chatitle': e.target.value })}
-              value={formData.chatitle}
-              InputProps={{
-                readOnly: true,
-              }}
+            <h3>
+              {!props.language ? "Bewertung" : "Review"}
+            </h3>
+            <TextField align="left" id="standard-required" label={!props.language ? "Name der Challenge" : "Challenge's Title"}
+            onChange={e => setFormData({ ...formData, 'chatitle': e.target.value })}
+            value={formData.chatitle}
+            InputProps={{
+              readOnly: true,
+            }}
             />
-            <TextField align="left" id="standard-required" label="Theme"
-              onChange={e => setFormData({ ...formData, 'theme': e.target.value })}
-              value={formData.theme}
-              InputProps={{
-                readOnly: true,
-              }}
+            <TextField align="left" id="standard-required" label={!props.language ? "Thema" : "Theme"}
+            onChange={e => setFormData({ ...formData, 'theme': e.target.value })}
+            value={formData.theme}
+            InputProps={{
+              readOnly: true,
+            }}
             />
-            <TextField align="left" id="standard-required" label="Technology"
-              onChange={e => setFormData({ ...formData, 'chaDes': e.target.value })}
-              value={formData.technology}
-              InputProps={{
-                readOnly: true,
-              }}
+            <TextField align="left" id="standard-required" label={!props.language ? "Technik" : "Technology"}
+            onChange={e => setFormData({ ...formData, 'chaDes': e.target.value })}
+            value={formData.technology}
+            InputProps={{
+              readOnly: true,
+            }}
             />
           </div>
         </Grid>

@@ -3,8 +3,8 @@ import ChallengeOverview from './challengeOverview';
 import ChallengeGallery from './challengeGallery';
 import Box from '@material-ui/core/Box';
 import Auth from '@aws-amplify/auth';
-const ChallengeView = () => {
 
+export default function ChallengeView(props) {
   const [error, setError] = useState(null);
   const [group, setGroup] = useState("");
   useEffect(() => {
@@ -25,13 +25,15 @@ const ChallengeView = () => {
   return (
     <div>
       {group == "admin" && <Box>
-        <ChallengeOverview />
+        <ChallengeOverview
+          props={props}
+        />
       </Box>}
       {group == "common" && <Box>
-        <ChallengeGallery />
+        <ChallengeGallery
+          props={props}
+        />
       </Box>}
     </div>
   );
 }
-
-export default ChallengeView;

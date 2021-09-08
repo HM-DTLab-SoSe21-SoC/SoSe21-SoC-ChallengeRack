@@ -58,7 +58,7 @@ function stableSort(array, comparator) {
 const headCells = [
   { id: 'phase', numeric: false, disablePadding: true, label: 'Phase' },
   { id: 'status', numeric: false, disablePadding: false, label: 'Status' },
-  { id: 'orgaTitle', numeric: false, disablePadding: false, label: 'Orga. Title.' },
+  { id: 'orgaTitle', numeric: false, disablePadding: false, label: 'Orga. Name.' },
   { id: 'orgaLocat', numeric: false, disablePadding: false, label: 'Orga. Locat.' },
   { id: 'chatitle', numeric: false, disablePadding: false, label: 'Chall. Title' },
   { id: 'type', numeric: false, disablePadding: false, label: 'Type' },
@@ -77,7 +77,6 @@ function EnhancedTableHead(props) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
@@ -192,8 +191,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
 }));
-
-const ChallengeOverview = ({ }) => {
+export default function ChallengeOverview({props}) {
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
@@ -246,16 +244,13 @@ const ChallengeOverview = ({ }) => {
       setSelected(challenge.id);
     }
     setSelectedChall(challenge);
-
   };
-
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
   const handleHide = (event) => {
     setShow(prev => !prev);
   };
-
   const isSelected = (id) => selected.indexOf(id) !== -1;
   const handleSearch = (event) => {
     setSearch(event.target.value);
@@ -273,6 +268,7 @@ const ChallengeOverview = ({ }) => {
             {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
               <div align="left">
                 <DetailedPage
+                props={props}
                   handleHide={handleHide}
                   challenge={filteredChallenge}
                   fetchChallenges={fetchChallenges}
@@ -291,7 +287,7 @@ const ChallengeOverview = ({ }) => {
               <TextField
                 value={search}
                 onChange={(event) => { handleSearch(event); }}
-                placeholder="Search..."
+                placeholder={!props.language ? "Suche..." : "Search..." }
               />
               <Icon color="white" aria-label="edit" justIcon round>
                 <Search />
@@ -384,4 +380,3 @@ const ChallengeOverview = ({ }) => {
     </div>
   );
 }
-export default ChallengeOverview;
