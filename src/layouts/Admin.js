@@ -76,6 +76,7 @@ export default function Admin({ ...rest }) {
       </div>
       <div className={classes.navbar}>
         <Sidebar
+          language={language}
           routes={routes}
           image={bgImage}
           handleDrawerToggle={handleDrawerToggle}
@@ -84,6 +85,7 @@ export default function Admin({ ...rest }) {
           {...rest}
         />
         <Navbar
+          language={language}
           routes={routes}
           handleDrawerToggle={handleDrawerToggle}
           setlanguage={setlanguage}

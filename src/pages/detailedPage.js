@@ -85,7 +85,7 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
             {!props.language ? "Zurück zur Übersicht" : "Back to the overview"}
           </Button>&nbsp;&nbsp;&nbsp;
           <Button onClick={() => { updateChallenge(); fetchChallenges(); }} variant="contained" color="primary">
-            {!props.language ? "Challaengedaten übernehmen" : "Update challenge data"}
+            {!props.language ? "Challaenge-Daten übernehmen" : "Update challenge data"}
           </Button>&nbsp;&nbsp;&nbsp;
           <Button onClick={() => { deleteChallenge(challenge); handleHide(); }} variant="contained" color="primary">
             {!props.language ? "Challenge löschen" : "Delete challenge"}

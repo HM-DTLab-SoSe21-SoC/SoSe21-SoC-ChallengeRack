@@ -120,6 +120,11 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
+    padding: "30px",
+  },
+  paper2: {
+    width: '100%',
+    marginBottom: theme.spacing(2),
   },
   table: {
     minWidth: 750,
@@ -191,7 +196,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
 }));
-export default function ChallengeOverview({props}) {
+export default function ChallengeOverview({ props }) {
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
@@ -264,11 +269,11 @@ export default function ChallengeOverview({props}) {
     <div className={classes.root}>
       <Paper className={classes.paper}>
         {show && <Box>
-          <div align="left" className={classes.paper}>
+          <div align="left" >
             {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
               <div align="left">
                 <DetailedPage
-                props={props}
+                  props={props}
                   handleHide={handleHide}
                   challenge={filteredChallenge}
                   fetchChallenges={fetchChallenges}
@@ -279,19 +284,22 @@ export default function ChallengeOverview({props}) {
           </div>
         </Box>}
         {!show && <Box>
+          <h3 align="center">
+          {!props.language ? "Übersicht der Challenges" : "Challenge Overview"}
+          </h3>
           <Toolbar
             className={clsx(classes.root2, {
               [classes.highlight]: selected.length > 0,
             })}
           >
-              <TextField
-                value={search}
-                onChange={(event) => { handleSearch(event); }}
-                placeholder={!props.language ? "Suche..." : "Search..." }
-              />
-              <Icon color="white" aria-label="edit" justIcon round>
-                <Search />
-              </Icon>
+            <TextField
+              value={search}
+              onChange={(event) => { handleSearch(event); }}
+              placeholder={!props.language ? "Suche..." : "Search..."}
+            />
+            <Icon color="white" aria-label="edit" justIcon round>
+              <Search />
+            </Icon>
             {selected.length > 0 ? (
               <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
                 {challenges.filter(challenge => challenge.id == selected).map(filteredChallenge => (
