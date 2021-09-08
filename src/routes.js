@@ -26,7 +26,7 @@ const dashboardRoutes = [
   {
     path: "/challengeProposal",
     name: "Propose a challenge",
-    nameDE: "Vorschlag für eine Challenge",
+    nameDE: "Challenge vorschlagen",
     icon: Unarchive,
     component: challengeProposal,
     layout: "/admin",

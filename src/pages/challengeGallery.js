@@ -202,9 +202,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function ChallengeGallery({ props }) {
   const classes = useStyles();
+  
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
-  const [dense, setDense] = useState(false);
   const [search, setSearch] = useState([]);
   const [challSearch, setchallSearch] = useState(null);
   const [challenges, setChallenges] = useState([]);
@@ -212,6 +213,8 @@ export default function ChallengeGallery({ props }) {
   const [isLoading, setIsLoading] = useState(false);
   const [chall, setChall] = useState();
 
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
   useEffect((event) => {
     fetchChallenges(event);
   }, []);
@@ -236,8 +239,6 @@ export default function ChallengeGallery({ props }) {
     setOrderBy(property);
   };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -245,14 +246,6 @@ export default function ChallengeGallery({ props }) {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
-
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
   const handleSearch = (event) => {
     setSearch(event.target.value);
     if (event.target.value == "") {
@@ -264,9 +257,7 @@ export default function ChallengeGallery({ props }) {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <h3 align="center">
-          {!props.language ? "Übersicht der Challenges" : "Challenge Overview"}
-        </h3>
+      <Typography align="center" gutterBottom variant="h4">{!props.language ? "Übersicht der Challenges" : "Challenge Overview"}</Typography>
         <div className={classes.searchWrapper}>
           <TextField
             value={search}
@@ -361,10 +352,6 @@ export default function ChallengeGallery({ props }) {
           </div>
         </Popover>
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
     </div>
   );
 }

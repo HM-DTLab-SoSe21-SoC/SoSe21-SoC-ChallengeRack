@@ -10,21 +10,27 @@ import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Divider from '@material-ui/core/Divider';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: '40ch',
+      minWidth : '30ch',
     },
   },
   root2: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
-      width: '80ch',
+      minWidth: '80ch',
     },
   },
   form: {
+  },
+  textfield: {
+    paddingBottom: "10px",
+  },
+  paper: {
     padding: "30px",
   },
 }));
@@ -111,7 +117,7 @@ export default function ChallengeProposal(props) {
       !formData.chaSup || !formData.leadSup || !formData.nextStep
       */
     ) {
-      alert("Please fill in all the mandatory fields.");
+      alert(!props.language ? "Bitte füllen Sie alle notwendigen Felder(*) aus." : "Please fill in all the mandatory fields(*).");
       return;
     }
     else {
@@ -143,55 +149,59 @@ export default function ChallengeProposal(props) {
   };
   return (
     <Paper className={classes.paper}>
-
       <form align="left" className={classes.form} noValidate autoComplete="off">
-        <h3 align="center">
-          {!props.language ? "Vorschlagsformular" : "Challenge proposal form"}
-        </h3>
+        <Typography align="center" gutterBottom variant="h4">{!props.language ? "Vorschlagsformular" : "Challenge proposal form"}</Typography>
         <p className={classes.root}>
           {!props.language ? "Dieses Dokument soll Ihnen und uns helfen, die Herausforderung in Hinblick auf digitale Transformation, vor denen Ihre Organisation steht, klarer zu definieren. So können wir besser einschätzen, worum es Ihnen bzw. Ihren Anspruchsgruppen (Mitglieder, KundInnen, PatientInnen, etc.) geht, und ob und wo wir mit digitalen Lösungsansätzen helfen können. Außerdem wollen wir – soweit zum jetzigen Zeitpunkt möglich – einen Eindruck gewinnen, wie Ihre Mitwirkung bei der Erarbeitung möglicher Challenge-Lösungen im Digital Transformation Lab aussehen kann." : "This form is intended to help you and us to more clearly define the digital transformation challenge your organization faces. This will enable us to better assess what is important to you or your stakeholders (members, customers, patients, etc.), and whether and where we can help with digital solutions. We also want to get an idea, as far as possible at this stage, of what your involvement in the development of possible challenge solutions in the Digital Transformation Lab might look like."}
         </p>
         <div className={classes.root}>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label={!props.language ? "Name der Organisation" : "Organazation's Name"}
+          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Name der Organisation*" : "Organazation's Name*"}</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required"
               onChange={e => setFormData({ ...formData, 'orgaTitle': e.target.value })}
               value={formData.orgaTitle}
             />
           </div>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label={!props.language ? "Standort der Organisation" : "Organazation's Location"}
+          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Standort der Organisation*" : "Organazation's Location*"}</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required"
               onChange={e => setFormData({ ...formData, 'orgaLocat': e.target.value })}
               value={formData.orgaLocat}
             />
           </div>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label={!props.language ? "Autor" : "Author"}
+          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Autor*" : "Author*"}</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required"
               onChange={e => setFormData({ ...formData, 'coName': e.target.value })}
               value={formData.coName}
             />
           </div>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label={!props.language ? "Webseite der Organisation" : "Organazation's Website"}
+          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Webseite der Organisation*" : "Organazation's Website*"}</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required"
               onChange={e => setFormData({ ...formData, 'orgaWebsite': e.target.value })}
               value={formData.orgaWebsite}
             />
           </div>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label="Email"
+          <Typography align="left" gutterBottom variant="body2">Email*</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required"
               onChange={e => setFormData({ ...formData, 'coEmail': e.target.value })}
               value={formData.coEmail}
             />
           </div>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required" label={!props.language ? "Telefon" : "Phone (optional)"}
+          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Telefon(optional)" : "Phone (optional)"}</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-required"
               onChange={e => setFormData({ ...formData, 'coPhone': e.target.value })}
               value={formData.coPhone}
             />
           </div>
         </div>
         <div className={classes.root2}>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label={!props.language ? "Erzählen Sie uns ein wenig über Ihre Organisation. Was ist ihre Mission?" : "Tell us a bit about your organization. What is its key mission (challenge statement)?"}
+          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Erzählen Sie uns ein wenig über Ihre Organisation. Was ist ihre Mission?*" : "Tell us a bit about your organization. What is its key mission (challenge statement)?*"}</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static"
               onChange={e => setFormData({ ...formData, 'chaStatem': e.target.value })}
               value={formData.chaStatem}
               variant="outlined"
@@ -199,8 +209,9 @@ export default function ChallengeProposal(props) {
               rows={4}
             />
           </div>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label={!props.language ? "Wer sind Sie und was ist Ihre Rolle innerhalb Ihrer Organisation?" : "Who are you and what is your role within the organization?"}
+          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Wer sind Sie und was ist Ihre Rolle innerhalb Ihrer Organisation?*" : "Who are you and what is your role within the organization?*"}</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static"
               onChange={e => setFormData({ ...formData, 'coTitle': e.target.value })}
               value={formData.coTitle}
               variant="outlined"
@@ -208,8 +219,9 @@ export default function ChallengeProposal(props) {
               rows={2}
             />
           </div>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label={!props.language ? "Erzählen Sie uns jetzt von Ihrer Challenge! Welches Problem oder welche Gelegenheit möchten Sie angehen?" : "Now, tell us about your challenge. What problem or opportunity would you like to address?"}
+          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Erzählen Sie uns jetzt von Ihrer Challenge! Welches Problem oder welche Gelegenheit möchten Sie angehen?*" : "Now, tell us about your challenge. What problem or opportunity would you like to address?*"}</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static"
               onChange={e => setFormData({ ...formData, 'orgaMission': e.target.value })}
               value={formData.orgaMission}
               variant="outlined"
@@ -217,8 +229,9 @@ export default function ChallengeProposal(props) {
               rows={6}
             />
           </div>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label={!props.language ? "Wer sind Ihre Anspruchsgruppen – sowohl mittelbar (z.B. Lehrpersonal, MitarbeiterInnen, Ehrenamtliche) als auch Endnutzer (z.B. Studierende, KundInnen, PatientInnen, Mitglieder)" : "Who are your customers/stakeholders-both intermediary (e.g. employees, faculty, volunteers) and end users (e.g. students, patients):"}
+          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Wer sind Ihre Anspruchsgruppen – sowohl mittelbar (z.B. Lehrpersonal, MitarbeiterInnen, Ehrenamtliche) als auch Endnutzer (z.B. Studierende, KundInnen, PatientInnen, Mitglieder)*" : "Who are your customers/stakeholders-both intermediary (e.g. employees, faculty, volunteers) and end users (e.g. students, patients)*"}</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static"
               onChange={e => setFormData({ ...formData, 'chaStak': e.target.value })}
               value={formData.chaStak}
               variant="outlined"
@@ -226,8 +239,9 @@ export default function ChallengeProposal(props) {
               rows={4}
             />
           </div>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label={!props.language ? "Versuchen Sie bereits heute, dieses Problem zu lösen? Wie?" : "Do you already try to solve this problem today? How?"}
+          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Versuchen Sie bereits heute, dieses Problem zu lösen? Wie?*" : "Do you already try to solve this problem today? How?*"}</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static"
               onChange={e => setFormData({ ...formData, 'chaBak': e.target.value })}
               value={formData.chaBak}
               variant="outlined"
@@ -235,8 +249,9 @@ export default function ChallengeProposal(props) {
               rows={4}
             />
           </div>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label={!props.language ? "Ohne Ihre Hilfe können wir das Problem nicht lösen. Sind Sie bereit und in der Lage, uns zu unterstützen (Mitarbeit, Testdaten, usw.)? Wie? " : "We cannot solve the problem without your help. Would you be willing and able to support (staff, data, etc.)? How?"}
+          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Ohne Ihre Hilfe können wir das Problem nicht lösen. Sind Sie bereit und in der Lage, uns zu unterstützen (Mitarbeit, Testdaten, usw.)? Wie?*" : "We cannot solve the problem without your help. Would you be willing and able to support (staff, data, etc.)? How?*"}</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static"
               onChange={e => setFormData({ ...formData, 'chaSup': e.target.value })}
               value={formData.chaSup}
               variant="outlined"
@@ -244,8 +259,9 @@ export default function ChallengeProposal(props) {
               rows={2}
             />
           </div>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label={!props.language ? "Stellen wir uns vor, wir haben ein Semester lang an Ihrer Challenge gearbeitet. Wie würden Sie den Erfolg danach messen?" : "Let's imagine - we have been working on your challenge for a semester/term. How would you measure the success afterwards?"}
+          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Stellen wir uns vor, wir haben ein Semester lang an Ihrer Challenge gearbeitet. Wie würden Sie den Erfolg danach messen?*" : "Let's imagine - we have been working on your challenge for a semester/term. How would you measure the success afterwards?*"}</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static"
               onChange={e => setFormData({ ...formData, 'critOfSuc': e.target.value })}
               value={formData.critOfSuc}
               variant="outlined"
@@ -253,8 +269,9 @@ export default function ChallengeProposal(props) {
               rows={2}
             />
           </div>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label={!props.language ? "Es ist uns wichtig, tatsächliche Ergebnisse mit unseren Challenges zu erzielen. Haben Sie für diese Challenge Unterstützung auf der Führungsebene? Wer ist das?" : "It is important to us to drive actual impact. Do you have executive and leadership support for this challenge? Who is this?"}
+          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Es ist uns wichtig, tatsächliche Ergebnisse mit unseren Challenges zu erzielen. Haben Sie für diese Challenge Unterstützung auf der Führungsebene? Wer ist das?*" : "It is important to us to drive actual impact. Do you have executive and leadership support for this challenge? Who is this?*"}</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static"
               onChange={e => setFormData({ ...formData, 'leadSup': e.target.value })}
               value={formData.leadSup}
               variant="outlined"
@@ -262,8 +279,9 @@ export default function ChallengeProposal(props) {
               rows={2}
             />
           </div>
-          <div>
-            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static" label={!props.language ? "Was sind aus Ihrer Sicht die nächsten Schritte, um eine vielversprechende Idee in der Realität / in Ihrer Organisation umzusetzen?" : "In your opinion, what are the next steps to implement a promising idea in reality/in your organization?"}
+          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Was sind aus Ihrer Sicht die nächsten Schritte, um eine vielversprechende Idee in der Realität / in Ihrer Organisation umzusetzen?*" : "In your opinion, what are the next steps to implement a promising idea in reality/in your organization?*"}</Typography>
+          <div className={classes.textfield}>
+            <TextField InputLabelProps={{ shrink: true, }} align="left" id="standard-multiline-static"
               onChange={e => setFormData({ ...formData, 'nextStep': e.target.value })}
               value={formData.nextStep}
               variant="outlined"
@@ -277,8 +295,9 @@ export default function ChallengeProposal(props) {
               checked={checked2}
               onChange={handleCheck2}
             />
-            {!props.language ? "Als öffentliche Einrichtung veröffentlichen wir die Ergebnisse einer Challenge unter einer OpenSource-Lizenz, um weitere Innovationen anzuregen. Ist das für Sie in Ordnung?" : "As a public institution, we publish the results of a challenge under an open source license to stimulate further innovation. Is that okay with you?"}
+            {!props.language ? "Als öffentliche Einrichtung veröffentlichen wir die Ergebnisse einer Challenge unter einer OpenSource-Lizenz, um weitere Innovationen anzuregen. Ist das für Sie in Ordnung?(Zustimmung für Zusammenarbeit mit DTLab nötig)*" : "As a public institution, we publish the results of a challenge under an open source license to stimulate further innovation. Is that okay with you?(Consent required for cooperation with DTLab)*"}
           </div>
+          <Typography align="left" gutterBottom variant="body2"></Typography>
           <div>
             <Checkbox
               color="primary"

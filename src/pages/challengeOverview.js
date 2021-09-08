@@ -25,7 +25,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import Search from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
 
@@ -121,10 +120,6 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     marginBottom: theme.spacing(2),
     padding: "30px",
-  },
-  paper2: {
-    width: '100%',
-    marginBottom: theme.spacing(2),
   },
   table: {
     minWidth: 750,
@@ -284,9 +279,7 @@ export default function ChallengeOverview({ props }) {
           </div>
         </Box>}
         {!show && <Box>
-          <h3 align="center">
-          {!props.language ? "Übersicht der Challenges" : "Challenge Overview"}
-          </h3>
+          <Typography align="center" gutterBottom variant="h4">{!props.language ? "Übersicht der Challenges" : "Challenge Overview"}</Typography>
           <Toolbar
             className={clsx(classes.root2, {
               [classes.highlight]: selected.length > 0,

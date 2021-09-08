@@ -122,7 +122,6 @@ export default function Sidebar(props) {
                       ) : (
                         <prop.icon
                           className={classNames(classes.itemIcon, whiteFontClasses, {
-
                           })}
                         />
                       )}
