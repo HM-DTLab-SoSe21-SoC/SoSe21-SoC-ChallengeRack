@@ -143,7 +143,11 @@ export default function ChallengeProposal(props) {
   };
   return (
     <Paper className={classes.paper}>
+
       <form align="left" className={classes.form} noValidate autoComplete="off">
+        <h3 align="center">
+          {!props.language ? "Vorschlagsformular" : "Challenge proposal form"}
+        </h3>
         <p className={classes.root}>
           {!props.language ? "Dieses Dokument soll Ihnen und uns helfen, die Herausforderung in Hinblick auf digitale Transformation, vor denen Ihre Organisation steht, klarer zu definieren. So können wir besser einschätzen, worum es Ihnen bzw. Ihren Anspruchsgruppen (Mitglieder, KundInnen, PatientInnen, etc.) geht, und ob und wo wir mit digitalen Lösungsansätzen helfen können. Außerdem wollen wir – soweit zum jetzigen Zeitpunkt möglich – einen Eindruck gewinnen, wie Ihre Mitwirkung bei der Erarbeitung möglicher Challenge-Lösungen im Digital Transformation Lab aussehen kann." : "This form is intended to help you and us to more clearly define the digital transformation challenge your organization faces. This will enable us to better assess what is important to you or your stakeholders (members, customers, patients, etc.), and whether and where we can help with digital solutions. We also want to get an idea, as far as possible at this stage, of what your involvement in the development of possible challenge solutions in the Digital Transformation Lab might look like."}
         </p>

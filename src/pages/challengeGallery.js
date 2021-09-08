@@ -118,6 +118,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
+    paddingTop: "30px"
   },
   table: {
     minWidth: 750,
@@ -183,8 +184,8 @@ const useStyles = makeStyles((theme) => ({
       width: "-webkit-fill-available",
       margin: "10px 15px 0",
     },
-    paddingTop: "25px",
-    paddingLeft: "25px",
+    paddingTop: "30px",
+    paddingLeft: "30px",
     display: "inline-block",
     float: "left",
 
@@ -263,6 +264,9 @@ export default function ChallengeGallery({ props }) {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
+        <h3 align="center">
+          {!props.language ? "Übersicht der Challenges" : "Challenge Overview"}
+        </h3>
         <div className={classes.searchWrapper}>
           <TextField
             value={search}
