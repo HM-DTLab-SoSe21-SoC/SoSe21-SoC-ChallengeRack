@@ -7,25 +7,28 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { Icon } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
+import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
       autoWidth: true,
-      minWidth : '30ch',
+      maxWidth:'50px'
     },
   },
   root2: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
       autoWidth: true,
-      minWidth: '80ch',
+      maxWidth:"50px"
     },
   },
   textfield: {
     paddingBottom: "10px",
     autoWidth: true,
+    width: "500px",
   },
   paper: {
     padding: "30px",
@@ -101,51 +104,58 @@ const Popup = ({ props, handleClose, challenge }) => {
         </div>
         <div className={classes.root}>
           <Typography align="left" gutterBottom variant="h5">{!props.language ? "Organisation" : "Organization"}</Typography>
-          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Name der Organisation:" : "Organazation's Title:"}</Typography>
+          <Divider />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Name der Organisation:" : "Organazation's Title:"}</b></Typography>
           <Typography align="left" gutterBottom variant="body2">{challenge.orgaTitle}</Typography>
 
-          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Standort der Organisation:" : "Organazation's Location:"}</Typography>
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Standort der Organisation:" : "Organazation's Location:"}</b></Typography>
           <Typography align="left" gutterBottom variant="body2">{challenge.orgaLocat}</Typography>
 
-          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Erstellungsdatum:" : "Submission Date:"}</Typography>
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Erstellungsdatum:" : "Submission Date:"}</b></Typography>
           <Typography align="left" gutterBottom variant="body2">{challenge.createdAt}</Typography>
+
         </div>
         <div className={classes.root2}>
           <Typography align="left" gutterBottom variant="h5">{!props.language ? "Challenge" : "Challenge"}</Typography>
-          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Stellungnahme:" : "Challenge's Statement:"}</Typography>
-          <Typography align="left" gutterBottom variant="body2">{challenge.chaStatem}</Typography>
-          
-          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Beschreibung der Challenge:" : "Challenge's Description:"}</Typography>
+          <Divider />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Stellungnahme:" : "Challenge's Statement:"}</b></Typography>
+          <Container maxWidth="50px">
+            <Typography  maxWidth="50px"  align="left" gutterBottom variant="body2">{challenge.chaStatem}</Typography>
+          </Container>
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Beschreibung der Challenge:" : "Challenge's Description:"}</b></Typography>
           <Typography align="left" gutterBottom variant="body2">{challenge.chaDes}</Typography>
-         
-          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Stakeholder der Challenge:" : "Challenge's Stakeholders:"}</Typography>
+
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Stakeholder der Challenge:" : "Challenge's Stakeholders:"}</b></Typography>
           <Typography align="left" gutterBottom variant="body2">{challenge.chaStak}</Typography>
-          
-          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Hintergrund der Challenge:" : "Challenge's Background:"}</Typography>
+
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Hintergrund der Challenge:" : "Challenge's Background:"}</b></Typography>
           <Typography align="left" gutterBottom variant="body2">{challenge.chaBac}</Typography>
-          
-          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Unterstützung:" : "Challenge's Support:"}</Typography>
+
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Unterstützung:" : "Challenge's Support:"}</b></Typography>
           <Typography align="left" gutterBottom variant="body2">{challenge.chaSup}</Typography>
-          
-          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Unterstützung der Führung:" : "Leadership Support:"}</Typography>
+
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Unterstützung der Führung:" : "Leadership Support:"}</b></Typography>
           <Typography align="left" gutterBottom variant="body2">{challenge.leadSup}</Typography>
-          
-          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Erfolgskriterien:" : "Criteria of Success:"}</Typography>
+
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Erfolgskriterien:" : "Criteria of Success:"}</b></Typography>
           <Typography align="left" gutterBottom variant="body2">{challenge.critOfSuc}</Typography>
-          
-          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Nächste Schritte:" : "Next Steps:"}</Typography>
+
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Nächste Schritte:" : "Next Steps:"}</b></Typography>
           <Typography align="left" gutterBottom variant="body2">{challenge.nextStep}</Typography>
+
         </div>
         <div className={classes.root2}>
           <Typography align="left" gutterBottom variant="h5">{!props.language ? "Bewertung" : "Review"}</Typography>
-          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Name der Challenge:" : "Challenge's Title:"}</Typography>
+          <Divider />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Name der Challenge:" : "Challenge's Title:"}</b></Typography>
           <Typography align="left" gutterBottom variant="body2">{challenge.chatitle}</Typography>
 
-          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Thema:" : "Theme:"}</Typography>
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Thema:" : "Theme:"}</b></Typography>
           <Typography align="left" gutterBottom variant="body2">{challenge.theme}</Typography>
 
-          <Typography align="left" gutterBottom variant="body2">{!props.language ? "Technik:" : "Technology:"}</Typography>
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Technik:" : "Technology:"}</b></Typography>
           <Typography align="left" gutterBottom variant="body2">{challenge.technology}</Typography>
+
         </div>
       </form >
     </div>
