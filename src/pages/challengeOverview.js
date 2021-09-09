@@ -343,11 +343,8 @@ export default function ChallengeOverview({ props }) {
                         key={challenge.id}
                         selected={isItemSelected}
                       >
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            checked={isItemSelected}
-                            inputProps={{ 'aria-labelledby': labelId }}
-                          />
+                        <TableCell>
+                          <img height="40" src={"https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"} />
                         </TableCell>
                         <TableCell component="th" id={labelId} scope="challenge" padding="none">
                           {challenge.phase}

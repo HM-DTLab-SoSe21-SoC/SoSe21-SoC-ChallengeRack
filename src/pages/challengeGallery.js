@@ -294,7 +294,7 @@ export default function ChallengeGallery({ props }) {
                         <CardActionArea onClick={(event) => { setChall(challenge.id); handleClick(event); }}>
                           <CardMedia
                             className={classes.media}
-                            image="https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/dtlab_1/bilder_138/_dtl_bilder_neu/corona-5401250_1280_Standard_Standard.jpg"
+                            image="https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"
                             title="Contemplative Reptile"
                           />
                           <CardContent>

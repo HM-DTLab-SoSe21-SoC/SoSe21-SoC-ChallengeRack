@@ -87,7 +87,9 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
         <Button onClick={() => { deleteChallenge(challenge); handleHide(); }} variant="contained" color="primary">
           {!props.language ? "Challenge löschen" : "Delete challenge"}
         </Button>&nbsp;&nbsp;&nbsp;
-
+      </div>
+      <div align="left">
+        <img height="100" src={"https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"} />
       </div>
       <div className={classes.root2}>
         <h1>

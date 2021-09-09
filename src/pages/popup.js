@@ -9,26 +9,27 @@ import Typography from '@material-ui/core/Typography';
 import { Icon } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import Container from '@material-ui/core/Container';
+import InputBase from '@material-ui/core/InputBase';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
       autoWidth: true,
-      maxWidth:'50px'
+      maxWidth: '50px'
     },
   },
   root2: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
       autoWidth: true,
-      maxWidth:"50px"
+      maxWidth: "50px"
     },
   },
   textfield: {
     paddingBottom: "10px",
     autoWidth: true,
-    width: "500px",
+    width: "900px",
   },
   paper: {
     padding: "30px",
@@ -100,7 +101,7 @@ const Popup = ({ props, handleClose, challenge }) => {
           </IconButton>
         </div>
         <div align="left">
-          <img height="60" src={"https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/dtlab_1/bilder_138/_dtl_bilder_neu/corona-5401250_1280_Standard_Standard.jpg"} />
+          <img height="60" src={"https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"} />
         </div>
         <div className={classes.root}>
           <Typography align="left" gutterBottom variant="h5">{!props.language ? "Organisation" : "Organization"}</Typography>
@@ -119,43 +120,106 @@ const Popup = ({ props, handleClose, challenge }) => {
           <Typography align="left" gutterBottom variant="h5">{!props.language ? "Challenge" : "Challenge"}</Typography>
           <Divider />
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Stellungnahme:" : "Challenge's Statement:"}</b></Typography>
-          <Container maxWidth="50px">
-            <Typography  maxWidth="50px"  align="left" gutterBottom variant="body2">{challenge.chaStatem}</Typography>
-          </Container>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.chaStatem}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Beschreibung der Challenge:" : "Challenge's Description:"}</b></Typography>
-          <Typography align="left" gutterBottom variant="body2">{challenge.chaDes}</Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.chaDes}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
 
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Stakeholder der Challenge:" : "Challenge's Stakeholders:"}</b></Typography>
-          <Typography align="left" gutterBottom variant="body2">{challenge.chaStak}</Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.chaStak}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
 
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Hintergrund der Challenge:" : "Challenge's Background:"}</b></Typography>
-          <Typography align="left" gutterBottom variant="body2">{challenge.chaBac}</Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.chaBac}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
 
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Unterstützung:" : "Challenge's Support:"}</b></Typography>
-          <Typography align="left" gutterBottom variant="body2">{challenge.chaSup}</Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.chaSup}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
 
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Unterstützung der Führung:" : "Leadership Support:"}</b></Typography>
-          <Typography align="left" gutterBottom variant="body2">{challenge.leadSup}</Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.leadSup}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
 
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Erfolgskriterien:" : "Criteria of Success:"}</b></Typography>
-          <Typography align="left" gutterBottom variant="body2">{challenge.critOfSuc}</Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.critOfSuc}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
 
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Nächste Schritte:" : "Next Steps:"}</b></Typography>
-          <Typography align="left" gutterBottom variant="body2">{challenge.nextStep}</Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.nextStep}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
 
         </div>
         <div className={classes.root2}>
           <Typography align="left" gutterBottom variant="h5">{!props.language ? "Bewertung" : "Review"}</Typography>
           <Divider />
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Name der Challenge:" : "Challenge's Title:"}</b></Typography>
-          <Typography align="left" gutterBottom variant="body2">{challenge.chatitle}</Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.chatitle}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
 
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Thema:" : "Theme:"}</b></Typography>
-          <Typography align="left" gutterBottom variant="body2">{challenge.theme}</Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.theme}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
 
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Technik:" : "Technology:"}</b></Typography>
-          <Typography align="left" gutterBottom variant="body2">{challenge.technology}</Typography>
-
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.technology}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
         </div>
       </form >
     </div>
