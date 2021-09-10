@@ -1,14 +1,10 @@
 import React, { useState } from 'react';
-import { API } from 'aws-amplify';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { updateChallenge as updateChallengeMutation } from '../graphql/mutations';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import { Icon } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
-import Container from '@material-ui/core/Container';
 import InputBase from '@material-ui/core/InputBase';
 
 const useStyles = makeStyles((theme) => ({
@@ -135,7 +131,6 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Stakeholder der Challenge:" : "Challenge's Stakeholders:"}</b></Typography>
           <InputBase
             className={classes.textfield}
@@ -144,7 +139,6 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Hintergrund der Challenge:" : "Challenge's Background:"}</b></Typography>
           <InputBase
             className={classes.textfield}
@@ -153,8 +147,7 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Unterstützung:" : "Challenge's Support:"}</b></Typography>
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Unterstützung für Challenge:" : "Challenge's Support:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"
@@ -162,7 +155,6 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Unterstützung der Führung:" : "Leadership Support:"}</b></Typography>
           <InputBase
             className={classes.textfield}
@@ -171,7 +163,6 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Erfolgskriterien:" : "Criteria of Success:"}</b></Typography>
           <InputBase
             className={classes.textfield}
@@ -180,7 +171,6 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Nächste Schritte:" : "Next Steps:"}</b></Typography>
           <InputBase
             className={classes.textfield}
@@ -192,7 +182,7 @@ const Popup = ({ props, handleClose, challenge }) => {
 
         </div>
         <div className={classes.root2}>
-          <Typography align="left" gutterBottom variant="h5">{!props.language ? "Bewertung" : "Review"}</Typography>
+          <Typography align="left" gutterBottom variant="h5">{!props.language ? "Rezension" : "Review"}</Typography>
           <Divider />
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Name der Challenge:" : "Challenge's Title:"}</b></Typography>
           <InputBase
@@ -202,7 +192,6 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Thema:" : "Theme:"}</b></Typography>
           <InputBase
             className={classes.textfield}
@@ -211,7 +200,6 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Technik:" : "Technology:"}</b></Typography>
           <InputBase
             className={classes.textfield}
