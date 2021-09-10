@@ -34,55 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Popup = ({ props, handleClose, challenge }) => {
-  const initialFormState = {
-    id: challenge.id,
-    phase: challenge.phase,
-    status: challenge.status,
-    coName: challenge.coName,
-    coTitle: challenge.coTitle,
-    coEmail: challenge.coEmail,
-    coPhone: challenge.coPhone,
-    coOptIn: challenge.coOptIn,
-    orgaTitle: challenge.orgaTitle,
-    orgaLocat: challenge.orgaLocat,
-    orgaMission: challenge.orgaMission,
-    orgaWebsite: challenge.orgaWebsite,
-    createdAt: challenge.createdAt,
-    chaStatem: challenge.chaStatem,
-    chaDes: challenge.chaDes,
-    chaStak: challenge.chaStak,
-    chaBac: challenge.chaBac,
-    chaSup: challenge.chaSup,
-    leadSup: challenge.leadSup,
-    critOfSuc: challenge.critOfSuc,
-    nextStep: challenge.nextStep,
-    chatitle: challenge.chatitle,
-    theme: challenge.theme,
-    technology: challenge.technology,
-    repu: challenge.repu,
-    feasibil: challenge.feasibil,
-    impact: challenge.impact,
-    scalabil: challenge.scalabil,
-    aligment: challenge.aligment,
-    prototype: challenge.prototype,
-    score: challenge.prototype,
-    type: challenge.type,
-    comment: challenge.comment,
-    faculty: challenge.faculty,
-    prof: challenge.prof,
-    matchEmail: challenge.matchEmail,
-    numberOfT: challenge.numberOfT,
-    numberOfS: challenge.numberOfS,
-    startDate: challenge.startDate,
-    endDate: challenge.endDate,
-    cohort: challenge.cohort,
-    milestone: challenge.milestone,
-    publURL: challenge.publURL,
-    gitHubURL: challenge.gitHubURL,
-  }
   const classes = useStyles();
-
-  const [formData, setFormData] = useState(initialFormState);
   return (
     <div className={classes.paper}>
       <form noValidate autoComplete="off">
@@ -103,14 +55,29 @@ const Popup = ({ props, handleClose, challenge }) => {
           <Typography align="left" gutterBottom variant="h5">{!props.language ? "Organisation" : "Organization"}</Typography>
           <Divider />
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Name der Organisation:" : "Organazation's Title:"}</b></Typography>
-          <Typography align="left" gutterBottom variant="body2">{challenge.orgaTitle}</Typography>
-
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.orgaTitle}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Standort der Organisation:" : "Organazation's Location:"}</b></Typography>
-          <Typography align="left" gutterBottom variant="body2">{challenge.orgaLocat}</Typography>
-
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.orgaLocat}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
           <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Erstellungsdatum:" : "Submission Date:"}</b></Typography>
-          <Typography align="left" gutterBottom variant="body2">{challenge.createdAt}</Typography>
-
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.orgaDate}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
         </div>
         <div className={classes.root2}>
           <Typography align="left" gutterBottom variant="h5">{!props.language ? "Challenge" : "Challenge"}</Typography>

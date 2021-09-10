@@ -370,11 +370,12 @@ export default function ChallengeOverview({ props }) {
           </TableContainer>
         </Box>}
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
-
+      {!show && <Box>
+        <FormControlLabel
+          control={<Switch checked={dense} onChange={handleChangeDense} />}
+          label="Dense padding"
+        />
+      </Box>}
     </div>
   );
 }

@@ -23,9 +23,8 @@ const useStyles = makeStyles((theme) => ({
   },
   textfield: {
     paddingBottom: "10px",
-    width: "900px",
-    backgroundColor: '#fcfcfb',
-    fullWidth: 'true',
+    backgroundColor: '#EEEEEE',
+    width: '98%',
   }
 }));
 
@@ -344,13 +343,17 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
           multiline
         />
         <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Punktestand:" : "Score:"}</b></Typography>
-        <InputBase
-          className={classes.textfield}
-          onChange={e => setFormData({ ...formData, 'score': e.target.value })}
-          value={formData.score}
-          multiline
-        />
       </div>
+      <TextField
+        id="outlined-number"
+        type="number"
+        onChange={e => setFormData({ ...formData, 'score': e.target.value })}
+        value={formData.score}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        variant="outlined"
+      />
       <div className={classes.root}>
         <Typography align="left" gutterBottom variant="h5">{!props.language ? "Typ" : "Type"}</Typography>
         <Divider />
@@ -393,38 +396,54 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
           value={formData.matchEmail}
           multiline
         />
-        <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Anzahl der Teams:" : "Number of Teams:"}</b></Typography>
-        <InputBase
-          className={classes.textfield}
-          onChange={e => setFormData({ ...formData, 'numberOfT': e.target.value })}
-          value={formData.numberOfT}
-          multiline
-        />
-        <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Anzahl der Studenten:" : "Number of Students:"}</b></Typography>
-        <InputBase
-          className={classes.textfield}
-          onChange={e => setFormData({ ...formData, 'numberOfS': e.target.value })}
-          value={formData.numberOfS}
-          multiline
-        />
       </div>
+      <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Anzahl der Teams:" : "Number of Teams:"}</b></Typography>
+      <TextField
+        id="outlined-number"
+        type="number"
+        onChange={e => setFormData({ ...formData, 'numberOfT': e.target.value })}
+        value={formData.numberOfT}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        variant="outlined"
+      />
+      <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Anzahl der Studenten:" : "Number of Students:"}</b></Typography>
+      <TextField
+        id="outlined-number"
+        type="number"
+        onChange={e => setFormData({ ...formData, 'numberOfS': e.target.value })}
+        value={formData.numberOfS}
+        InputLabelProps={{
+          shrink: true,
+        }}
+        variant="outlined"
+      />
+      <Typography align="left" gutterBottom variant="h5">Plan</Typography>
+      <Divider />
+      <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Start-Datum:" : "Start Date:"}</b></Typography>
+      <TextField
+        id="date"
+        type="date"
+        onChange={e => setFormData({ ...formData, 'startDate': e.target.value })}
+        value={formData.startDate}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
+
+
+      <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "End-Datum:" : "End Date:"}</b></Typography>
+      <TextField
+        id="date"
+        type="date"
+        onChange={e => setFormData({ ...formData, 'endDate': e.target.value })}
+        value={formData.endDate}
+        InputLabelProps={{
+          shrink: true,
+        }}
+      />
       <div className={classes.root}>
-        <Typography align="left" gutterBottom variant="h5">Plan</Typography>
-        <Divider />
-        <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Start-Datum:" : "Start Date:"}</b></Typography>
-        <InputBase
-          className={classes.textfield}
-          onChange={e => setFormData({ ...formData, 'startDate': e.target.value })}
-          value={formData.startDate}
-          multiline
-        />
-        <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "End-Datum:" : "End Date:"}</b></Typography>
-        <InputBase
-          className={classes.textfield}
-          onChange={e => setFormData({ ...formData, 'endDate': e.target.value })}
-          value={formData.endDate}
-          multiline
-        />
         <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Semester:" : "Cohort:"}</b></Typography>
         <InputBase
           className={classes.textfield}

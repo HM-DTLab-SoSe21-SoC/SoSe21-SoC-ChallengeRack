@@ -300,7 +300,7 @@ export default function ChallengeGallery({ props }) {
                           <CardContent>
                             <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaTitle}</Typography>
                             <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaLocat}</Typography>
-                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.createdAt}</Typography>
+                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaDate}</Typography>
                             <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.chatitle}</Typography>
                             <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.theme}</Typography>
                             <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.technology}</Typography>

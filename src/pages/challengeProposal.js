@@ -47,7 +47,7 @@ const initialFormState = {
   orgaLocat: "",
   orgaMission: "",
   orgaWebsite: "",
-  orgaDate: new Date(),
+  orgaDate: new Date().getDate() + '.' + (new Date().getMonth() + 1) + '.' + new Date().getFullYear(),
   coOptIn: "no",
   chaStatem: "",
   chaDes: "",
@@ -92,9 +92,7 @@ export default function ChallengeProposal(props) {
   const [hide, setHide] = useState(false);
   useEffect(() => {
     fetchChallenges();
-    var today = new Date(),
-    date= today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
-    setFormData({ ...formData, 'orgaDate': date })
+
   }, []);
 
   async function fetchChallenges() {
