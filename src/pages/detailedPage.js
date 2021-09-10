@@ -70,7 +70,7 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
     scalabil: challenge.scalabil,
     aligment: challenge.aligment,
     prototype: challenge.prototype,
-    score: challenge.prototype,
+    score: challenge.score,
     type: challenge.type,
     comment: challenge.comment,
     faculty: challenge.faculty,
@@ -236,7 +236,7 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
       <div className={classes.root}>
         <Typography className={classes.title} align="left" gutterBottom variant="h5">Challenge</Typography>
         <Divider />
-        <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Beschreibung der Challenge" : "Statement der Challenge"}</b></Typography>
+        <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Statement der Challenge" : "Challenge Statement"}</b></Typography>
         <InputBase
           className={classes.textfield}
           onChange={e => setFormData({ ...formData, 'chaStatem': e.target.value })}
