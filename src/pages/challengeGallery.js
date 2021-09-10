@@ -118,6 +118,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
+    paddingTop: "30px"
   },
   table: {
     minWidth: 750,
@@ -183,8 +184,8 @@ const useStyles = makeStyles((theme) => ({
       width: "-webkit-fill-available",
       margin: "10px 15px 0",
     },
-    paddingTop: "25px",
-    paddingLeft: "25px",
+    paddingTop: "30px",
+    paddingLeft: "30px",
     display: "inline-block",
     float: "left",
 
@@ -199,20 +200,21 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 1000,
   },
 }));
-
-const ChallengeGallery = ({ }) => {
+export default function ChallengeGallery({ props }) {
   const classes = useStyles();
+  
+  const [anchorEl, setAnchorEl] = React.useState(null);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
-  const [dense, setDense] = useState(false);
   const [search, setSearch] = useState([]);
   const [challSearch, setchallSearch] = useState(null);
-
   const [challenges, setChallenges] = useState([]);
   const [apiError, setApiError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [chall, setChall] = useState();
 
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
   useEffect((event) => {
     fetchChallenges(event);
   }, []);
@@ -237,8 +239,6 @@ const ChallengeGallery = ({ }) => {
     setOrderBy(property);
   };
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -246,14 +246,6 @@ const ChallengeGallery = ({ }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
-
-  const open = Boolean(anchorEl);
-  const id = open ? 'simple-popover' : undefined;
-
-  const handleChangeDense = (event) => {
-    setDense(event.target.checked);
-  };
-
   const handleSearch = (event) => {
     setSearch(event.target.value);
     if (event.target.value == "") {
@@ -265,11 +257,12 @@ const ChallengeGallery = ({ }) => {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
+      <Typography align="center" gutterBottom variant="h4">{!props.language ? "Übersicht der Challenges" : "Challenge Overview"}</Typography>
         <div className={classes.searchWrapper}>
           <TextField
             value={search}
             onChange={(event) => { handleSearch(event); }}
-            placeholder="Search..."
+            placeholder={!props.language ? "Suche..." : "Search..."}
           />
           <Icon color="white" aria-label="edit" justIcon round>
             <Search />
@@ -299,15 +292,17 @@ const ChallengeGallery = ({ }) => {
                     >
                       <Card className={classes.card}>
                         <CardActionArea onClick={(event) => { setChall(challenge.id); handleClick(event); }}>
+                        <CardContent>
+                            <Typography align="left" gutterBottom variant="h5"><b>{challenge.orgaTitle}</b></Typography>
+                          </CardContent>
                           <CardMedia
                             className={classes.media}
-                            image="https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/dtlab_1/bilder_138/_dtl_bilder_neu/corona-5401250_1280_Standard_Standard.jpg"
+                            image="https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"
                             title="Contemplative Reptile"
                           />
                           <CardContent>
-                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaTitle}</Typography>
                             <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaLocat}</Typography>
-                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.createdAt}</Typography>
+                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaDate}</Typography>
                             <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.chatitle}</Typography>
                             <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.theme}</Typography>
                             <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.technology}</Typography>
@@ -330,6 +325,7 @@ const ChallengeGallery = ({ }) => {
           </Box>
         </div>
         <Popover
+          props={props}
           className={classes.popup}
           id={id}
           open={open}
@@ -348,6 +344,7 @@ const ChallengeGallery = ({ }) => {
             {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
               <div align="left">
                 <Popup
+                  props={props}
                   handleClose={handleClose}
                   challenge={filteredChallenge}
                   fetchChallenges={fetchChallenges}
@@ -356,13 +353,7 @@ const ChallengeGallery = ({ }) => {
             ))}
           </div>
         </Popover>
-
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
     </div>
   );
 }
-export default ChallengeGallery;

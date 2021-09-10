@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
@@ -17,28 +17,10 @@ import bgImage from "assets/img/sidebar-2.jpg";
 import Amplify from 'aws-amplify';
 import awsconfig from '../aws-exports';
 import { AmplifyAuthenticator, AmplifySignIn } from '@aws-amplify/ui-react';
+
 Amplify.configure(awsconfig);
 
 let ps;
-
-const switchRoutes = (
-  <Switch>
-    {routes.map((prop, key) => {
-      if (prop.layout === "/admin") {
-        return (
-          <Route
-            path={prop.layout + prop.path}
-            component={prop.component}
-            key={key}
-          />
-        );
-      }
-      return null;
-    })}
-    <Redirect from="/" to="/admin/challengeView" />
-  </Switch>
-);
-
 const useStyles = makeStyles(styles);
 
 export default function Admin({ ...rest }) {
@@ -47,8 +29,8 @@ export default function Admin({ ...rest }) {
   // ref to help us initialize PerfectScrollbar on windows devices
   const mainPanel = React.createRef();
   // states and functions
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [language, setlanguage] = useState(false);
   const handleDrawerToggle = (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -61,7 +43,7 @@ export default function Admin({ ...rest }) {
     }
   };
   // initialize and destroy the PerfectScrollbar plugin
-  React.useEffect(() => {
+  useEffect(() => {
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
@@ -92,6 +74,7 @@ export default function Admin({ ...rest }) {
       </div>
       <div className={classes.navbar}>
         <Sidebar
+          language={language}
           routes={routes}
           image={bgImage}
           handleDrawerToggle={handleDrawerToggle}
@@ -100,16 +83,18 @@ export default function Admin({ ...rest }) {
           {...rest}
         />
         <Navbar
+          language={language}
           routes={routes}
           handleDrawerToggle={handleDrawerToggle}
+          setlanguage={setlanguage}
           {...rest}
         />
+
       </div>
       <div className={classes.mainPanel} ref={mainPanel}>
         <div className={classes.content}>
           <AmplifyAuthenticator >
             <AmplifySignIn
-            
               slot="sign-in"
               handleAuthStateChange={handleAuthStateChange}
               hideSignUp
@@ -118,18 +103,36 @@ export default function Admin({ ...rest }) {
                   type: "username",
                   label: "Username",
                   value: "guest",
-                  inputProps: { required: true},
+                  inputProps: { required: true },
                 },
                 {
                   type: "password",
                   label: "Password",
                   value: "1234567890",
-                  inputProps: { required: true},
+                  inputProps: { required: true },
                 },
               ]}
             >
             </AmplifySignIn>
-            <div className={classes.container}>{switchRoutes}</div>
+            <div className={classes.container}>
+              <Switch>
+                {routes.map((prop, key) => {
+                  if (prop.layout === "/admin") {
+                    return (
+                      <Route
+                        path={prop.layout + prop.path}
+                        key={key}
+                        render={(props) => (
+                          <prop.component {...props} language={language} />
+                        )}
+                      />
+                    );
+                  }
+                  return null;
+                })}
+                <Redirect from="/" to="/admin/challengeView" />
+              </Switch>
+            </div>
           </AmplifyAuthenticator>
         </div>
         <Footer />

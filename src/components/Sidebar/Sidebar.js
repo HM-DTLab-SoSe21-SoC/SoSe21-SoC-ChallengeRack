@@ -80,7 +80,6 @@ export default function Sidebar(props) {
             </IconButton>
           </div>
           <div className={classes.sidebarWrapper}>
-
             <List className={classes.list}>
               <ListItem
                 button
@@ -123,12 +122,11 @@ export default function Sidebar(props) {
                       ) : (
                         <prop.icon
                           className={classNames(classes.itemIcon, whiteFontClasses, {
-
                           })}
                         />
                       )}
                       <ListItemText
-                        primary={prop.name}
+                        primary={!props.language ? prop.nameDE : prop.name}
                         className={classNames(classes.itemText, whiteFontClasses, {
                         })}
                         disableTypography={true}

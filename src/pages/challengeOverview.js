@@ -19,13 +19,11 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import DeleteIcon from '@material-ui/icons/Delete';
-import FilterListIcon from '@material-ui/icons/FilterList';
 import Search from "@material-ui/icons/Search";
 import TextField from '@material-ui/core/TextField';
 
@@ -58,7 +56,7 @@ function stableSort(array, comparator) {
 const headCells = [
   { id: 'phase', numeric: false, disablePadding: true, label: 'Phase' },
   { id: 'status', numeric: false, disablePadding: false, label: 'Status' },
-  { id: 'orgaTitle', numeric: false, disablePadding: false, label: 'Orga. Title.' },
+  { id: 'orgaTitle', numeric: false, disablePadding: false, label: 'Orga. Name.' },
   { id: 'orgaLocat', numeric: false, disablePadding: false, label: 'Orga. Locat.' },
   { id: 'chatitle', numeric: false, disablePadding: false, label: 'Chall. Title' },
   { id: 'type', numeric: false, disablePadding: false, label: 'Type' },
@@ -76,8 +74,7 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-
+        <TableCell>
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
@@ -121,6 +118,7 @@ const useStyles = makeStyles((theme) => ({
   paper: {
     width: '100%',
     marginBottom: theme.spacing(2),
+    padding: "30px",
   },
   table: {
     minWidth: 750,
@@ -192,8 +190,7 @@ const useStyles = makeStyles((theme) => ({
 
   },
 }));
-
-const ChallengeOverview = ({ }) => {
+export default function ChallengeOverview({ props }) {
   const classes = useStyles();
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
@@ -206,7 +203,6 @@ const ChallengeOverview = ({ }) => {
   const [challenges, setChallenges] = useState([]);
   const [apiError, setApiError] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [chall, setChall] = useState();
   const [show, setShow] = useState(false);
 
   useEffect((event) => {
@@ -246,16 +242,13 @@ const ChallengeOverview = ({ }) => {
       setSelected(challenge.id);
     }
     setSelectedChall(challenge);
-
   };
-
   const handleChangeDense = (event) => {
     setDense(event.target.checked);
   };
   const handleHide = (event) => {
     setShow(prev => !prev);
   };
-
   const isSelected = (id) => selected.indexOf(id) !== -1;
   const handleSearch = (event) => {
     setSearch(event.target.value);
@@ -265,42 +258,40 @@ const ChallengeOverview = ({ }) => {
       setchallSearch(event.target.value.toLowerCase());
     }
   };
-
-
-
-
   return (
     <div className={classes.root}>
-
       <Paper className={classes.paper}>
         {show && <Box>
-          <div align="left" className={classes.paper}>
-            {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
+          <div align="left" >
+            {challenges.filter(challenge => challenge.id == selected).map(filteredChallenge => (
               <div align="left">
                 <DetailedPage
+                  props={props}
                   handleHide={handleHide}
                   challenge={filteredChallenge}
                   fetchChallenges={fetchChallenges}
                   deleteChallenge={deleteChallengeFunction}
+                  setSelected={setSelected}
                 />
               </div>
             ))}
           </div>
         </Box>}
         {!show && <Box>
+          <Typography align="center" gutterBottom variant="h4">{!props.language ? "Übersicht der Challenges" : "Challenge Overview"}</Typography>
           <Toolbar
             className={clsx(classes.root2, {
               [classes.highlight]: selected.length > 0,
             })}
           >
-              <TextField
-                value={search}
-                onChange={(event) => { handleSearch(event); }}
-                placeholder="Search..."
-              />
-              <Icon color="white" aria-label="edit" justIcon round>
-                <Search />
-              </Icon>
+            <TextField
+              value={search}
+              onChange={(event) => { handleSearch(event); }}
+              placeholder={!props.language ? "Suche..." : "Search..."}
+            />
+            <Icon color="white" aria-label="edit" justIcon round>
+              <Search />
+            </Icon>
             {selected.length > 0 ? (
               <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
                 {challenges.filter(challenge => challenge.id == selected).map(filteredChallenge => (
@@ -310,10 +301,8 @@ const ChallengeOverview = ({ }) => {
                     selected
                   </div>
                 ))}
-
               </Typography>
             ) : (null)}
-
             {selected.length > 0 ? (
               <Tooltip title="Delete">
                 <IconButton onClick={() => { deleteChallengeFunction(selectedChall) }} aria-label="delete">
@@ -321,10 +310,7 @@ const ChallengeOverview = ({ }) => {
                 </IconButton>
               </Tooltip>
             ) : (null)}
-            
           </Toolbar>
-
-
           <TableContainer>
             <Table
               className={classes.table}
@@ -356,11 +342,8 @@ const ChallengeOverview = ({ }) => {
                         key={challenge.id}
                         selected={isItemSelected}
                       >
-                        <TableCell padding="checkbox">
-                          <Checkbox
-                            checked={isItemSelected}
-                            inputProps={{ 'aria-labelledby': labelId }}
-                          />
+                        <TableCell>
+                          <img height="40" src={"https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"} />
                         </TableCell>
                         <TableCell component="th" id={labelId} scope="challenge" padding="none">
                           {challenge.phase}
@@ -374,7 +357,7 @@ const ChallengeOverview = ({ }) => {
                         <TableCell align="left">{challenge.theme}</TableCell>
                         <TableCell align="left">{challenge.technology}</TableCell>
                         <TableCell align="left">
-                          <Button onClick={() => { setChall(challenge.id); handleHide(); }} variant="contained" color="primary">
+                          <Button onClick={() => { handleHide(); }} variant="contained" color="primary">
                             Details
                           </Button>
                         </TableCell>
@@ -386,12 +369,12 @@ const ChallengeOverview = ({ }) => {
           </TableContainer>
         </Box>}
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
-
+      {!show && <Box>
+        <FormControlLabel
+          control={<Switch checked={dense} onChange={handleChangeDense} />}
+          label="Dense padding"
+        />
+      </Box>}
     </div>
   );
 }
-export default ChallengeOverview;

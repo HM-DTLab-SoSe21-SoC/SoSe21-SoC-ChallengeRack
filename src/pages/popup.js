@@ -1,114 +1,44 @@
 import React, { useState } from 'react';
-import { API } from 'aws-amplify';
 import { makeStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
-import { updateChallenge as updateChallengeMutation } from '../graphql/mutations';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import IconButton from '@material-ui/core/IconButton';
-import {
-  Box,
-  Container,
-  Grid,
-  Button,
-  Icon,
-} from '@material-ui/core';
+import Typography from '@material-ui/core/Typography';
+import { Icon } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider';
+import InputBase from '@material-ui/core/InputBase';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
       autoWidth: true,
+      maxWidth: '50px'
     },
   },
   root2: {
     '& .MuiTextField-root': {
       margin: theme.spacing(1),
       autoWidth: true,
+      maxWidth: "50px"
     },
   },
-  details: {
-    padding: "15px",
+  textfield: {
+    paddingBottom: "10px",
+    autoWidth: true,
+    width: "900px",
   },
-  background: {
-    position: "absolute",
-    zIndex: "1",
-    height: "100%",
-    width: "100%",
-    display: "block",
-    top: "0",
-    left: "0",
-    backgroundSize: "cover",
-    backgroundPosition: "center center",
-    "&:after": {
-      position: "absolute",
-      zIndex: "3",
-      width: "100%",
-      height: "100%",
-      content: '""',
-      display: "block",
-      opacity: ".8",
-    },
-  },
+  paper: {
+    padding: "30px",
+    width: "1000px",
+  }
 }));
 
-
-const Popup = ({ handleClose, challenge, fetchChallenges, }) => {
-  const initialFormState = {
-    id: challenge.id,
-    phase: challenge.phase,
-    status: challenge.status,
-    coName: challenge.coName,
-    coTitle: challenge.coTitle,
-    coEmail: challenge.coEmail,
-    coPhone: challenge.coPhone,
-    coOptIn: challenge.coOptIn,
-    orgaTitle: challenge.orgaTitle,
-    orgaLocat: challenge.orgaLocat,
-    orgaMission: challenge.orgaMission,
-    orgaWebsite: challenge.orgaWebsite,
-    createdAt: challenge.createdAt,
-    chaStatem: challenge.chaStatem,
-    chaDes: challenge.chaDes,
-    chaStak: challenge.chaStak,
-    chaBac: challenge.chaBac,
-    chaSup: challenge.chaSup,
-    leadSup: challenge.leadSup,
-    critOfSuc: challenge.critOfSuc,
-    nextStep: challenge.nextStep,
-    chatitle: challenge.chatitle,
-    theme: challenge.theme,
-    technology: challenge.technology,
-    repu: challenge.repu,
-    feasibil: challenge.feasibil,
-    impact: challenge.impact,
-    scalabil: challenge.scalabil,
-    aligment: challenge.aligment,
-    prototype: challenge.prototype,
-    score: challenge.prototype,
-    type: challenge.type,
-    comment: challenge.comment,
-    faculty: challenge.faculty,
-    prof: challenge.prof,
-    matchEmail: challenge.matchEmail,
-    numberOfT: challenge.numberOfT,
-    numberOfS: challenge.numberOfS,
-    startDate: challenge.startDate,
-    endDate: challenge.endDate,
-    cohort: challenge.cohort,
-    milestone: challenge.milestone,
-    publURL: challenge.publURL,
-    gitHubURL: challenge.gitHubURL,
-  }
+const Popup = ({ props, handleClose, challenge }) => {
   const classes = useStyles();
-
-  const [formData, setFormData] = useState(initialFormState);
-  const updateChallenge = async (event) => {
-    await API.graphql({ query: updateChallengeMutation, variables: { input: formData } });
-  }
   return (
-    <form className={classes.details} noValidate autoComplete="off">
-      <div>
-        <Grid item md={5}>
+    <div className={classes.paper}>
+      <form noValidate autoComplete="off">
+        <div >
           <IconButton
             button
             onClick={handleClose}>
@@ -117,126 +47,138 @@ const Popup = ({ handleClose, challenge, fetchChallenges, }) => {
             </Icon>
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           </IconButton>
-          <div/>
-          <img align="left" height="60" src={"https://w3-mediapool.hm.edu/mediapool/media/baukasten/img_2/dtlab_1/bilder_138/_dtl_bilder_neu/corona-5401250_1280_Standard_Standard.jpg"} />
-          <p>&nbsp;</p>
-          <div className={classes.root2}>
-            <h3>Organization</h3>
-            <TextField align="left" id="standard-required" label="Organazation's Title"
-              onChange={e => setFormData({ ...formData, 'orgaTitle': e.target.value })}
-              value={formData.orgaTitle}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField align="left" id="standard-required" label="Organazation's Location"
-              onChange={e => setFormData({ ...formData, 'orgaLocat': e.target.value })}
-              value={formData.orgaLocat}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField align="left" id="standard-required" label="Submission Date"
-              onChange={e => setFormData({ ...formData, 'createdAt': e.target.value })}
-              value={formData.createdAt}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          </div>
-          <div className={classes.root}>
-            <h3>Challenge</h3>
-            <TextField align="left" id="standard-required" label="Challenge's Statement"
-              onChange={e => setFormData({ ...formData, 'chaStatem': e.target.value })}
-              value={formData.chaStatem}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField align="left" id="standard-required" label="Challenge's Description"
-              onChange={e => setFormData({ ...formData, 'chaDes': e.target.value })}
-              value={formData.chaDes}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField align="left" id="standard-required" label="Challenge's Stakeholders"
-              onChange={e => setFormData({ ...formData, 'chaStak': e.target.value })}
-              value={formData.chaStak}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField align="left" id="standard-required" label="Challenge's Background"
-              onChange={e => setFormData({ ...formData, 'chaBac': e.target.value })}
-              value={formData.chaBac}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField align="left" id="standard-required" label="Challenge's Support"
-              onChange={e => setFormData({ ...formData, 'chaSup': e.target.value })}
-              value={formData.chaSup}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField align="left" id="standard-required" label="Leadership Support"
-              onChange={e => setFormData({ ...formData, 'leadSup': e.target.value })}
-              value={formData.leadSup}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField align="left" id="standard-required" label="Criteria of Success"
-              onChange={e => setFormData({ ...formData, 'critOfSuc': e.target.value })}
-              value={formData.critOfSuc}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField align="left" id="standard-required" label="Next Steps"
-              onChange={e => setFormData({ ...formData, 'nextStep': e.target.value })}
-              value={formData.nextStep}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          </div>
-          <div className={classes.root}>
-            <h3>Review</h3>
-            <TextField align="left" id="standard-required" label="Challenge's Title"
-              onChange={e => setFormData({ ...formData, 'chatitle': e.target.value })}
-              value={formData.chatitle}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField align="left" id="standard-required" label="Theme"
-              onChange={e => setFormData({ ...formData, 'theme': e.target.value })}
-              value={formData.theme}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-            <TextField align="left" id="standard-required" label="Technology"
-              onChange={e => setFormData({ ...formData, 'chaDes': e.target.value })}
-              value={formData.technology}
-              InputProps={{
-                readOnly: true,
-              }}
-            />
-          </div>
-        </Grid>
-      </div>
-      <div
-      />
+        </div>
+        <div align="left">
+          <img height="60" src={"https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"} />
+        </div>
+        <div className={classes.root}>
+          <Typography align="left" gutterBottom variant="h5">{!props.language ? "Organisation" : "Organization"}</Typography>
+          <Divider />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Name der Organisation:" : "Organazation's Title:"}</b></Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.orgaTitle}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Standort der Organisation:" : "Organazation's Location:"}</b></Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.orgaLocat}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Erstellungsdatum:" : "Submission Date:"}</b></Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.orgaDate}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
+        </div>
+        <div className={classes.root2}>
+          <Typography align="left" gutterBottom variant="h5">{!props.language ? "Challenge" : "Challenge"}</Typography>
+          <Divider />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Stellungnahme:" : "Challenge's Statement:"}</b></Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.chaStatem}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Beschreibung der Challenge:" : "Challenge's Description:"}</b></Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.chaDes}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Stakeholder der Challenge:" : "Challenge's Stakeholders:"}</b></Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.chaStak}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Hintergrund der Challenge:" : "Challenge's Background:"}</b></Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.chaBac}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Unterstützung für Challenge:" : "Challenge's Support:"}</b></Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.chaSup}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Unterstützung der Führung:" : "Leadership Support:"}</b></Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.leadSup}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Erfolgskriterien:" : "Criteria of Success:"}</b></Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.critOfSuc}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Nächste Schritte:" : "Next Steps:"}</b></Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.nextStep}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
 
-
-
-    </form>
+        </div>
+        <div className={classes.root2}>
+          <Typography align="left" gutterBottom variant="h5">{!props.language ? "Rezension" : "Review"}</Typography>
+          <Divider />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Name der Challenge:" : "Challenge's Title:"}</b></Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.chatitle}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Thema:" : "Theme:"}</b></Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.theme}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
+          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Technik:" : "Technology:"}</b></Typography>
+          <InputBase
+            className={classes.textfield}
+            defaultValue="-"
+            value={challenge.technology}
+            multiline
+            inputProps={{ 'aria-label': 'naked' }}
+          />
+        </div>
+      </form >
+    </div>
   );
 };
-
 
 export default Popup;
