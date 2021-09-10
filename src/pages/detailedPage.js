@@ -7,6 +7,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import InputBase from '@material-ui/core/InputBase';
 import Divider from '@material-ui/core/Divider';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -113,19 +116,40 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
           inputProps={{ 'aria-label': 'naked' }}
         />
         <Typography align="left" gutterBottom variant="body2"><b>Phase</b></Typography>
-        <InputBase
-          className={classes.textfield}
-          onChange={e => setFormData({ ...formData, 'phase': e.target.value })}
-          value={formData.phase}
-          multiline
-        />
+        <FormControl>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            onChange={e => setFormData({ ...formData, 'phase': e.target.value })}
+            value={formData.phase}
+          >
+            <MenuItem value={"Identify"}>Identify</MenuItem>
+            <MenuItem value={"Engage"}>Engage</MenuItem>
+            <MenuItem value={"Define"}>Define</MenuItem>
+            <MenuItem value={"Build "}>Build </MenuItem>
+            <MenuItem value={"Realize Value"}>Realize Value</MenuItem>
+          </Select>
+        </FormControl>
         <Typography align="left" gutterBottom variant="body2"><b>Status</b></Typography>
-        <InputBase
-          className={classes.textfield}
-          onChange={e => setFormData({ ...formData, 'status': e.target.value })}
-          value={formData.status}
-          multiline
-        />
+        <Typography align="left" gutterBottom variant="body2"><b>Phase</b></Typography>
+        <FormControl>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            onChange={e => setFormData({ ...formData, 'status': e.target.value })}
+            value={formData.status}
+          >
+            <MenuItem value={"Exploring"}>Exploring</MenuItem>
+            <MenuItem value={"Applied"}>Applied</MenuItem>
+            <MenuItem value={"Qualified"}>Qualified</MenuItem>
+            <MenuItem value={"Disqualified "}>Disqualified </MenuItem>
+            <MenuItem value={"Matched"}>Matched</MenuItem>
+            <MenuItem value={"Planned"}>Planned</MenuItem>
+            <MenuItem value={"Executing"}>Executing</MenuItem>
+            <MenuItem value={"Presented"}>Presented</MenuItem>
+            <MenuItem value={"Published "}>Published </MenuItem>
+          </Select>
+        </FormControl>
       </div>
       <div className={classes.root}>
         <Typography align="left" gutterBottom variant="h5">{!props.language ? "Kontakt" : "Contact"}</Typography>
@@ -358,12 +382,18 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
         <Typography align="left" gutterBottom variant="h5">{!props.language ? "Typ" : "Type"}</Typography>
         <Divider />
         <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Challenge Typ:" : "Challenge Type:"}</b></Typography>
-        <InputBase
-          className={classes.textfield}
-          onChange={e => setFormData({ ...formData, 'type': e.target.value })}
-          value={formData.type}
-          multiline
-        />
+        <FormControl>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            onChange={e => setFormData({ ...formData, 'type': e.target.value })}
+            value={formData.type}
+          >
+            <MenuItem value={"Student projects"}>Student projects</MenuItem>
+            <MenuItem value={"Student challenges"}>Student challenges</MenuItem>
+            <MenuItem value={"Startup challenges"}>Startup challenges</MenuItem>
+          </Select>
+        </FormControl>
         <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Kommentar:" : "Comment:"}</b></Typography>
         <InputBase
           className={classes.textfield}
