@@ -292,13 +292,15 @@ export default function ChallengeGallery({ props }) {
                     >
                       <Card className={classes.card}>
                         <CardActionArea onClick={(event) => { setChall(challenge.id); handleClick(event); }}>
+                        <CardContent>
+                            <Typography align="left" gutterBottom variant="h5"><b>{challenge.orgaTitle}</b></Typography>
+                          </CardContent>
                           <CardMedia
                             className={classes.media}
                             image="https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"
                             title="Contemplative Reptile"
                           />
                           <CardContent>
-                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaTitle}</Typography>
                             <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaLocat}</Typography>
                             <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaDate}</Typography>
                             <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.chatitle}</Typography>
