@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteChallenge }) => {
+const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteChallenge, setSelected }) => {
   const initialFormState = {
     id: challenge.id,
     phase: challenge.phase,
@@ -87,7 +87,7 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
   return (
     <form noValidate autoComplete="off">
       <div>
-        <Button onClick={() => { fetchChallenges(); handleHide(); }} variant="contained" color="primary">
+        <Button onClick={() => { fetchChallenges(); handleHide(); setSelected(""); }} variant="contained" color="primary">
           {!props.language ? "Zurück zur Übersicht" : "Back to the overview"}
         </Button>&nbsp;&nbsp;&nbsp;
         <Button onClick={() => { updateChallenge(); fetchChallenges(); }} variant="contained" color="primary">

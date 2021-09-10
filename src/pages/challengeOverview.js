@@ -19,7 +19,6 @@ import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
@@ -75,7 +74,7 @@ function EnhancedTableHead(props) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
+        <TableCell>
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
@@ -204,7 +203,6 @@ export default function ChallengeOverview({ props }) {
   const [challenges, setChallenges] = useState([]);
   const [apiError, setApiError] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [chall, setChall] = useState();
   const [show, setShow] = useState(false);
 
   useEffect((event) => {
@@ -265,7 +263,7 @@ export default function ChallengeOverview({ props }) {
       <Paper className={classes.paper}>
         {show && <Box>
           <div align="left" >
-            {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
+            {challenges.filter(challenge => challenge.id == selected).map(filteredChallenge => (
               <div align="left">
                 <DetailedPage
                   props={props}
@@ -273,6 +271,7 @@ export default function ChallengeOverview({ props }) {
                   challenge={filteredChallenge}
                   fetchChallenges={fetchChallenges}
                   deleteChallenge={deleteChallengeFunction}
+                  setSelected={setSelected}
                 />
               </div>
             ))}
@@ -358,7 +357,7 @@ export default function ChallengeOverview({ props }) {
                         <TableCell align="left">{challenge.theme}</TableCell>
                         <TableCell align="left">{challenge.technology}</TableCell>
                         <TableCell align="left">
-                          <Button onClick={() => { setChall(challenge.id); handleHide(); }} variant="contained" color="primary">
+                          <Button onClick={() => { handleHide(); }} variant="contained" color="primary">
                             Details
                           </Button>
                         </TableCell>

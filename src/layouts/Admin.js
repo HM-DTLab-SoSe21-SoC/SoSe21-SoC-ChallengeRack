@@ -17,12 +17,10 @@ import bgImage from "assets/img/sidebar-2.jpg";
 import Amplify from 'aws-amplify';
 import awsconfig from '../aws-exports';
 import { AmplifyAuthenticator, AmplifySignIn } from '@aws-amplify/ui-react';
-import Button from '@material-ui/core/Button';
+
 Amplify.configure(awsconfig);
 
 let ps;
-
-
 const useStyles = makeStyles(styles);
 
 export default function Admin({ ...rest }) {
@@ -31,8 +29,8 @@ export default function Admin({ ...rest }) {
   // ref to help us initialize PerfectScrollbar on windows devices
   const mainPanel = React.createRef();
   // states and functions
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [language, setlanguage] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [language, setlanguage] = useState(false);
   const handleDrawerToggle = (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
       return;
@@ -45,7 +43,7 @@ export default function Admin({ ...rest }) {
     }
   };
   // initialize and destroy the PerfectScrollbar plugin
-  React.useEffect(() => {
+  useEffect(() => {
     if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
