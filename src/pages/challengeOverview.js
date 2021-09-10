@@ -298,7 +298,7 @@ export default function ChallengeOverview({ props }) {
                   <div>
                     {filteredChallenge.orgaTitle}
                     &nbsp;
-                    selected
+                    {!props.language ? "ausgewählt" : "selected"}
                   </div>
                 ))}
               </Typography>
