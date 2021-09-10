@@ -304,11 +304,16 @@ export default function ChallengeOverview({ props }) {
               </Typography>
             ) : (null)}
             {selected.length > 0 ? (
-              <Tooltip title="Delete">
-                <IconButton onClick={() => { deleteChallengeFunction(selectedChall) }} aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
-              </Tooltip>
+              <div align="right">
+                <Tooltip title="Details">
+                  <Button onClick={handleHide}>Details </Button>
+                </Tooltip>
+                <Tooltip title="Delete">
+                  <Icon onClick={() => { deleteChallengeFunction(selectedChall) }} aria-label="delete">
+                    <DeleteIcon />
+                  </Icon>
+                </Tooltip>
+              </div>
             ) : (null)}
           </Toolbar>
           <TableContainer>
@@ -356,11 +361,6 @@ export default function ChallengeOverview({ props }) {
                         <TableCell align="left">{challenge.score}</TableCell>
                         <TableCell align="left">{challenge.theme}</TableCell>
                         <TableCell align="left">{challenge.technology}</TableCell>
-                        <TableCell align="left">
-                          <Button onClick={() => { handleHide(); }} variant="contained" color="primary">
-                            Details
-                          </Button>
-                        </TableCell>
                       </TableRow>
                     );
                   })}
