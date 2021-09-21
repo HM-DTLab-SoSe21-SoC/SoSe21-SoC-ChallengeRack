@@ -10,7 +10,7 @@ import "./assets/css/material-dashboard-react.css?v=1.10.0";
 
 function App() {
   useEffect(() => {
-    document.title = "DTLab Challanges"
+    document.title = "DTLab Challenges"
   }, [])
   return (
     <div className="App">

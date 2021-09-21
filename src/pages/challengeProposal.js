@@ -317,7 +317,7 @@ export default function ChallengeProposal(props) {
         {!hide && <Box>
           <div>
             <Button onClick={() => { createChallenge(); fetchChallenges(); }} variant="contained" color="primary">
-              {!props.language ? "Challange erstellen" : "Create Challenge"}
+              {!props.language ? "Challenge erstellen" : "Create Challenge"}
             </Button>
           </div>
         </Box>}
