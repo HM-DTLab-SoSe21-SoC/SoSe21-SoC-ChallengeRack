@@ -54,7 +54,6 @@ export const createChallenge = /* GraphQL */ `
       gitHubURL
       publDate
       timestamp
-      image
       createdAt
       updatedAt
       owner
@@ -114,7 +113,6 @@ export const updateChallenge = /* GraphQL */ `
       gitHubURL
       publDate
       timestamp
-      image
       createdAt
       updatedAt
       owner
@@ -174,7 +172,6 @@ export const deleteChallenge = /* GraphQL */ `
       gitHubURL
       publDate
       timestamp
-      image
       createdAt
       updatedAt
       owner

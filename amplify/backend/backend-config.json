@@ -59,5 +59,13 @@
         }
       }
     }
+  },
+  "storage": {
+    "rack988b3c5c": {
+      "service": "S3",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": []
+    }
   }
 }
