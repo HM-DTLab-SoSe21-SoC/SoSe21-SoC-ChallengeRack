@@ -34,6 +34,9 @@ const useStyles = makeStyles((theme) => ({
   title:{
     paddingTop: "40px",
   },
+  button: {
+    paddingBottom: "10px",
+  },
 }));
 
 
@@ -94,7 +97,7 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
   }
   return (
     <form noValidate autoComplete="off">
-      <div>
+      <div className={classes.button}>
         <Button onClick={() => { fetchChallenges(); handleHide(); setSelected(""); }} variant="contained" color="primary">
           {!props.language ? "Zurück zur Übersicht" : "Back to the overview"}
         </Button>&nbsp;&nbsp;&nbsp;
@@ -106,7 +109,7 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
         </Button>&nbsp;&nbsp;&nbsp;
       </div>
       <div align="left">
-        <img height="100" src={"https://https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/" + challenge.orgaTitle + ".jpg"} />
+        <img height="100" src={"https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/" + challenge.orgaTitle + ".jpg"} />
       </div>
       <div className={classes.root2}>
         <Typography className={classes.title} align="left" gutterBottom variant="h5">{!props.language ? "Allgemein" : "General"}</Typography>
