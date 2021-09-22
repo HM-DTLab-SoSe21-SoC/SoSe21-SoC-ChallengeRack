@@ -22,12 +22,6 @@
           "deploymentBucketName": "amplify-rack-dev-145931-deployment",
           "s3Key": "amplify-builds/rackc542a3dePostConfirmation-474b7162636d4b666963-build.zip"
         }
-      },
-      "storage": {
-        "rack988b3c5c": {
-          "bucketName": "amplify-rack-dev-145931-deployment",
-          "region": "us-east-1"
-        }
       }
     }
   }
