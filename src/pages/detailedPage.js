@@ -10,6 +10,7 @@ import Divider from '@material-ui/core/Divider';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
   label: {
     paddingTop: "10px",
   },
-  title:{
+  title: {
     paddingTop: "40px",
   },
   button: {
@@ -92,6 +93,7 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
   const classes = useStyles();
 
   const [formData, setFormData] = useState(initialFormState);
+  const [pic, setPic] = useState(false);
   const updateChallenge = async (event) => {
     await API.graphql({ query: updateChallengeMutation, variables: { input: formData } });
   }
@@ -109,7 +111,12 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
         </Button>&nbsp;&nbsp;&nbsp;
       </div>
       <div align="left">
-        <img height="100" src={"https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/" + challenge.orgaTitle + ".jpg"} />
+      {!pic && <Box>
+        <img onError={() => setPic(true)} height="100" src={"https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/" + challenge.orgaTitle + ".jpg"} />
+        </Box>}
+        {pic && <Box>
+          <img height="100" src={"https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"} />
+          </Box>}
       </div>
       <div className={classes.root2}>
         <Typography className={classes.title} align="left" gutterBottom variant="h5">{!props.language ? "Allgemein" : "General"}</Typography>
