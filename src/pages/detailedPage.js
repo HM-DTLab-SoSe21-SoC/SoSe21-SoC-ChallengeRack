@@ -36,7 +36,8 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "40px",
   },
   button: {
-    paddingBottom: "10px",
+    padding: "0px 10px 10px 0px",
+    display: "inline-block",
   },
 }));
 
@@ -102,13 +103,17 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
       <div className={classes.button}>
         <Button onClick={() => { fetchChallenges(); handleHide(); setSelected(""); }} variant="contained" color="primary">
           {!props.language ? "Zurück zur Übersicht" : "Back to the overview"}
-        </Button>&nbsp;&nbsp;&nbsp;
+        </Button>
+        </div>
+        <div className={classes.button}>
         <Button onClick={() => { updateChallenge(); fetchChallenges(); }} variant="contained" color="primary">
           {!props.language ? "Challenge-Daten übernehmen" : "Update challenge data"}
-        </Button>&nbsp;&nbsp;&nbsp;
+        </Button>
+        </div>
+        <div className={classes.button}>
         <Button onClick={() => { deleteChallenge(challenge); handleHide(); }} variant="contained" color="primary">
           {!props.language ? "Challenge löschen" : "Delete challenge"}
-        </Button>&nbsp;&nbsp;&nbsp;
+        </Button>
       </div>
       <div align="left">
         <img onError={(event) => event.target.src = 'https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/noPicture.jpg'} height="100" src={"https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/" + challenge.orgaTitle + ".jpg"} />

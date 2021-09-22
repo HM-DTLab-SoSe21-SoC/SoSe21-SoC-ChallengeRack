@@ -135,8 +135,7 @@ const useStyles = makeStyles((theme) => ({
     width: 1,
   },
   root2: {
-    paddingLeft: theme.spacing(2),
-    paddingRight: theme.spacing(1),
+
   },
   highlight:
     theme.palette.type === 'light'
@@ -187,7 +186,9 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "15px",
     display: "inline-block",
     float: "left",
-
+  },
+  button: {
+    display: "inline-block",
   },
 }));
 export default function ChallengeOverview({ props }) {
@@ -258,9 +259,6 @@ export default function ChallengeOverview({ props }) {
       setchallSearch(event.target.value.toLowerCase());
     }
   };
-  const handleNoPic = (ev) => {
-    ev.target.src = 'https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6'
-  };
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
@@ -307,11 +305,10 @@ export default function ChallengeOverview({ props }) {
               </Typography>
             ) : (null)}
             {selected.length > 0 ? (
-              <div align="right">
+              <div className={classes.button} align="right">
                 <Tooltip title="Details">
-                  <Button onClick={handleHide}>Details </Button>
-                </Tooltip>
-                <Tooltip title="Delete">
+                  <Button onClick={handleHide}>Details</Button>
+                </Tooltip><Tooltip title="Delete">
                   <Icon onClick={() => { deleteChallengeFunction(selectedChall) }} aria-label="delete">
                     <DeleteIcon />
                   </Icon>
@@ -339,7 +336,6 @@ export default function ChallengeOverview({ props }) {
                   .map((challenge, index) => {
                     const isItemSelected = isSelected(challenge.id);
                     const labelId = `enhanced-table-checkbox-${index}`;
-
                     return (
                       <TableRow
                         hover

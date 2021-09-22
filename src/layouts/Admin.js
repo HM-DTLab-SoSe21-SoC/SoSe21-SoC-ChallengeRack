@@ -135,7 +135,9 @@ export default function Admin({ ...rest }) {
             </div>
           </AmplifyAuthenticator>
         </div>
-        <Footer />
+        <Footer
+          language={language}
+        />
       </div>
     </div>
   );

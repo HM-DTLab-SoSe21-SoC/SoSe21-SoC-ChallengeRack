@@ -24,17 +24,17 @@ export default function Footer(props) {
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="https://sites.hm.edu/dt_lab/ueber_uns/about-us.en.html" className={classes.block}>
-                About us
+                {!props.language ? "Über uns" : "About us"}
               </a>
             </ListItem>
             <ListItem className={classes.inlineBlock}>
               <a href="https://sites.hm.edu/dt_lab/kontakt_2/kontaktseite.en.html" className={classes.block}>
-                Contact
+                {!props.language ? "Kontakt" : "Contact"}
               </a>
             </ListItem>
           </List>
         </div>
-        
+
       </div>
     </footer>
   );
