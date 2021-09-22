@@ -79,6 +79,7 @@ const initialFormState = {
   milestone: "",
   publURL: "",
   gitHubURL: "",
+  image: "false",
 }
 
 export default function ChallengeProposal(props) {

@@ -111,12 +111,7 @@ const DetailedPage = ({ props, handleHide, challenge, fetchChallenges, deleteCha
         </Button>&nbsp;&nbsp;&nbsp;
       </div>
       <div align="left">
-      {!pic && <Box>
-        <img onError={() => setPic(true)} height="100" src={"https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/" + challenge.orgaTitle + ".jpg"} />
-        </Box>}
-        {pic && <Box>
-          <img height="100" src={"https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"} />
-          </Box>}
+        <img onError={(event) => event.target.src = 'https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/noPicture.jpg'} height="100" src={"https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/" + challenge.orgaTitle + ".jpg"} />
       </div>
       <div className={classes.root2}>
         <Typography className={classes.title} align="left" gutterBottom variant="h5">{!props.language ? "Allgemein" : "General"}</Typography>

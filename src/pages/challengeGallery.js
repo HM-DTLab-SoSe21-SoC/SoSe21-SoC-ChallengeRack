@@ -296,9 +296,10 @@ export default function ChallengeGallery({ props }) {
                             <Typography align="left" gutterBottom variant="h5"><b>{challenge.orgaTitle}</b></Typography>
                           </CardContent>
                           <CardMedia
+                          component="img"
                             className={classes.media}
-                            image="https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"
-                            title="Contemplative Reptile"
+                            src={"https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/" + challenge.orgaTitle + ".jpg"}
+                            onError={(event) => event.target.src = 'https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/noPicture.jpg'}
                           />
                           <CardContent>
                             <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaLocat}</Typography>

@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import { Icon } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import InputBase from '@material-ui/core/InputBase';
+import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
   label: {
     paddingTop: "10px",
   },
-  title:{
+  title: {
     paddingTop: "40px",
   },
 }));
@@ -55,7 +56,7 @@ const Popup = ({ props, handleClose, challenge }) => {
           </IconButton>
         </div>
         <div align="left">
-          <img height="60" src={"https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"} />
+          <img onError={(event) => event.target.src = 'https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/noPicture.jpg'} height="100" src={"https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/" + challenge.orgaTitle + ".jpg"} />
         </div>
         <div className={classes.root}>
           <Typography className={classes.title} align="left" gutterBottom variant="h5">{!props.language ? "Organisation" : "Organization"}</Typography>
