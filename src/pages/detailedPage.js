@@ -10,7 +10,7 @@ import Divider from '@material-ui/core/Divider';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-import { Storage } from 'aws-amplify';
+
 const useStyles = makeStyles((theme) => ({
   root: {
     '& .MuiTextField-root': {
