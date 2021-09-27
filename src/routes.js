@@ -21,6 +21,7 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 // core components/views for Admin layout
 import challengeProposal from './pages/challengeProposal';
 import challengeView from './pages/challengeView';
+import printList from './pages/printList';
 
 const dashboardRoutes = [
   {
@@ -37,6 +38,14 @@ const dashboardRoutes = [
     nameDE: "Übersicht der Challanges",
     icon: AssignmentIcon,
     component: challengeView,
+    layout: "/admin",
+  },
+  {
+    path: "/printList",
+    name: "Print overview of the challenges",
+    nameDE: "Druckübersicht der Challenges",
+    icon: AssignmentIcon,
+    component: printList,
     layout: "/admin",
   },
 ];

@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import { Icon } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider';
 import InputBase from '@material-ui/core/InputBase';
-import Box from '@material-ui/core/Box';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -48,7 +47,7 @@ const Popup = ({ props, handleClose, challenge }) => {
         <div >
           <IconButton
             button
-            onClick={handleClose}>
+            >
             <Icon >
               <ChevronLeftIcon />
             </Icon>

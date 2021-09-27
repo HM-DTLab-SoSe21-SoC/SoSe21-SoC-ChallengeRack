@@ -93,7 +93,6 @@ export default function ChallengeProposal(props) {
   const [hide, setHide] = useState(false);
   useEffect(() => {
     fetchChallenges();
-
   }, []);
 
   async function fetchChallenges() {
