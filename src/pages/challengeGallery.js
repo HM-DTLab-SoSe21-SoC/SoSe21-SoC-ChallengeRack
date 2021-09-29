@@ -237,11 +237,6 @@ export default function ChallengeGallery({ props }) {
       setIsLoading(false);
     }
   }
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
