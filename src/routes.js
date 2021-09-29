@@ -40,13 +40,5 @@ const dashboardRoutes = [
     component: challengeView,
     layout: "/admin",
   },
-  {
-    path: "/printList",
-    name: "Print overview of the challenges",
-    nameDE: "Druckübersicht der Challenges",
-    icon: AssignmentIcon,
-    component: printList,
-    layout: "/admin",
-  },
 ];
 export default dashboardRoutes;
