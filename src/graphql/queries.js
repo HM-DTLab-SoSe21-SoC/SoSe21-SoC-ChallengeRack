@@ -50,6 +50,7 @@ export const getChallenge = /* GraphQL */ `
       publURL
       gitHubURL
       publDate
+      image
       timestamp
       createdAt
       updatedAt
@@ -111,6 +112,7 @@ export const listChallenges = /* GraphQL */ `
         publURL
         gitHubURL
         publDate
+        image
         timestamp
         createdAt
         updatedAt
@@ -182,6 +184,7 @@ export const listBySpecificID = /* GraphQL */ `
         publURL
         gitHubURL
         publDate
+        image
         timestamp
         createdAt
         updatedAt

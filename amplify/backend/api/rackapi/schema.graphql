@@ -53,5 +53,6 @@ type Challenge
 	publURL: String
 	gitHubURL: String
 	publDate: String
+	image: String
 	timestamp: Int
 }

@@ -79,6 +79,7 @@ const initialFormState = {
   milestone: "",
   publURL: "",
   gitHubURL: "",
+  image: "false",
 }
 
 export default function ChallengeProposal(props) {
@@ -92,7 +93,6 @@ export default function ChallengeProposal(props) {
   const [hide, setHide] = useState(false);
   useEffect(() => {
     fetchChallenges();
-
   }, []);
 
   async function fetchChallenges() {
@@ -317,7 +317,7 @@ export default function ChallengeProposal(props) {
         {!hide && <Box>
           <div>
             <Button onClick={() => { createChallenge(); fetchChallenges(); }} variant="contained" color="primary">
-              {!props.language ? "Challange erstellen" : "Create Challenge"}
+              {!props.language ? "Challenge erstellen" : "Create Challenge"}
             </Button>
           </div>
         </Box>}

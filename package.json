@@ -19,6 +19,7 @@
     "awesome-bootstrap-checkbox": "^1.0.1",
     "aws-amplify": "^4.2.3",
     "aws-amplify-react": "^5.0.9",
+    "aws-amplify-react-native": "^5.0.3",
     "aws-appsync": "^4.1.0",
     "bootstrap": "^5.1.0",
     "chart.js": "^3.5.0",
@@ -40,6 +41,7 @@
     "react-perfect-scrollbar": "^1.5.8",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-to-print": "^2.13.0",
     "sass": "^1.37.5",
     "web-vitals": "^1.1.2"
   },

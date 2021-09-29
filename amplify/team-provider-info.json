@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "rackc542a3de": {}
+        "rackc542a3de": {},
+        "userPoolGroups": {}
       },
       "function": {
         "rackc542a3dePostConfirmation": {

@@ -187,7 +187,9 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: "15px",
     display: "inline-block",
     float: "left",
-
+  },
+  button: {
+    display: "inline-block",
   },
 }));
 export default function ChallengeOverview({ props }) {
@@ -298,17 +300,21 @@ export default function ChallengeOverview({ props }) {
                   <div>
                     {filteredChallenge.orgaTitle}
                     &nbsp;
-                    selected
+                    {!props.language ? "ausgewählt" : "selected"}
                   </div>
                 ))}
               </Typography>
             ) : (null)}
             {selected.length > 0 ? (
-              <Tooltip title="Delete">
-                <IconButton onClick={() => { deleteChallengeFunction(selectedChall) }} aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
-              </Tooltip>
+              <div className={classes.button} align="right">
+                <Tooltip title="Details">
+                  <Button onClick={handleHide}>Details</Button>
+                </Tooltip><Tooltip title="Delete">
+                  <Icon onClick={() => { deleteChallengeFunction(selectedChall) }} aria-label="delete">
+                    <DeleteIcon />
+                  </Icon>
+                </Tooltip>
+              </div>
             ) : (null)}
           </Toolbar>
           <TableContainer>
@@ -331,7 +337,6 @@ export default function ChallengeOverview({ props }) {
                   .map((challenge, index) => {
                     const isItemSelected = isSelected(challenge.id);
                     const labelId = `enhanced-table-checkbox-${index}`;
-
                     return (
                       <TableRow
                         hover
@@ -343,7 +348,7 @@ export default function ChallengeOverview({ props }) {
                         selected={isItemSelected}
                       >
                         <TableCell>
-                          <img height="40" src={"https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"} />
+                          <img onError={(event) => event.target.src = 'https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/noPicture.jpg'} height="50" src={"https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/" + challenge.orgaTitle + ".jpg"} />
                         </TableCell>
                         <TableCell component="th" id={labelId} scope="challenge" padding="none">
                           {challenge.phase}
@@ -356,11 +361,6 @@ export default function ChallengeOverview({ props }) {
                         <TableCell align="left">{challenge.score}</TableCell>
                         <TableCell align="left">{challenge.theme}</TableCell>
                         <TableCell align="left">{challenge.technology}</TableCell>
-                        <TableCell align="left">
-                          <Button onClick={() => { handleHide(); }} variant="contained" color="primary">
-                            Details
-                          </Button>
-                        </TableCell>
                       </TableRow>
                     );
                   })}

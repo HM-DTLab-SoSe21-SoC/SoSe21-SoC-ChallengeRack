@@ -23,14 +23,20 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   textfield: {
-    paddingBottom: "10px",
-    autoWidth: true,
-    width: "900px",
+    backgroundColor: '#EEEEEE',
+    width: '90%',
+
   },
   paper: {
     padding: "30px",
     width: "1000px",
-  }
+  },
+  label: {
+    paddingTop: "10px",
+  },
+  title: {
+    paddingTop: "40px",
+  },
 }));
 
 const Popup = ({ props, handleClose, challenge }) => {
@@ -41,7 +47,7 @@ const Popup = ({ props, handleClose, challenge }) => {
         <div >
           <IconButton
             button
-            onClick={handleClose}>
+            >
             <Icon >
               <ChevronLeftIcon />
             </Icon>
@@ -49,12 +55,12 @@ const Popup = ({ props, handleClose, challenge }) => {
           </IconButton>
         </div>
         <div align="left">
-          <img height="60" src={"https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"} />
+          <img onError={(event) => event.target.src = 'https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/noPicture.jpg'} height="100" src={"https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/" + challenge.orgaTitle + ".jpg"} />
         </div>
         <div className={classes.root}>
-          <Typography align="left" gutterBottom variant="h5">{!props.language ? "Organisation" : "Organization"}</Typography>
+          <Typography className={classes.title} align="left" gutterBottom variant="h5">{!props.language ? "Organisation" : "Organization"}</Typography>
           <Divider />
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Name der Organisation:" : "Organazation's Title:"}</b></Typography>
+          <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Name der Organisation:" : "Organazation's Title:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"
@@ -62,7 +68,7 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Standort der Organisation:" : "Organazation's Location:"}</b></Typography>
+          <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Standort der Organisation:" : "Organazation's Location:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"
@@ -70,7 +76,7 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Erstellungsdatum:" : "Submission Date:"}</b></Typography>
+          <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Erstellungsdatum:" : "Submission Date:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"
@@ -80,9 +86,9 @@ const Popup = ({ props, handleClose, challenge }) => {
           />
         </div>
         <div className={classes.root2}>
-          <Typography align="left" gutterBottom variant="h5">{!props.language ? "Challenge" : "Challenge"}</Typography>
+          <Typography className={classes.title} align="left" gutterBottom variant="h5">{!props.language ? "Challenge" : "Challenge"}</Typography>
           <Divider />
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Stellungnahme:" : "Challenge's Statement:"}</b></Typography>
+          <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Stellungnahme:" : "Challenge's Statement:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"
@@ -90,7 +96,7 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Beschreibung der Challenge:" : "Challenge's Description:"}</b></Typography>
+          <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Beschreibung der Challenge:" : "Challenge's Description:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"
@@ -98,7 +104,7 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Stakeholder der Challenge:" : "Challenge's Stakeholders:"}</b></Typography>
+          <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Stakeholder der Challenge:" : "Challenge's Stakeholders:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"
@@ -106,7 +112,7 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Hintergrund der Challenge:" : "Challenge's Background:"}</b></Typography>
+          <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Hintergrund der Challenge:" : "Challenge's Background:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"
@@ -114,7 +120,7 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Unterstützung für Challenge:" : "Challenge's Support:"}</b></Typography>
+          <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Unterstützung für Challenge:" : "Challenge's Support:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"
@@ -122,7 +128,7 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Unterstützung der Führung:" : "Leadership Support:"}</b></Typography>
+          <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Unterstützung der Führung:" : "Leadership Support:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"
@@ -130,7 +136,7 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Erfolgskriterien:" : "Criteria of Success:"}</b></Typography>
+          <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Erfolgskriterien:" : "Criteria of Success:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"
@@ -138,7 +144,7 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Nächste Schritte:" : "Next Steps:"}</b></Typography>
+          <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Nächste Schritte:" : "Next Steps:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"
@@ -146,12 +152,11 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-
         </div>
         <div className={classes.root2}>
-          <Typography align="left" gutterBottom variant="h5">{!props.language ? "Rezension" : "Review"}</Typography>
+          <Typography className={classes.title} align="left" gutterBottom variant="h5">{!props.language ? "Rezension" : "Review"}</Typography>
           <Divider />
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Name der Challenge:" : "Challenge's Title:"}</b></Typography>
+          <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Name der Challenge:" : "Challenge's Title:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"
@@ -159,7 +164,7 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Thema:" : "Theme:"}</b></Typography>
+          <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Thema:" : "Theme:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"
@@ -167,7 +172,7 @@ const Popup = ({ props, handleClose, challenge }) => {
             multiline
             inputProps={{ 'aria-label': 'naked' }}
           />
-          <Typography align="left" gutterBottom variant="body2"><b>{!props.language ? "Technik:" : "Technology:"}</b></Typography>
+          <Typography className={classes.label} align="left" gutterBottom variant="body2"><b>{!props.language ? "Technik:" : "Technology:"}</b></Typography>
           <InputBase
             className={classes.textfield}
             defaultValue="-"

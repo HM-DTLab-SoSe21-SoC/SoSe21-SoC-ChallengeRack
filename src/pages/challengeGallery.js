@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Popup from './popup';
+import PrintList from './printList'
 import { API, graphqlOperation } from 'aws-amplify';
 import { listChallenges } from '../graphql/queries';
 import PropTypes from 'prop-types';
@@ -19,6 +20,9 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Popover from '@material-ui/core/Popover';
+import { NavLink } from 'react-router-dom';
+import Button from '@material-ui/core/Button';
+import IconButton from '@material-ui/core/IconButton';
 import {
   Box,
   Container,
@@ -202,7 +206,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function ChallengeGallery({ props }) {
   const classes = useStyles();
-  
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [order, setOrder] = useState('asc');
   const [orderBy, setOrderBy] = useState('calories');
@@ -212,7 +216,7 @@ export default function ChallengeGallery({ props }) {
   const [apiError, setApiError] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [chall, setChall] = useState();
-
+  const [show, setShow] = useState(0);
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
   useEffect((event) => {
@@ -233,11 +237,6 @@ export default function ChallengeGallery({ props }) {
       setIsLoading(false);
     }
   }
-  const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === 'asc';
-    setOrder(isAsc ? 'desc' : 'asc');
-    setOrderBy(property);
-  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -254,105 +253,132 @@ export default function ChallengeGallery({ props }) {
       setchallSearch(event.target.value.toLowerCase());
     }
   };
+  const handleHide = (event) => {
+    setShow(event) 
+  };
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-      <Typography align="center" gutterBottom variant="h4">{!props.language ? "Übersicht der Challenges" : "Challenge Overview"}</Typography>
-        <div className={classes.searchWrapper}>
-          <TextField
-            value={search}
-            onChange={(event) => { handleSearch(event); }}
-            placeholder={!props.language ? "Suche..." : "Search..."}
-          />
-          <Icon color="white" aria-label="edit" justIcon round>
-            <Search />
-          </Icon>
-        </div>
-        <div>
-          <Box
-            sx={{
-              backgroundColor: 'background.default',
-              minHeight: '100%',
-              py: 3
+      {show == 2 && <Box>
+          <div align="left">
+            <Popup
+              props={props}
+              setShow={setShow}
+              challenges={challenges}
+            />
+          </div>
+        </Box>}
+        {show == 1 && <Box>
+          <div align="left">
+            <PrintList
+              props={props}
+              setShow={setShow}
+              challenges={challenges}
+            />
+          </div>
+        </Box>}
+        {show == 0 && <Box>
+          <Typography align="center" gutterBottom variant="h4">{!props.language ? "Übersicht der Challenges" : "Challenge Overview"}</Typography>
+          <div className={classes.searchWrapper}>
+            <TextField
+              value={search}
+              onChange={(event) => { handleSearch(event); }}
+              placeholder={!props.language ? "Suche..." : "Search..."}
+            />
+            <Icon color="white" aria-label="edit" justIcon round>
+              <Search />
+            </Icon>
+            <Button variant="outlined" onClick={() => { setShow(1) }} color="primary">
+              {!props.language ? "Challengeliste drucken" : "Print Challengelist"}
+            </Button>
+          </div>
+          <div>
+            <Box
+              sx={{
+                backgroundColor: 'background.default',
+                minHeight: '100%',
+                py: 3
+              }}
+            >
+              <Container maxWidth={false}>
+                <Box sx={{ pt: 3 }}>
+                  <Grid
+                    container
+                    spacing={3}
+                  >
+                    {stableSort(challenges.filter(challenge => (challenge.search == challSearch || challenge.phase.toLowerCase().includes(challSearch) || challenge.status.toLowerCase().includes(challSearch) || challenge.orgaTitle.toLowerCase().includes(challSearch) || challenge.orgaLocat.toLowerCase().includes(challSearch) || challenge.chatitle.toLowerCase().includes(challSearch) || challenge.type.toLowerCase().includes(challSearch) || challenge.score.toLowerCase().includes(challSearch) || challenge.theme.toLowerCase().includes(challSearch) || challenge.technology.toLowerCase().includes(challSearch))), getComparator(order, orderBy)).map((challenge) => (
+                      <Grid
+                        item
+                        key={challenge.id}
+                        lg={4}
+                        md={6}
+                        xs={12}
+                      >
+                        <Card className={classes.card}>
+                          <CardActionArea onClick={(event) => { setChall(challenge.id); handleClick(event); }}>
+                            <CardContent>
+                              <Typography align="left" gutterBottom variant="h5"><b>{challenge.orgaTitle}</b></Typography>
+                            </CardContent>
+                            <CardMedia
+                              component="img"
+                              className={classes.media}
+                              src={"https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/" + challenge.orgaTitle + ".jpg"}
+                              onError={(event) => event.target.src = 'https://amplify-rack-dev-145931-deployment.s3.amazonaws.com/noPicture.jpg'}
+                            />
+                            <CardContent>
+                              <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaLocat}</Typography>
+                              <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaDate}</Typography>
+                              <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.chatitle}</Typography>
+                              <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.theme}</Typography>
+                              <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.technology}</Typography>
+                            </CardContent>
+                          </CardActionArea>
+                        </Card>
+                      </Grid>
+                    ))}
+                  </Grid>
+                </Box>
+                <Box
+                  sx={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    pt: 3
+                  }}
+                >
+                </Box>
+              </Container>
+            </Box>
+          </div>
+          <Popover
+            props={props}
+            className={classes.popup}
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'center',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'center',
+              horizontal: 'center',
             }}
           >
-            <Container maxWidth={false}>
-              <Box sx={{ pt: 3 }}>
-                <Grid
-                  container
-                  spacing={3}
-                >
-                  {stableSort(challenges.filter(challenge => (challenge.search == challSearch || challenge.phase.toLowerCase().includes(challSearch) || challenge.status.toLowerCase().includes(challSearch) || challenge.orgaTitle.toLowerCase().includes(challSearch) || challenge.orgaLocat.toLowerCase().includes(challSearch) || challenge.chatitle.toLowerCase().includes(challSearch) || challenge.type.toLowerCase().includes(challSearch) || challenge.score.toLowerCase().includes(challSearch) || challenge.theme.toLowerCase().includes(challSearch) || challenge.technology.toLowerCase().includes(challSearch))), getComparator(order, orderBy)).map((challenge) => (
-                    <Grid
-                      item
-                      key={challenge.id}
-                      lg={4}
-                      md={6}
-                      xs={12}
-                    >
-                      <Card className={classes.card}>
-                        <CardActionArea onClick={(event) => { setChall(challenge.id); handleClick(event); }}>
-                        <CardContent>
-                            <Typography align="left" gutterBottom variant="h5"><b>{challenge.orgaTitle}</b></Typography>
-                          </CardContent>
-                          <CardMedia
-                            className={classes.media}
-                            image="https://us.123rf.com/450wm/koblizeek/koblizeek1902/koblizeek190200055/125337077-kein-bildvektorsymbol-verf%C3%BCgbares-symbol-fehlt-keine-galerie-f%C3%BCr-diesen-moment-.jpg?ver=6"
-                            title="Contemplative Reptile"
-                          />
-                          <CardContent>
-                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaLocat}</Typography>
-                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.orgaDate}</Typography>
-                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.chatitle}</Typography>
-                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.theme}</Typography>
-                            <Typography align="left" gutterBottom variant="h6" component="h2">{challenge.technology}</Typography>
-                          </CardContent>
-                        </CardActionArea>
-                      </Card>
-                    </Grid>
-                  ))}
-                </Grid>
-              </Box>
-              <Box
-                sx={{
-                  display: 'flex',
-                  justifyContent: 'center',
-                  pt: 3
-                }}
-              >
-              </Box>
-            </Container>
-          </Box>
-        </div>
-        <Popover
-          props={props}
-          className={classes.popup}
-          id={id}
-          open={open}
-          anchorEl={anchorEl}
-          onClose={handleClose}
-          anchorOrigin={{
-            vertical: 'center',
-            horizontal: 'center',
-          }}
-          transformOrigin={{
-            vertical: 'center',
-            horizontal: 'center',
-          }}
-        >
-          <div>
-            {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
-              <div align="left">
-                <Popup
-                  props={props}
-                  handleClose={handleClose}
-                  challenge={filteredChallenge}
-                  fetchChallenges={fetchChallenges}
-                />
-              </div>
-            ))}
-          </div>
-        </Popover>
+            <div>
+              {challenges.filter(challenge => challenge.id == chall).map(filteredChallenge => (
+                <div align="left">
+                  <Popup
+                    props={props}
+                    handleClose={handleClose}
+                    challenge={filteredChallenge}
+                    fetchChallenges={fetchChallenges}
+                  />
+                </div>
+              ))}
+            </div>
+          </Popover>
+        </Box>}
       </Paper>
     </div>
   );
